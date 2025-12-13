@@ -23,8 +23,6 @@ import {
   CalendarDays,
   Contact,
   Menu,
-  FileQuestion,
-  PillIcon,
 } from 'lucide-react';
 import Link from 'next/link';
 
@@ -45,14 +43,9 @@ const menuItems = [
     icon: Droplets,
   },
   {
-    href: '/#symptom-finder',
-    label: 'Symptom Finder',
-    icon: FileQuestion,
-  },
-   {
-    href: '/#medicine-info',
-    label: 'Medicine Info',
-    icon: PillIcon,
+    href: '/#medipop-assist',
+    label: 'Medipop (AI Assist)',
+    icon: Stethoscope,
   },
   {
     href: '/#current-medications',
