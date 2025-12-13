@@ -19,6 +19,7 @@ import {
   User,
   FilePenLine,
   UtensilsCrossed,
+  Dumbbell,
 } from 'lucide-react';
 import Link from 'next/link';
 import { useSidebar } from '../ui/sidebar';
@@ -49,6 +50,11 @@ const menuItems = [
     href: '/diet-chart',
     label: 'Diet Chart',
     icon: UtensilsCrossed,
+  },
+  {
+    href: '/exercises',
+    label: 'Exercise Log',
+    icon: Dumbbell,
   },
   {
     href: '/#doctor-visits',
