@@ -1,6 +1,7 @@
 "use client";
 
-import { useFormState, useFormStatus } from "react-dom";
+import { useActionState, useEffect, useRef } from "react";
+import { useFormStatus } from "react-dom";
 import { fetchMedicineInfo, type ActionState } from "@/app/actions";
 import { Button } from "@/components/ui/button";
 import {
@@ -15,7 +16,6 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Loader2, Pill, Search } from "lucide-react";
-import { useEffect, useRef } from "react";
 import { useToast } from "@/hooks/use-toast";
 
 function SubmitButton() {
@@ -30,7 +30,7 @@ function SubmitButton() {
 
 export function MedicineInfo() {
   const initialState: ActionState = { message: null, data: null, issues: [] };
-  const [state, formAction] = useFormState(fetchMedicineInfo, initialState);
+  const [state, formAction] = useActionState(fetchMedicineInfo, initialState);
   const formRef = useRef<HTMLFormElement>(null);
   const { toast } = useToast();
 
