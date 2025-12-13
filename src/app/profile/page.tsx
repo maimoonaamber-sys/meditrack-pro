@@ -12,7 +12,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { User, Shield, Phone, PlusCircle, Trash2, ArrowLeft } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import Link from 'next/link';
-import { Sidebar, SidebarInset } from '@/components/ui/sidebar';
+import { Sidebar, SidebarInset, SidebarProvider } from '@/components/ui/sidebar';
 import { DashboardSidebar } from '@/components/dashboard/sidebar';
 
 interface EmergencyContact {
@@ -101,7 +101,7 @@ export default function ProfilePage() {
     }
 
   return (
-    <>
+    <SidebarProvider>
       <Sidebar>
         <DashboardSidebar />
       </Sidebar>
@@ -201,6 +201,6 @@ export default function ProfilePage() {
           </main>
         </div>
       </SidebarInset>
-    </>
+    </SidebarProvider>
   );
 }
