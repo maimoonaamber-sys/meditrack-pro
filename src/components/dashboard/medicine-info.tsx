@@ -22,7 +22,8 @@ export function MedicineInfo() {
     event.preventDefault();
     const medicine = inputRef.current?.value;
     if (medicine) {
-      const googleUrl = `https://www.google.com/search?q=${encodeURIComponent(medicine + ' uses and formula')}`;
+      const searchQuery = `${medicine} why it is prescribed, its uses, and what happens when overdosed`;
+      const googleUrl = `https://www.google.com/search?q=${encodeURIComponent(searchQuery)}`;
       window.open(googleUrl, '_blank');
     }
   };
