@@ -7,15 +7,18 @@ import { Header } from '@/components/dashboard/header';
 import { DashboardSidebar } from '@/components/dashboard/sidebar';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Camera, ScanLine } from 'lucide-react';
+import { Camera, ScanLine, AlertTriangle, ArrowLeft } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import Link from 'next/link';
-import { ArrowLeft } from 'lucide-react';
+import { diagnoseSkin, SkinDiagnosisOutput } from '@/ai/flows/diagnose-skin-flow';
+import { Badge } from '@/components/ui/badge';
+import { Skeleton } from '@/components/ui/skeleton';
 
 export default function SkinScannerPage() {
   const [hasCameraPermission, setHasCameraPermission] = useState(false);
   const [isScanning, setIsScanning] = useState(false);
+  const [diagnosis, setDiagnosis] = useState<SkinDiagnosisOutput | null>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const { toast } = useToast();
 
@@ -57,9 +60,10 @@ export default function SkinScannerPage() {
     }
   }, [toast]);
 
-  const handleScan = () => {
+  const handleScan = async () => {
     if (!videoRef.current) return;
     setIsScanning(true);
+    setDiagnosis(null);
 
     const video = videoRef.current;
     const canvas = document.createElement('canvas');
@@ -68,27 +72,27 @@ export default function SkinScannerPage() {
     const context = canvas.getContext('2d');
     if (context) {
         context.drawImage(video, 0, 0, canvas.width, canvas.height);
-        canvas.toBlob((blob) => {
-            if (blob) {
-                const searchUrl = `https://lens.google.com/uploadbyb64?b64=${canvas.toDataURL('image/jpeg').split(',')[1]}`;
-                window.open(searchUrl, '_blank');
-            } else {
-                 toast({
-                    variant: 'destructive',
-                    title: 'Scan Failed',
-                    description: 'Could not capture image from camera.',
-                });
-            }
-            setIsScanning(false);
-        }, 'image/jpeg');
+        const dataUri = canvas.toDataURL('image/jpeg');
+
+        try {
+            const result = await diagnoseSkin({ photoDataUri: dataUri });
+            setDiagnosis(result);
+        } catch (error) {
+            console.error("AI Diagnosis Error: ", error);
+            toast({
+                variant: 'destructive',
+                title: 'Analysis Failed',
+                description: 'The AI model could not analyze the image. Please try again.',
+            });
+        }
     } else {
-        setIsScanning(false);
         toast({
             variant: 'destructive',
             title: 'Scan Failed',
-            description: 'Could not process image.',
+            description: 'Could not process image from camera.',
         });
     }
+    setIsScanning(false);
   }
 
   return (
@@ -109,7 +113,7 @@ export default function SkinScannerPage() {
                     <div className="flex items-center gap-3">
                         <Camera className="h-6 w-6" />
                         <div className="flex-1">
-                            <CardTitle className="font-headline text-lg">Skin Scanner</CardTitle>
+                            <CardTitle className="font-headline text-lg">AI Skin Scanner</CardTitle>
                             <CardDescription>
                                 Use your camera to scan skin for allergies and other issues.
                             </CardDescription>
@@ -121,7 +125,7 @@ export default function SkinScannerPage() {
                          <video ref={videoRef} className="w-full h-full object-cover" autoPlay muted playsInline />
                          {isScanning && (
                             <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
-                                <p className="text-white text-lg">Analyzing...</p>
+                                <p className="text-white text-lg">Analyzing with AI...</p>
                             </div>
                          )}
                     </div>
@@ -137,8 +141,56 @@ export default function SkinScannerPage() {
 
                     <Button onClick={handleScan} disabled={!hasCameraPermission || isScanning} className="w-full">
                         <ScanLine className="mr-2 h-4 w-4" />
-                        {isScanning ? 'Scanning...' : 'Scan Skin'}
+                        {isScanning ? 'Scanning...' : 'Scan Skin with AI'}
                     </Button>
+
+                     <Alert variant="destructive" className="flex items-start">
+                        <AlertTriangle className="h-5 w-5 mt-0.5" />
+                        <div className="ml-4">
+                            <AlertTitle>Disclaimer</AlertTitle>
+                            <AlertDescription>
+                                This tool provides a preliminary analysis and is not a substitute for professional medical advice. Always consult a qualified healthcare provider for any health concerns.
+                            </AlertDescription>
+                        </div>
+                    </Alert>
+
+                    {isScanning && (
+                        <Card>
+                            <CardHeader>
+                                <Skeleton className="h-6 w-1/2" />
+                            </CardHeader>
+                            <CardContent className="space-y-2">
+                                <Skeleton className="h-4 w-full" />
+                                <Skeleton className="h-4 w-full" />
+                                <Skeleton className="h-4 w-3/4" />
+                            </CardContent>
+                        </Card>
+                    )}
+
+                    {diagnosis && (
+                        <Card className="bg-muted/30">
+                            <CardHeader>
+                                <CardTitle className="font-headline text-lg">AI Analysis Result</CardTitle>
+                                {diagnosis.conditionName !== "Unknown" && (
+                                    <div className="flex flex-wrap gap-2 pt-2">
+                                        <Badge>{diagnosis.conditionName}</Badge>
+                                        {diagnosis.isAllergy && <Badge variant="secondary">Allergy</Badge>}
+                                        {diagnosis.isBurn && <Badge variant="destructive">Burn</Badge>}
+                                    </div>
+                                )}
+                            </CardHeader>
+                            <CardContent className="space-y-4 text-sm">
+                                <div>
+                                    <h3 className="font-semibold mb-1">Description</h3>
+                                    <p className="text-muted-foreground">{diagnosis.description}</p>
+                                </div>
+                                <div>
+                                    <h3 className="font-semibold mb-1">Recommendations</h3>
+                                    <p className="text-muted-foreground">{diagnosis.recommendation}</p>
+                                </div>
+                            </CardContent>
+                        </Card>
+                    )}
                 </CardContent>
             </Card>
           </main>
@@ -147,3 +199,5 @@ export default function SkinScannerPage() {
     </SidebarProvider>
   );
 }
+
+    
