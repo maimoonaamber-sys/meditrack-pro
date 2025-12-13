@@ -23,7 +23,9 @@ export function MedipopAssist() {
     const query = inputRef.current?.value;
     if (query) {
       setIsLoading(true);
-      const url = `https://gemini.google.com/q/analyze uses, side effects, formula, and overdose information for the medicine: ${encodeURIComponent(query)}`;
+      const url = `https://gemini.google.com/q/Why am I experiencing ${encodeURIComponent(
+        query
+      )}, what are the recovery options, and is it dangerous if ignored?`;
       window.open(url, '_blank');
       setIsLoading(false);
       if(inputRef.current) {
@@ -40,7 +42,7 @@ export function MedipopAssist() {
           <div className="flex-1">
             <CardTitle className="font-headline text-lg">Medipop (AI Assist)</CardTitle>
             <CardDescription>
-              Enter a medicine name to analyze its uses, side effects, and more on Gemini.
+              Enter a symptom to analyze its causes, recovery options, and risks on Gemini.
             </CardDescription>
           </div>
         </div>
@@ -48,7 +50,7 @@ export function MedipopAssist() {
       <form onSubmit={handleSearch}>
         <CardContent className="space-y-4">
           <Textarea
-            placeholder="e.g., 'Ibuprofen'"
+            placeholder="e.g., 'Headache and fatigue'"
             rows={3}
             ref={inputRef}
             disabled={isLoading}

@@ -24,7 +24,9 @@ export function MedipopFab() {
     const query = textareaRef.current?.value;
     if (query) {
       setIsLoading(true);
-      const url = `https://gemini.google.com/q/analyze uses, side effects, formula, and overdose information for the medicine: ${encodeURIComponent(query)}`;
+       const url = `https://gemini.google.com/q/Why am I experiencing ${encodeURIComponent(
+        query
+      )}, what are the recovery options, and is it dangerous if ignored?`;
       window.open(url, '_blank');
       setIsLoading(false);
       setIsOpen(false);
@@ -52,13 +54,13 @@ export function MedipopFab() {
                 <Stethoscope /> Medipop (AI Assist)
             </DialogTitle>
             <DialogDescription>
-             Enter a medicine name to analyze its uses and effects on Gemini.
+             Enter a symptom to analyze its causes and risks on Gemini.
             </DialogDescription>
           </DialogHeader>
           <form onSubmit={handleSearch}>
             <div className="grid gap-4 py-4">
               <Textarea
-                placeholder="e.g., 'Aspirin'"
+                placeholder="e.g., 'Sore throat'"
                 rows={4}
                 ref={textareaRef}
                 disabled={isLoading}
