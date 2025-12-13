@@ -8,7 +8,7 @@ import {
   SidebarMenuButton,
   SidebarContent,
 } from '@/components/ui/sidebar';
-import { Pill, LineChart, History, FileText, Stethoscope } from 'lucide-react';
+import { Pill, LineChart, History, FileText, Stethoscope, ClipboardPlus } from 'lucide-react';
 
 const menuItems = [
   {
@@ -25,6 +25,11 @@ const menuItems = [
     href: '#lab-reports',
     label: 'Lab Reports',
     icon: FileText,
+  },
+  {
+    href: '#current-medications',
+    label: 'Current Medications',
+    icon: ClipboardPlus,
   },
   {
     href: '#medicine-info',

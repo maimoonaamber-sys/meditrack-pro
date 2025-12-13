@@ -5,6 +5,7 @@ import { MedicineInfo } from "./medicine-info";
 import { RiskScore } from "./risk-score";
 import { SicknessHistory } from "./sickness-history";
 import { SymptomChecker } from "./symptom-checker";
+import { CurrentMedications } from "./current-medications";
 
 export function HealthDashboard() {
   return (
@@ -24,6 +25,9 @@ export function HealthDashboard() {
         </div>
       </div>
       <div className="lg:col-span-1 grid auto-rows-max items-start gap-4 md:gap-8">
+        <div id="current-medications">
+          <CurrentMedications />
+        </div>
         <div id="medicine-info">
           <MedicineInfo />
         </div>
