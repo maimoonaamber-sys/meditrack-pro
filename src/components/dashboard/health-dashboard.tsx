@@ -7,6 +7,7 @@ import { SicknessHistory } from "./sickness-history";
 import { SymptomChecker } from "./symptom-checker";
 import { CurrentMedications } from "./current-medications";
 import { DiabetesTracker } from "./diabetes-tracker";
+import { BloodPressurePulseTracker } from "./blood-pressure-pulse-tracker";
 
 export function HealthDashboard() {
   return (
@@ -15,6 +16,9 @@ export function HealthDashboard() {
         <Alerts />
         <div id="health-trends">
           <HealthTrends />
+        </div>
+        <div id="blood-pressure-pulse-tracker">
+            <BloodPressurePulseTracker />
         </div>
         <div id="diabetes-tracker">
           <DiabetesTracker />

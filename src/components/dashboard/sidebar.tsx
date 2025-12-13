@@ -8,13 +8,18 @@ import {
   SidebarMenuButton,
   SidebarContent,
 } from '@/components/ui/sidebar';
-import { Pill, LineChart, History, FileText, Stethoscope, ClipboardPlus, Droplets } from 'lucide-react';
+import { Pill, LineChart, History, FileText, Stethoscope, ClipboardPlus, Droplets, HeartPulse } from 'lucide-react';
 
 const menuItems = [
   {
     href: '#health-trends',
     label: 'Health Trends',
     icon: LineChart,
+  },
+  {
+    href: '#blood-pressure-pulse-tracker',
+    label: 'BP & Pulse',
+    icon: HeartPulse,
   },
   {
     href: '#diabetes-tracker',
