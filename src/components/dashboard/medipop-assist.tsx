@@ -23,7 +23,7 @@ export function MedipopAssist() {
     const query = inputRef.current?.value;
     if (query) {
       setIsLoading(true);
-      const url = `https://gemini.google.com/q/${encodeURIComponent(query)}`;
+      const url = `https://gemini.google.com/q/analyze uses, side effects, formula, and overdose information for the medicine: ${encodeURIComponent(query)}`;
       window.open(url, '_blank');
       setIsLoading(false);
       if(inputRef.current) {
@@ -40,7 +40,7 @@ export function MedipopAssist() {
           <div className="flex-1">
             <CardTitle className="font-headline text-lg">Medipop (AI Assist)</CardTitle>
             <CardDescription>
-              Ask about symptoms or medicines.
+              Enter a medicine name to analyze its uses, side effects, and more on Gemini.
             </CardDescription>
           </div>
         </div>
@@ -48,7 +48,7 @@ export function MedipopAssist() {
       <form onSubmit={handleSearch}>
         <CardContent className="space-y-4">
           <Textarea
-            placeholder="e.g., 'sore throat and headache' or 'Ibuprofen'"
+            placeholder="e.g., 'Ibuprofen'"
             rows={3}
             ref={inputRef}
             disabled={isLoading}
@@ -57,7 +57,7 @@ export function MedipopAssist() {
         <CardFooter className="flex">
           <Button type="submit" className="w-full" disabled={isLoading}>
             <BrainCircuit />
-            {isLoading ? 'Redirecting...' : 'Ask Medipop on Gemini'}
+            {isLoading ? 'Redirecting...' : 'Analyze with Gemini'}
           </Button>
         </CardFooter>
       </form>
