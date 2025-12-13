@@ -10,7 +10,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { ArrowLeft, FilePenLine, Save } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import Link from 'next/link';
-import { Sidebar, SidebarInset } from '@/components/ui/sidebar';
+import { Sidebar, SidebarInset, SidebarProvider } from '@/components/ui/sidebar';
 import { DashboardSidebar } from '@/components/dashboard/sidebar';
 
 export default function NotesPage() {
@@ -33,7 +33,7 @@ export default function NotesPage() {
   };
 
   return (
-    <>
+    <SidebarProvider>
       <Sidebar>
         <DashboardSidebar />
       </Sidebar>
@@ -71,6 +71,6 @@ export default function NotesPage() {
           </main>
         </div>
       </SidebarInset>
-    </>
+    </SidebarProvider>
   );
 }
