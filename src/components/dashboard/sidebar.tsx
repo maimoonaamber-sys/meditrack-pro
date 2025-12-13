@@ -18,6 +18,7 @@ import {
   X,
   User,
   FilePenLine,
+  UtensilsCrossed,
 } from 'lucide-react';
 import Link from 'next/link';
 import { useSidebar } from '../ui/sidebar';
@@ -43,6 +44,11 @@ const menuItems = [
     href: '/#current-medications',
     label: 'Current Medications',
     icon: ClipboardPlus,
+  },
+  {
+    href: '/diet-chart',
+    label: 'Diet Chart',
+    icon: UtensilsCrossed,
   },
   {
     href: '/#doctor-visits',
