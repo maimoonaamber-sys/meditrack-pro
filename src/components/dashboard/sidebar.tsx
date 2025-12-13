@@ -68,11 +68,6 @@ const menuItems = [
 
 const bottomMenuItems = [
     {
-        href: '/profile',
-        label: 'My Profile',
-        icon: User,
-    },
-    {
         href: '/notes',
         label: 'Notes',
         icon: FilePenLine
