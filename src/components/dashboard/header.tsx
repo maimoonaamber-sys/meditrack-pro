@@ -1,6 +1,5 @@
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Pill } from "lucide-react";
-import Image from "next/image";
 
 export function Header() {
   return (
@@ -13,13 +12,6 @@ export function Header() {
       </div>
       <div className="ml-auto">
         <Avatar className="h-9 w-9">
-          <Image 
-            src="https://picsum.photos/seed/user-avatar/40/40" 
-            alt="User Avatar"
-            width={40}
-            height={40}
-            data-ai-hint="user avatar"
-          />
           <AvatarFallback>U</AvatarFallback>
         </Avatar>
       </div>
