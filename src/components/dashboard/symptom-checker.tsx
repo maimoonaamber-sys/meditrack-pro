@@ -59,7 +59,7 @@ export function SymptomChecker() {
         <CardFooter className="flex">
           <Button type="submit" className="w-full" disabled={isLoading}>
             <Search />
-            {isLoading ? 'Searching...' : 'Analyze with Google'}
+            {isLoading ? 'Analyzing...' : 'Analyze'}
           </Button>
         </CardFooter>
       </form>

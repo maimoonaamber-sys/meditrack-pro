@@ -59,7 +59,7 @@ export function MedicineInfo() {
         <CardFooter className="flex">
           <Button type="submit" className="w-full" disabled={isLoading}>
             <Search />
-            {isLoading ? 'Searching...' : 'Search with Google'}
+            {isLoading ? 'Searching...' : 'Search'}
           </Button>
         </CardFooter>
       </form>
