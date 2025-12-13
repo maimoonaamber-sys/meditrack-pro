@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Contact, PlusCircle } from "lucide-react";
+import { Contact, PlusCircle, X } from "lucide-react";
 
 interface Doctor {
   name: string;
@@ -47,6 +47,10 @@ export function DoctorContacts() {
       setDoctors([...doctors, { name, number }]);
       formRef.current?.reset();
     }
+  };
+
+  const handleDeleteDoctor = (indexToDelete: number) => {
+    setDoctors(doctors.filter((_, index) => index !== indexToDelete));
   };
 
   return (
@@ -84,11 +88,17 @@ export function DoctorContacts() {
             <h3 className="text-sm font-medium">Your Doctors</h3>
             <ul className="space-y-2">
               {doctors.map((doc, index) => (
-                <li key={index} className="flex justify-between items-center text-sm bg-muted/50 p-2 rounded-md">
-                  <span className="font-medium">{doc.name}</span>
-                  <a href={`tel:${doc.number}`} className="text-sm text-primary hover:underline">
-                    {doc.number}
-                  </a>
+                <li key={index} className="flex justify-between items-center text-sm bg-muted/50 p-2 rounded-md pl-3">
+                  <div>
+                    <span className="font-medium">{doc.name}</span>
+                    <a href={`tel:${doc.number}`} className="text-sm text-primary hover:underline block">
+                      {doc.number}
+                    </a>
+                  </div>
+                  <Button variant="ghost" size="icon" className="h-8 w-8" onClick={() => handleDeleteDoctor(index)}>
+                    <X className="h-4 w-4" />
+                    <span className="sr-only">Delete contact</span>
+                  </Button>
                 </li>
               ))}
             </ul>
