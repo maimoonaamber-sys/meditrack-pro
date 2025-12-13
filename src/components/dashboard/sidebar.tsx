@@ -8,7 +8,7 @@ import {
   SidebarMenuButton,
   SidebarContent,
 } from '@/components/ui/sidebar';
-import { Pill, LineChart, History, FileText, Stethoscope, ClipboardPlus, Droplets, HeartPulse, ScanLine, CalendarDays, Contact } from 'lucide-react';
+import { Pill, LineChart, History, FileText, Stethoscope, ClipboardPlus, Droplets, HeartPulse, Camera, CalendarDays, Contact } from 'lucide-react';
 import Link from 'next/link';
 
 const menuItems = [
@@ -81,8 +81,8 @@ export function DashboardSidebar() {
               <Link href="/skin-scanner" legacyBehavior>
                 <SidebarMenuButton asChild>
                   <a>
-                    <ScanLine />
-                    Skin Scanner
+                    <Camera />
+                    Skin Photo Log
                   </a>
                 </SidebarMenuButton>
               </Link>
