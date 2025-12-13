@@ -11,6 +11,7 @@ import { DoctorVisits } from "./doctor-visits";
 import { DoctorContacts } from "./doctor-contacts";
 import { SymptomChecker } from "./symptom-checker";
 import { MedicineInfo } from "./medicine-info";
+import { AiAssistant } from "./ai-assistant";
 
 export function HealthDashboard() {
   return (
@@ -18,6 +19,7 @@ export function HealthDashboard() {
       <div className="grid gap-4 md:gap-8 lg:grid-cols-3">
         <div className="lg:col-span-2 grid auto-rows-max items-start gap-4 md:gap-8">
           <Alerts />
+           <AiAssistant />
           <div className="grid gap-4 md:grid-cols-2">
             <SymptomChecker />
             <MedicineInfo />
