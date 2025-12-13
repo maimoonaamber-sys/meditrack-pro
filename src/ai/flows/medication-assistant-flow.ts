@@ -6,7 +6,7 @@
  * - askQuestion - A function that handles questions about medications.
  */
 import { ai } from '@/ai/genkit';
-import { z } from 'genkit/zod';
+import { z } from 'zod';
 
 const MedicationQuestionInputSchema = z.string();
 
