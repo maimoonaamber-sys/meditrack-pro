@@ -3,7 +3,7 @@
 
 import {Header} from '@/components/dashboard/header';
 import {HealthDashboard} from '@/components/dashboard/health-dashboard';
-import { SidebarProvider, Sidebar, SidebarInset } from '@/components/ui/sidebar';
+import { Sidebar, SidebarInset, SidebarProvider } from '@/components/ui/sidebar';
 import { DashboardSidebar } from '@/components/dashboard/sidebar';
 
 
