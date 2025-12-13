@@ -78,12 +78,10 @@ export function DashboardSidebar() {
       <SidebarContent>
         <SidebarMenu>
           <SidebarMenuItem>
-              <Link href="/skin-scanner" legacyBehavior>
-                <SidebarMenuButton asChild>
-                  <a>
+              <Link href="/skin-scanner">
+                <SidebarMenuButton>
                     <Camera />
                     Skin Photo Log
-                  </a>
                 </SidebarMenuButton>
               </Link>
           </SidebarMenuItem>
