@@ -23,7 +23,7 @@ export function MedipopAssist() {
     const query = inputRef.current?.value;
     if (query) {
       setIsLoading(true);
-      const url = `https://gemini.google.com/`;
+      const url = `https://gemini.google.com/q/${encodeURIComponent(query)}`;
       window.open(url, '_blank');
       setIsLoading(false);
       if(inputRef.current) {

@@ -24,7 +24,7 @@ export function MedipopFab() {
     const query = textareaRef.current?.value;
     if (query) {
       setIsLoading(true);
-      const url = `https://gemini.google.com/`;
+      const url = `https://gemini.google.com/q/${encodeURIComponent(query)}`;
       window.open(url, '_blank');
       setIsLoading(false);
       setIsOpen(false);
