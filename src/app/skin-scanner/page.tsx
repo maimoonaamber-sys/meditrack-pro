@@ -3,9 +3,7 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
-import { SidebarProvider, Sidebar, SidebarInset } from '@/components/ui/sidebar';
 import { Header } from '@/components/dashboard/header';
-import { DashboardSidebar } from '@/components/dashboard/sidebar';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Camera, ImagePlus, AlertTriangle, ArrowLeft, History } from 'lucide-react';
@@ -109,89 +107,82 @@ export default function SkinPhotoLogPage() {
   }
 
   return (
-    <SidebarProvider>
-      <Sidebar>
-        <DashboardSidebar />
-      </Sidebar>
-      <SidebarInset>
-        <div className="flex min-h-screen w-full flex-col">
-          <Header />
-          <main className="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-8">
-            <Link href="/" className="flex items-center gap-2 text-sm font-medium text-muted-foreground hover:text-foreground">
-                <ArrowLeft className="h-4 w-4" />
-                Back to Dashboard
-            </Link>
+    <div className="flex min-h-screen w-full flex-col">
+      <Header />
+      <main className="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-8">
+        <Link href="/" className="flex items-center gap-2 text-sm font-medium text-muted-foreground hover:text-foreground">
+            <ArrowLeft className="h-4 w-4" />
+            Back to Dashboard
+        </Link>
+        <Card>
+            <CardHeader>
+                <div className="flex items-center gap-3">
+                    <Camera className="h-6 w-6" />
+                    <div className="flex-1">
+                        <CardTitle className="font-headline text-lg">Skin Photo Log</CardTitle>
+                        <CardDescription>
+                            Use your camera to take photos of skin issues to show your doctor.
+                        </CardDescription>
+                    </div>
+                </div>
+            </CardHeader>
+            <CardContent className="space-y-4">
+                <div className="relative w-full aspect-video bg-muted rounded-md overflow-hidden border">
+                     <video ref={videoRef} className="w-full h-full object-cover" autoPlay muted playsInline />
+                </div>
+
+                { !hasCameraPermission && (
+                    <Alert variant="destructive">
+                        <AlertTitle>Camera Access Required</AlertTitle>
+                        <AlertDescription>
+                            Please allow camera access in your browser to use this feature. You may need to refresh the page after granting permission.
+                        </AlertDescription>
+                    </Alert>
+                )}
+
+                <Button onClick={handleCaptureAndSave} disabled={!hasCameraPermission || isSaving} className="w-full">
+                    <ImagePlus className="mr-2 h-4 w-4" />
+                    {isSaving ? 'Saving...' : 'Capture and Save Photo'}
+                </Button>
+
+                 <Alert variant="destructive" className="flex items-start">
+                    <AlertTriangle className="h-5 w-5 mt-0.5" />
+                    <div className="ml-4">
+                        <AlertTitle>Disclaimer</AlertTitle>
+                        <AlertDescription>
+                           This tool is for logging images only and does not provide medical advice. Always consult a qualified healthcare provider for any health concerns.
+                        </AlertDescription>
+                    </div>
+                </Alert>
+            </CardContent>
+        </Card>
+
+        {photoHistory.length > 0 && (
             <Card>
                 <CardHeader>
                     <div className="flex items-center gap-3">
-                        <Camera className="h-6 w-6" />
-                        <div className="flex-1">
-                            <CardTitle className="font-headline text-lg">Skin Photo Log</CardTitle>
-                            <CardDescription>
-                                Use your camera to take photos of skin issues to show your doctor.
-                            </CardDescription>
+                         <History className="h-6 w-6" />
+                         <div className="flex-1">
+                            <CardTitle className="font-headline text-lg">Photo History</CardTitle>
+                            <CardDescription>Review your saved photos.</CardDescription>
                         </div>
                     </div>
                 </CardHeader>
-                <CardContent className="space-y-4">
-                    <div className="relative w-full aspect-video bg-muted rounded-md overflow-hidden border">
-                         <video ref={videoRef} className="w-full h-full object-cover" autoPlay muted playsInline />
-                    </div>
-
-                    { !hasCameraPermission && (
-                        <Alert variant="destructive">
-                            <AlertTitle>Camera Access Required</AlertTitle>
-                            <AlertDescription>
-                                Please allow camera access in your browser to use this feature. You may need to refresh the page after granting permission.
-                            </AlertDescription>
-                        </Alert>
-                    )}
-
-                    <Button onClick={handleCaptureAndSave} disabled={!hasCameraPermission || isSaving} className="w-full">
-                        <ImagePlus className="mr-2 h-4 w-4" />
-                        {isSaving ? 'Saving...' : 'Capture and Save Photo'}
-                    </Button>
-
-                     <Alert variant="destructive" className="flex items-start">
-                        <AlertTriangle className="h-5 w-5 mt-0.5" />
-                        <div className="ml-4">
-                            <AlertTitle>Disclaimer</AlertTitle>
-                            <AlertDescription>
-                               This tool is for logging images only and does not provide medical advice. Always consult a qualified healthcare provider for any health concerns.
-                            </AlertDescription>
-                        </div>
-                    </Alert>
+                <CardContent className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                    {photoHistory.map((record, index) => (
+                         <Card key={index} className="overflow-hidden group relative">
+                            <div className="aspect-square w-full">
+                                <Image src={record.image} alt={`Photo from ${record.date}`} layout="fill" objectFit="cover" />
+                            </div>
+                            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-2">
+                                 <p className="text-white text-xs font-mono">{record.date}</p>
+                            </div>
+                         </Card>
+                    ))}
                 </CardContent>
             </Card>
-
-            {photoHistory.length > 0 && (
-                <Card>
-                    <CardHeader>
-                        <div className="flex items-center gap-3">
-                             <History className="h-6 w-6" />
-                             <div className="flex-1">
-                                <CardTitle className="font-headline text-lg">Photo History</CardTitle>
-                                <CardDescription>Review your saved photos.</CardDescription>
-                            </div>
-                        </div>
-                    </CardHeader>
-                    <CardContent className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                        {photoHistory.map((record, index) => (
-                             <Card key={index} className="overflow-hidden group relative">
-                                <div className="aspect-square w-full">
-                                    <Image src={record.image} alt={`Photo from ${record.date}`} layout="fill" objectFit="cover" />
-                                </div>
-                                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-2">
-                                     <p className="text-white text-xs font-mono">{record.date}</p>
-                                </div>
-                             </Card>
-                        ))}
-                    </CardContent>
-                </Card>
-            )}
-          </main>
-        </div>
-      </SidebarInset>
-    </SidebarProvider>
+        )}
+      </main>
+    </div>
   );
 }
