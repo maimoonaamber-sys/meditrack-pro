@@ -56,7 +56,10 @@ export function Alerts() {
         (position) => {
           const { latitude, longitude } = position.coords;
           const url = `https://www.google.com/maps?q=${latitude},${longitude}`;
-          const message = `Emergency! This is my current location: ${url}`;
+          
+          const userName = profile.name || 'A user';
+          const message = `Emergency! This is ${userName}'s current location: ${url}`;
+          
           const contactNumbers = emergencyContacts.map(c => c.phone).join(',');
 
           if (navigator.share) {
@@ -65,21 +68,23 @@ export function Alerts() {
                 text: message,
              }).catch(err => {
                 console.error("Could not share location:", err);
-                toast({
-                    variant: "destructive",
-                    title: "Could Not Share",
-                    description: "Unable to open sharing options."
-                });
+                // Fallback to SMS if share fails, e.g. on desktop
+                window.location.href = `sms:${contactNumbers}?body=${encodeURIComponent(message)}`;
              });
           } else {
             window.location.href = `sms:${contactNumbers}?body=${encodeURIComponent(message)}`;
           }
+           toast({
+                title: "Location Ready to Send",
+                description: "Opening your messaging app...",
+            });
         },
         (error) => {
+          console.error("Geolocation error:", error);
           toast({
             variant: "destructive",
             title: "Location Access Denied",
-            description: "Please enable location services to use this feature.",
+            description: "Please enable location services in your browser settings to use this feature.",
           });
         }
       );
@@ -96,14 +101,13 @@ export function Alerts() {
     <Card className="border-accent/50 bg-accent/10">
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
         <CardTitle className="text-lg font-medium font-headline text-accent-foreground/90">
-          Health Alerts
+          Emergency Actions
         </CardTitle>
         <AlertTriangle className="h-5 w-5 text-accent" />
       </CardHeader>
       <CardContent>
         <p className="text-sm text-accent-foreground/80 mb-4">
-          Your recent symptoms and medication overlap may indicate a moderate
-          health risk. We recommend seeking medical advice.
+          In case of an emergency, use the options below to get help quickly. Your location can be sent to your emergency contacts.
         </p>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
           <Button
@@ -117,7 +121,7 @@ export function Alerts() {
            <Button
             size="sm"
             variant="outline"
-            className="w-full"
+            className="w-full border-accent text-accent-foreground/90 hover:bg-accent/20"
             onClick={handleSendLocation}
           >
             <Share2 className="mr-2 h-4 w-4" />

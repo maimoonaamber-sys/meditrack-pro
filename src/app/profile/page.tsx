@@ -47,7 +47,7 @@ export default function ProfilePage() {
         }
     }, []);
 
-    const handleProfileChange = (field: keyof ProfileData, value: string) => {
+    const handleProfileChange = (field: keyof ProfileData, value: any) => {
         const newProfile = { ...profile, [field]: value };
         setProfile(newProfile);
     };
@@ -68,16 +68,33 @@ export default function ProfilePage() {
 
         if (name && phone && relationship) {
             const newContact: EmergencyContact = { name, phone, relationship };
-            const newProfile = { ...profile, emergencyContacts: [...profile.emergencyContacts, newContact] };
-            setProfile(newProfile);
+            const newEmergencyContacts = [...profile.emergencyContacts, newContact];
+            handleProfileChange('emergencyContacts', newEmergencyContacts);
+            // Also save immediately
+            localStorage.setItem('userProfile', JSON.stringify({ ...profile, emergencyContacts: newEmergencyContacts }));
             emergencyFormRef.current?.reset();
+             toast({
+                title: "Contact Added",
+                description: `${name} has been added to your emergency contacts.`
+            });
+        } else {
+            toast({
+                variant: 'destructive',
+                title: "Missing Information",
+                description: "Please fill out all fields for the emergency contact."
+            });
         }
     }
 
     const handleDeleteEmergencyContact = (indexToDelete: number) => {
         const updatedContacts = profile.emergencyContacts.filter((_, index) => index !== indexToDelete);
-        const newProfile = { ...profile, emergencyContacts: updatedContacts };
-        setProfile(newProfile);
+        handleProfileChange('emergencyContacts', updatedContacts);
+        // Also save immediately
+        localStorage.setItem('userProfile', JSON.stringify({ ...profile, emergencyContacts: updatedContacts }));
+         toast({
+            title: "Contact Removed",
+            description: "The emergency contact has been removed."
+        });
     }
 
   return (
@@ -124,7 +141,7 @@ export default function ProfilePage() {
                         <Shield className="h-6 w-6" />
                         <div className="flex-1">
                             <CardTitle className="font-headline text-lg">Emergency Contacts</CardTitle>
-                            <CardDescription>Add contacts who can be reached in an emergency.</CardDescription>
+                            <CardDescription>Add contacts who can be reached in an emergency. This information will be used for the "Send Location" feature.</CardDescription>
                         </div>
                     </div>
                 </CardHeader>
@@ -133,15 +150,15 @@ export default function ProfilePage() {
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                             <div className="space-y-1.5">
                                 <Label htmlFor="emergencyName">Contact Name</Label>
-                                <Input id="emergencyName" placeholder="e.g., Jane Doe" ref={emergencyNameRef} />
+                                <Input id="emergencyName" placeholder="e.g., Jane Doe" ref={emergencyNameRef} required />
                             </div>
                             <div className="space-y-1.5">
                                 <Label htmlFor="emergencyPhone">Phone Number</Label>
-                                <Input id="emergencyPhone" type="tel" placeholder="e.g., 555-0102" ref={emergencyPhoneRef} />
+                                <Input id="emergencyPhone" type="tel" placeholder="e.g., 555-0102" ref={emergencyPhoneRef} required />
                             </div>
                             <div className="space-y-1.5">
                                 <Label htmlFor="emergencyRelationship">Relationship</Label>
-                                <Input id="emergencyRelationship" placeholder="e.g., Spouse" ref={emergencyRelationshipRef} />
+                                <Input id="emergencyRelationship" placeholder="e.g., Spouse" ref={emergencyRelationshipRef} required />
                             </div>
                         </div>
                         <Button type="submit" className="w-full">
@@ -149,7 +166,7 @@ export default function ProfilePage() {
                             Add Emergency Contact
                         </Button>
                     </form>
-                    {profile.emergencyContacts.length > 0 && (
+                    {profile.emergencyContacts.length > 0 ? (
                         <div className="space-y-2">
                             {profile.emergencyContacts.map((contact, index) => (
                                 <div key={index} className="flex justify-between items-center bg-muted/50 p-3 rounded-md">
@@ -162,10 +179,13 @@ export default function ProfilePage() {
                                     </div>
                                     <Button variant="ghost" size="icon" className="h-8 w-8 text-destructive" onClick={() => handleDeleteEmergencyContact(index)}>
                                         <Trash2 className="h-4 w-4" />
+                                        <span className="sr-only">Delete {contact.name}</span>
                                     </Button>
                                 </div>
                             ))}
                         </div>
+                    ) : (
+                         <p className="text-center text-sm text-muted-foreground">No emergency contacts added yet.</p>
                     )}
                 </CardContent>
             </Card>
