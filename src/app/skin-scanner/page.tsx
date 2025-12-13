@@ -58,15 +58,37 @@ export default function SkinScannerPage() {
   }, [toast]);
 
   const handleScan = () => {
+    if (!videoRef.current) return;
     setIsScanning(true);
-    // Placeholder for actual scanning logic
-    setTimeout(() => {
-        toast({
-            title: 'Scan Complete',
-            description: 'Analysis results would be displayed here.',
-        });
+
+    const video = videoRef.current;
+    const canvas = document.createElement('canvas');
+    canvas.width = video.videoWidth;
+    canvas.height = video.videoHeight;
+    const context = canvas.getContext('2d');
+    if (context) {
+        context.drawImage(video, 0, 0, canvas.width, canvas.height);
+        canvas.toBlob((blob) => {
+            if (blob) {
+                const searchUrl = `https://lens.google.com/uploadbyb64?b64=${canvas.toDataURL('image/jpeg').split(',')[1]}`;
+                window.open(searchUrl, '_blank');
+            } else {
+                 toast({
+                    variant: 'destructive',
+                    title: 'Scan Failed',
+                    description: 'Could not capture image from camera.',
+                });
+            }
+            setIsScanning(false);
+        }, 'image/jpeg');
+    } else {
         setIsScanning(false);
-    }, 2000);
+        toast({
+            variant: 'destructive',
+            title: 'Scan Failed',
+            description: 'Could not process image.',
+        });
+    }
   }
 
   return (
