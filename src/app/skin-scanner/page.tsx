@@ -7,18 +7,26 @@ import { Header } from '@/components/dashboard/header';
 import { DashboardSidebar } from '@/components/dashboard/sidebar';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Camera, ScanLine, AlertTriangle, ArrowLeft } from 'lucide-react';
+import { Camera, ScanLine, AlertTriangle, ArrowLeft, History } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import Link from 'next/link';
+import Image from 'next/image';
 import { diagnoseSkin, SkinDiagnosisOutput } from '@/ai/flows/diagnose-skin-flow';
 import { Badge } from '@/components/ui/badge';
 import { Skeleton } from '@/components/ui/skeleton';
+
+interface ScanRecord {
+    image: string;
+    diagnosis: SkinDiagnosisOutput;
+    date: string;
+}
 
 export default function SkinScannerPage() {
   const [hasCameraPermission, setHasCameraPermission] = useState(false);
   const [isScanning, setIsScanning] = useState(false);
   const [diagnosis, setDiagnosis] = useState<SkinDiagnosisOutput | null>(null);
+  const [scanHistory, setScanHistory] = useState<ScanRecord[]>([]);
   const videoRef = useRef<HTMLVideoElement>(null);
   const { toast } = useToast();
 
@@ -77,6 +85,13 @@ export default function SkinScannerPage() {
         try {
             const result = await diagnoseSkin({ photoDataUri: dataUri });
             setDiagnosis(result);
+            const newRecord: ScanRecord = {
+                image: dataUri,
+                diagnosis: result,
+                date: new Date().toLocaleString()
+            };
+            setScanHistory(prevHistory => [newRecord, ...prevHistory]);
+
         } catch (error) {
             console.error("AI Diagnosis Error: ", error);
             toast({
@@ -170,7 +185,7 @@ export default function SkinScannerPage() {
                     {diagnosis && (
                         <Card className="bg-muted/30">
                             <CardHeader>
-                                <CardTitle className="font-headline text-lg">AI Analysis Result</CardTitle>
+                                <CardTitle className="font-headline text-lg">Latest AI Analysis Result</CardTitle>
                                 {diagnosis.conditionName !== "Unknown" && (
                                     <div className="flex flex-wrap gap-2 pt-2">
                                         <Badge>{diagnosis.conditionName}</Badge>
@@ -193,11 +208,58 @@ export default function SkinScannerPage() {
                     )}
                 </CardContent>
             </Card>
+
+            {scanHistory.length > 0 && (
+                <Card>
+                    <CardHeader>
+                        <div className="flex items-center gap-3">
+                             <History className="h-6 w-6" />
+                             <div className="flex-1">
+                                <CardTitle className="font-headline text-lg">Scan History</CardTitle>
+                                <CardDescription>Review your past skin scan results.</CardDescription>
+                            </div>
+                        </div>
+                    </CardHeader>
+                    <CardContent className="space-y-6">
+                        {scanHistory.map((record, index) => (
+                             <Card key={index} className="overflow-hidden">
+                                <div className="grid md:grid-cols-3 gap-4">
+                                    <div className="md:col-span-1">
+                                        <div className="relative w-full h-full aspect-video md:aspect-square">
+                                            <Image src={record.image} alt={`Scan from ${record.date}`} layout="fill" objectFit="cover" />
+                                        </div>
+                                    </div>
+                                    <div className="md:col-span-2">
+                                         <CardHeader>
+                                             <CardTitle className="font-headline text-base">Analysis from {record.date}</CardTitle>
+                                             {record.diagnosis.conditionName !== "Unknown" && (
+                                                <div className="flex flex-wrap gap-2 pt-1">
+                                                    <Badge>{record.diagnosis.conditionName}</Badge>
+                                                    {record.diagnosis.isAllergy && <Badge variant="secondary">Allergy</Badge>}
+                                                    {record.diagnosis.isBurn && <Badge variant="destructive">Burn</Badge>}
+                                                </div>
+                                            )}
+                                        </CardHeader>
+                                        <CardContent className="space-y-3 text-sm">
+                                            <div>
+                                                <h3 className="font-semibold mb-1">Description</h3>
+                                                <p className="text-muted-foreground text-xs">{record.diagnosis.description}</p>
+                                            </div>
+                                            <div>
+                                                <h3 className="font-semibold mb-1">Recommendations</h3>
+                                                <p className="text-muted-foreground text-xs">{record.diagnosis.recommendation}</p>
+                                            </div>
+                                        </CardContent>
+                                    </div>
+                                </div>
+                             </Card>
+                        ))}
+                    </CardContent>
+                </Card>
+            )}
           </main>
         </div>
       </SidebarInset>
     </SidebarProvider>
   );
 }
-
-    

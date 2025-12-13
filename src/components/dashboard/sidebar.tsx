@@ -78,10 +78,12 @@ export function DashboardSidebar() {
       <SidebarContent>
         <SidebarMenu>
           <SidebarMenuItem>
-              <Link href="/skin-scanner">
-                <SidebarMenuButton>
+              <Link href="/skin-scanner" legacyBehavior>
+                <SidebarMenuButton asChild>
+                  <a>
                     <ScanLine />
                     Skin Scanner
+                  </a>
                 </SidebarMenuButton>
               </Link>
           </SidebarMenuItem>
