@@ -1,7 +1,7 @@
 
 "use client";
 
-import { AlertTriangle, Phone, Video } from "lucide-react";
+import { AlertTriangle, Phone, Video, MapPin } from "lucide-react";
 import {
   Card,
   CardContent,
@@ -9,8 +9,10 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { useToast } from "@/hooks/use-toast";
 
 export function Alerts() {
+  const { toast } = useToast();
 
   const handleConsultDoctor = () => {
     window.open("https://meet.new", "_blank");
@@ -18,6 +20,31 @@ export function Alerts() {
 
   const handleCallAmbulance = () => {
     window.location.href = "tel:112";
+  };
+
+  const handleDetectLocation = () => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const { latitude, longitude } = position.coords;
+          const url = `https://www.google.com/maps?q=${latitude},${longitude}`;
+          window.open(url, "_blank");
+        },
+        (error) => {
+          toast({
+            variant: "destructive",
+            title: "Location Access Denied",
+            description: "Please enable location services in your browser settings to use this feature.",
+          });
+        }
+      );
+    } else {
+      toast({
+        variant: "destructive",
+        title: "Geolocation Not Supported",
+        description: "Your browser does not support geolocation.",
+      });
+    }
   };
 
   return (
@@ -33,14 +60,23 @@ export function Alerts() {
           Your recent symptoms and medication overlap may indicate a moderate
           health risk. We recommend seeking medical advice.
         </p>
-        <div className="flex gap-2">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
           <Button
             size="sm"
             className="w-full bg-accent text-accent-foreground hover:bg-accent/90"
             onClick={handleConsultDoctor}
           >
             <Video className="mr-2 h-4 w-4" />
-            Consult a Doctor
+            Consult Doctor
+          </Button>
+           <Button
+            size="sm"
+            variant="outline"
+            className="w-full"
+            onClick={handleDetectLocation}
+          >
+            <MapPin className="mr-2 h-4 w-4" />
+            Send Location
           </Button>
           <Button
             size="sm"
