@@ -1,7 +1,7 @@
 
 "use client";
 
-import { AlertTriangle, Phone, Video, MapPin } from "lucide-react";
+import { AlertTriangle, Phone, Video, Share2 } from "lucide-react";
 import {
   Card,
   CardContent,
@@ -10,6 +10,12 @@ import {
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
+
+interface EmergencyContact {
+    name: string;
+    phone: string;
+    relationship: string;
+}
 
 export function Alerts() {
   const { toast } = useToast();
@@ -22,19 +28,58 @@ export function Alerts() {
     window.location.href = "tel:112";
   };
 
-  const handleDetectLocation = () => {
+  const handleSendLocation = () => {
+    const savedProfile = localStorage.getItem('userProfile');
+    if (!savedProfile) {
+        toast({
+            variant: "destructive",
+            title: "No Profile Found",
+            description: "Please set up your profile and emergency contacts first.",
+        });
+        return;
+    }
+
+    const profile = JSON.parse(savedProfile);
+    const emergencyContacts: EmergencyContact[] = profile.emergencyContacts || [];
+
+    if (emergencyContacts.length === 0) {
+        toast({
+            variant: "destructive",
+            title: "No Emergency Contacts",
+            description: "Please add at least one emergency contact in your profile.",
+        });
+        return;
+    }
+
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
           const { latitude, longitude } = position.coords;
           const url = `https://www.google.com/maps?q=${latitude},${longitude}`;
-          window.open(url, "_blank");
+          const message = `Emergency! This is my current location: ${url}`;
+          const contactNumbers = emergencyContacts.map(c => c.phone).join(',');
+
+          if (navigator.share) {
+             navigator.share({
+                title: 'Emergency Location',
+                text: message,
+             }).catch(err => {
+                console.error("Could not share location:", err);
+                toast({
+                    variant: "destructive",
+                    title: "Could Not Share",
+                    description: "Unable to open sharing options."
+                });
+             });
+          } else {
+            window.location.href = `sms:${contactNumbers}?body=${encodeURIComponent(message)}`;
+          }
         },
         (error) => {
           toast({
             variant: "destructive",
             title: "Location Access Denied",
-            description: "Please enable location services in your browser settings to use this feature.",
+            description: "Please enable location services to use this feature.",
           });
         }
       );
@@ -73,9 +118,9 @@ export function Alerts() {
             size="sm"
             variant="outline"
             className="w-full"
-            onClick={handleDetectLocation}
+            onClick={handleSendLocation}
           >
-            <MapPin className="mr-2 h-4 w-4" />
+            <Share2 className="mr-2 h-4 w-4" />
             Send Location
           </Button>
           <Button
