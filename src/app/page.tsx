@@ -3,7 +3,6 @@
 
 import {Header} from '@/components/dashboard/header';
 import {HealthDashboard} from '@/components/dashboard/health-dashboard';
-import { MedipopFab } from '@/components/dashboard/medipop-fab';
 
 export default function Home() {
   return (
@@ -12,7 +11,6 @@ export default function Home() {
       <main className="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-8">
         <HealthDashboard />
       </main>
-      <MedipopFab />
     </div>
   );
 }
