@@ -9,8 +9,8 @@ import { DiabetesTracker } from "./diabetes-tracker";
 import { BloodPressurePulseTracker } from "./blood-pressure-pulse-tracker";
 import { DoctorVisits } from "./doctor-visits";
 import { DoctorContacts } from "./doctor-contacts";
-import { MedipopAssist } from "./medipop-assist";
-import { MedipopFab } from "./medipop-fab";
+import { SymptomChecker } from "./symptom-checker";
+import { MedicineInfo } from "./medicine-info";
 
 export function HealthDashboard() {
   return (
@@ -18,6 +18,10 @@ export function HealthDashboard() {
       <div className="grid gap-4 md:gap-8 lg:grid-cols-3">
         <div className="lg:col-span-2 grid auto-rows-max items-start gap-4 md:gap-8">
           <Alerts />
+          <div className="grid gap-4 md:grid-cols-2">
+            <SymptomChecker />
+            <MedicineInfo />
+          </div>
           <div id="health-trends">
             <HealthTrends />
           </div>
@@ -40,9 +44,6 @@ export function HealthDashboard() {
             </div>
         </div>
         <div className="lg:col-span-1 grid auto-rows-max items-start gap-4 md:gap-8">
-          <div id="medipop-assist">
-              <MedipopAssist />
-          </div>
           <div id="current-medications">
             <CurrentMedications />
           </div>
@@ -52,7 +53,6 @@ export function HealthDashboard() {
           <RiskScore />
         </div>
       </div>
-      <MedipopFab />
     </>
   );
 }

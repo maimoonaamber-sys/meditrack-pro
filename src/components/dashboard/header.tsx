@@ -1,6 +1,6 @@
 
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { Pill, User } from "lucide-react";
+import { Pill, User, Menu } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -10,13 +10,23 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import Link from "next/link";
-import { DashboardSidebar } from "./sidebar";
+import { Button } from "../ui/button";
+import { useSidebar } from "../ui/sidebar";
 
 export function Header() {
+  const { toggleSidebar } = useSidebar();
   return (
     <header className="sticky top-0 flex h-16 items-center gap-4 border-b bg-card px-4 md:px-6 z-10">
+       <Button
+        variant="ghost"
+        size="icon"
+        className="md:hidden"
+        onClick={toggleSidebar}
+      >
+        <Menu />
+        <span className="sr-only">Toggle Menu</span>
+      </Button>
       <div className="flex items-center gap-2">
-        <DashboardSidebar />
         <Pill className="h-6 w-6 text-primary" />
         <h1 className="text-xl font-bold font-headline text-foreground">
           MediTrack Pro

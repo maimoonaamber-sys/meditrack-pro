@@ -2,13 +2,6 @@
 'use client';
 
 import React from 'react';
-import {
-  Sheet,
-  SheetContent,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from '@/components/ui/sheet';
 import { Button } from '@/components/ui/button';
 import {
   Pill,
@@ -22,9 +15,11 @@ import {
   Camera,
   CalendarDays,
   Contact,
-  Menu,
+  X,
 } from 'lucide-react';
 import Link from 'next/link';
+import { useSidebar } from '../ui/sidebar';
+
 
 const menuItems = [
   {
@@ -41,11 +36,6 @@ const menuItems = [
     href: '/#diabetes-tracker',
     label: 'Diabetes Tracker',
     icon: Droplets,
-  },
-  {
-    href: '/#medipop-assist',
-    label: 'Medipop (AI Assist)',
-    icon: Stethoscope,
   },
   {
     href: '/#current-medications',
@@ -75,24 +65,8 @@ const menuItems = [
 ];
 
 export function DashboardSidebar() {
-  const [open, setOpen] = React.useState(false);
+  const { setOpen } = useSidebar();
   return (
-    <Sheet open={open} onOpenChange={setOpen}>
-      <SheetTrigger asChild>
-        <Button variant="ghost" size="icon" className="md:hidden">
-          <Menu />
-          <span className="sr-only">Toggle Menu</span>
-        </Button>
-      </SheetTrigger>
-      <SheetContent side="left" className="w-[300px] sm:w-[300px]">
-        <SheetHeader>
-          <div className="flex items-center gap-2">
-            <Pill className="h-6 w-6 text-primary" />
-            <SheetTitle className="text-xl font-bold font-headline text-foreground">
-              MediTrack Pro
-            </SheetTitle>
-          </div>
-        </SheetHeader>
         <nav className="mt-8 flex flex-col gap-1">
           <Link href="/skin-scanner" onClick={() => setOpen(false)}>
             <Button variant="ghost" className="w-full justify-start gap-2">
@@ -109,7 +83,5 @@ export function DashboardSidebar() {
             </Link>
           ))}
         </nav>
-      </SheetContent>
-    </Sheet>
   );
 }

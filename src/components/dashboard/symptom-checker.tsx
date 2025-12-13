@@ -11,10 +11,10 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-import { Stethoscope, BrainCircuit } from 'lucide-react';
+import { Stethoscope, Search } from 'lucide-react';
 import { Textarea } from '../ui/textarea';
 
-export function MedipopAssist() {
+export function SymptomChecker() {
   const inputRef = useRef<HTMLTextAreaElement>(null);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -23,7 +23,7 @@ export function MedipopAssist() {
     const query = inputRef.current?.value;
     if (query) {
       setIsLoading(true);
-      const url = `https://gemini.google.com/q/Why am I experiencing ${encodeURIComponent(
+      const url = `https://www.google.com/search?q=Why am I experiencing ${encodeURIComponent(
         query
       )}, what are the recovery options, and is it dangerous if ignored?`;
       window.open(url, '_blank');
@@ -40,9 +40,9 @@ export function MedipopAssist() {
         <div className="flex items-center gap-3">
           <Stethoscope className="h-6 w-6" />
           <div className="flex-1">
-            <CardTitle className="font-headline text-lg">Medipop (AI Assist)</CardTitle>
+            <CardTitle className="font-headline text-lg">Symptom Checker</CardTitle>
             <CardDescription>
-              Enter a symptom to analyze its causes, recovery options, and risks on Gemini.
+              Enter symptoms to search for causes and treatments on Google.
             </CardDescription>
           </div>
         </div>
@@ -58,8 +58,8 @@ export function MedipopAssist() {
         </CardContent>
         <CardFooter className="flex">
           <Button type="submit" className="w-full" disabled={isLoading}>
-            <BrainCircuit />
-            {isLoading ? 'Redirecting...' : 'Analyze with Gemini'}
+            <Search />
+            {isLoading ? 'Searching...' : 'Analyze with Google'}
           </Button>
         </CardFooter>
       </form>
