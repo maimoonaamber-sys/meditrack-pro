@@ -16,6 +16,8 @@ import {
   CalendarDays,
   Contact,
   X,
+  User,
+  FilePenLine,
 } from 'lucide-react';
 import Link from 'next/link';
 import { useSidebar } from '../ui/sidebar';
@@ -64,24 +66,49 @@ const menuItems = [
   },
 ];
 
+const bottomMenuItems = [
+    {
+        href: '/profile',
+        label: 'My Profile',
+        icon: User,
+    },
+    {
+        href: '/notes',
+        label: 'Notes',
+        icon: FilePenLine
+    }
+]
+
 export function DashboardSidebar() {
   const { setOpen } = useSidebar();
   return (
-        <nav className="mt-8 flex flex-col gap-1">
-          <Link href="/skin-scanner" onClick={() => setOpen(false)}>
-            <Button variant="ghost" className="w-full justify-start gap-2">
-              <Camera />
-              Skin Photo Log
-            </Button>
-          </Link>
-          {menuItems.map((item) => (
-            <Link key={item.label} href={item.href} onClick={() => setOpen(false)}>
-              <Button variant="ghost" className="w-full justify-start gap-2">
-                <item.icon />
-                {item.label}
-              </Button>
-            </Link>
-          ))}
+        <nav className="mt-8 flex flex-col gap-1 h-full">
+            <div className="flex-grow">
+              <Link href="/skin-scanner" onClick={() => setOpen(false)}>
+                <Button variant="ghost" className="w-full justify-start gap-2">
+                  <Camera />
+                  Skin Photo Log
+                </Button>
+              </Link>
+              {menuItems.map((item) => (
+                <Link key={item.label} href={item.href} onClick={() => setOpen(false)}>
+                  <Button variant="ghost" className="w-full justify-start gap-2">
+                    <item.icon />
+                    {item.label}
+                  </Button>
+                </Link>
+              ))}
+            </div>
+             <div className="mt-auto pt-4 border-t border-sidebar-border">
+                {bottomMenuItems.map((item) => (
+                     <Link key={item.label} href={item.href} onClick={() => setOpen(false)}>
+                        <Button variant="ghost" className="w-full justify-start gap-2">
+                            <item.icon />
+                            {item.label}
+                        </Button>
+                    </Link>
+                ))}
+            </div>
         </nav>
   );
 }
