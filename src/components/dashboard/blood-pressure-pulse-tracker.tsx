@@ -1,7 +1,7 @@
 
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -28,6 +28,18 @@ export function BloodPressurePulseTracker() {
   const systolicRef = useRef<HTMLInputElement>(null);
   const diastolicRef = useRef<HTMLInputElement>(null);
   const formRef = useRef<HTMLFormElement>(null);
+
+  useEffect(() => {
+    const savedReadings = localStorage.getItem('bloodPressureReadings');
+    if (savedReadings) {
+      setReadings(JSON.parse(savedReadings));
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('bloodPressureReadings', JSON.stringify(readings));
+  }, [readings]);
+
 
   const handleAddReading = (event: React.FormEvent) => {
     event.preventDefault();

@@ -1,7 +1,7 @@
 
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -26,6 +26,17 @@ export function DoctorContacts() {
   const nameRef = useRef<HTMLInputElement>(null);
   const numberRef = useRef<HTMLInputElement>(null);
   const formRef = useRef<HTMLFormElement>(null);
+
+  useEffect(() => {
+    const savedDoctors = localStorage.getItem('doctorContacts');
+    if (savedDoctors) {
+      setDoctors(JSON.parse(savedDoctors));
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('doctorContacts', JSON.stringify(doctors));
+  }, [doctors]);
 
   const handleAddDoctor = (event: React.FormEvent) => {
     event.preventDefault();

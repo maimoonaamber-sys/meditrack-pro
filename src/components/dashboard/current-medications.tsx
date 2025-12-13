@@ -62,6 +62,18 @@ export function CurrentMedications() {
   const nextDoseTimeRef = useRef<HTMLInputElement>(null);
   const formRef = useRef<HTMLFormElement>(null);
 
+  useEffect(() => {
+    const savedMedications = localStorage.getItem('medications');
+    if (savedMedications) {
+      setMedications(JSON.parse(savedMedications));
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('medications', JSON.stringify(medications));
+  }, [medications]);
+
+
   const handleAddMedication = (event: React.FormEvent) => {
     event.preventDefault();
     const name = nameInputRef.current?.value;

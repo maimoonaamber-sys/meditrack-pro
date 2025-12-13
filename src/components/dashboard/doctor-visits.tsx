@@ -1,7 +1,7 @@
 
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -18,7 +18,7 @@ import { format, formatDistanceToNow } from 'date-fns';
 
 interface Visit {
   doctorName: string;
-  visitDate: Date;
+  visitDate: string; // Store as ISO string
 }
 
 export function DoctorVisits() {
@@ -27,13 +27,25 @@ export function DoctorVisits() {
   const dateRef = useRef<HTMLInputElement>(null);
   const formRef = useRef<HTMLFormElement>(null);
 
+  useEffect(() => {
+    const savedVisits = localStorage.getItem('doctorVisits');
+    if (savedVisits) {
+      setVisits(JSON.parse(savedVisits));
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('doctorVisits', JSON.stringify(visits));
+  }, [visits]);
+
   const handleAddVisit = (event: React.FormEvent) => {
     event.preventDefault();
     const doctorName = nameRef.current?.value;
     const visitDate = dateRef.current?.value;
 
     if (doctorName && visitDate) {
-      setVisits([...visits, { doctorName, visitDate: new Date(visitDate) }].sort((a,b) => b.visitDate.getTime() - a.visitDate.getTime()));
+      const newVisit = { doctorName, visitDate: new Date(visitDate).toISOString() };
+      setVisits(prevVisits => [...prevVisits, newVisit].sort((a,b) => new Date(b.visitDate).getTime() - new Date(a.visitDate).getTime()));
       formRef.current?.reset();
     }
   };
@@ -76,9 +88,9 @@ export function DoctorVisits() {
                 <li key={index} className="flex justify-between items-center text-sm bg-muted/50 p-2 rounded-md">
                   <div>
                     <span className="font-medium">{visit.doctorName}</span>
-                    <span className="text-muted-foreground text-xs block">{format(visit.visitDate, 'MMMM d, yyyy')}</span>
+                    <span className="text-muted-foreground text-xs block">{format(new Date(visit.visitDate), 'MMMM d, yyyy')}</span>
                   </div>
-                  <span className="text-sm text-muted-foreground">{formatDistanceToNow(visit.visitDate, { addSuffix: true })}</span>
+                  <span className="text-sm text-muted-foreground">{formatDistanceToNow(new Date(visit.visitDate), { addSuffix: true })}</span>
                 </li>
               ))}
             </ul>

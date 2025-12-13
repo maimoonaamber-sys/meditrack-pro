@@ -1,5 +1,4 @@
 
-
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
@@ -25,17 +24,6 @@ export default function SkinPhotoLogPage() {
   const [photoHistory, setPhotoHistory] = useState<PhotoRecord[]>([]);
   const videoRef = useRef<HTMLVideoElement>(null);
   const { toast } = useToast();
-
-  useEffect(() => {
-    const savedPhotos = localStorage.getItem('skinPhotoHistory');
-    if (savedPhotos) {
-      setPhotoHistory(JSON.parse(savedPhotos));
-    }
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem('skinPhotoHistory', JSON.stringify(photoHistory));
-  }, [photoHistory]);
 
   useEffect(() => {
     const getCameraPermission = async () => {

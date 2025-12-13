@@ -1,7 +1,7 @@
 
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { History, PlusCircle } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -12,7 +12,7 @@ import { format } from 'date-fns';
 interface SicknessEntry {
   illness: string;
   duration: string;
-  date: Date;
+  date: string; // Keep as string to be JSON serializable
   medicines: string;
 }
 
@@ -24,6 +24,17 @@ export function SicknessHistory() {
   const medicinesRef = useRef<HTMLInputElement>(null);
   const formRef = useRef<HTMLFormElement>(null);
 
+  useEffect(() => {
+    const savedHistory = localStorage.getItem('sicknessHistory');
+    if (savedHistory) {
+      setHistory(JSON.parse(savedHistory));
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('sicknessHistory', JSON.stringify(history));
+  }, [history]);
+
   const handleAddEntry = (event: React.FormEvent) => {
     event.preventDefault();
     const illness = illnessRef.current?.value;
@@ -34,11 +45,11 @@ export function SicknessHistory() {
     if (illness && date && duration && medicines) {
       const newEntry: SicknessEntry = {
         illness,
-        date: new Date(date),
+        date: new Date(date).toISOString(), // Store as ISO string
         duration: `${duration} days`,
         medicines,
       };
-      setHistory([newEntry, ...history].sort((a,b) => b.date.getTime() - a.date.getTime()));
+      setHistory(prevHistory => [...prevHistory, newEntry].sort((a,b) => new Date(b.date).getTime() - new Date(a.date).getTime()));
       formRef.current?.reset();
     }
   };
@@ -90,7 +101,7 @@ export function SicknessHistory() {
                   <p className="text-muted-foreground text-xs mt-1">Duration: {item.duration}</p>
                   <p className="text-muted-foreground text-xs">Medicines: {item.medicines}</p>
                 </div>
-                <span className="text-muted-foreground text-xs text-right shrink-0 ml-4">{format(item.date, 'MMM d, yyyy')}</span>
+                <span className="text-muted-foreground text-xs text-right shrink-0 ml-4">{format(new Date(item.date), 'MMM d, yyyy')}</span>
               </li>
             ))}
           </ul>

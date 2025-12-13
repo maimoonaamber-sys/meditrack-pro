@@ -1,7 +1,7 @@
 
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -26,6 +26,18 @@ export function DiabetesTracker() {
   const beforeMealRef = useRef<HTMLInputElement>(null);
   const afterMealRef = useRef<HTMLInputElement>(null);
   const formRef = useRef<HTMLFormElement>(null);
+
+  useEffect(() => {
+    const savedReadings = localStorage.getItem('diabetesReadings');
+    if (savedReadings) {
+      setReadings(JSON.parse(savedReadings));
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('diabetesReadings', JSON.stringify(readings));
+  }, [readings]);
+
 
   const handleAddReading = (event: React.FormEvent) => {
     event.preventDefault();
