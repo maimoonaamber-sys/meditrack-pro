@@ -17,7 +17,7 @@ export function Alerts() {
   };
 
   const handleCallAmbulance = () => {
-    window.location.href = "tel:100";
+    window.location.href = "tel:112";
   };
 
   return (
