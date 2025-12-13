@@ -27,12 +27,11 @@ const medicationAssistantFlow = ai.defineFlow(
   async (prompt) => {
     const llmResponse = await ai.generate({
       model: 'googleai/gemini-1.5-flash',
-      prompt: `You are a friendly and helpful AI medical assistant. 
-               Your goal is to provide clear and concise information about medications.
-               Always start by greeting the user if it's the start of the conversation.
+      prompt: `You are a helpful AI assistant. Your user has a question about medications. Provide a comprehensive and accurate answer.
+               
                Here is the user's question: ${prompt}`,
       config: {
-        temperature: 0.5,
+        temperature: 0.7,
       },
     });
 
