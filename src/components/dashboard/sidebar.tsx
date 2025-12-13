@@ -8,7 +8,8 @@ import {
   SidebarMenuButton,
   SidebarContent,
 } from '@/components/ui/sidebar';
-import { Pill, LineChart, History, FileText, Stethoscope, ClipboardPlus, Droplets, HeartPulse } from 'lucide-react';
+import { Pill, LineChart, History, FileText, Stethoscope, ClipboardPlus, Droplets, HeartPulse, ScanLine, CalendarDays, Contact } from 'lucide-react';
+import Link from 'next/link';
 
 const menuItems = [
   {
@@ -26,6 +27,21 @@ const menuItems = [
     label: 'Diabetes Tracker',
     icon: Droplets,
   },
+    {
+    href: '#current-medications',
+    label: 'Current Medications',
+    icon: ClipboardPlus,
+  },
+  {
+    href: '#doctor-visits',
+    label: 'Doctor Visits',
+    icon: CalendarDays,
+  },
+  {
+    href: '#doctor-contacts',
+    label: 'Doctor Contacts',
+    icon: Contact,
+  },
   {
     href: '#sickness-history',
     label: 'Sickness History',
@@ -35,11 +51,6 @@ const menuItems = [
     href: '#lab-reports',
     label: 'Lab Reports',
     icon: FileText,
-  },
-  {
-    href: '#current-medications',
-    label: 'Current Medications',
-    icon: ClipboardPlus,
   },
   {
     href: '#medicine-info',
@@ -66,6 +77,14 @@ export function DashboardSidebar() {
       </SidebarHeader>
       <SidebarContent>
         <SidebarMenu>
+          <SidebarMenuItem>
+              <Link href="/skin-scanner">
+                <SidebarMenuButton>
+                    <ScanLine />
+                    Skin Scanner
+                </SidebarMenuButton>
+              </Link>
+          </SidebarMenuItem>
           {menuItems.map((item) => (
             <SidebarMenuItem key={item.label}>
               <a href={item.href}>

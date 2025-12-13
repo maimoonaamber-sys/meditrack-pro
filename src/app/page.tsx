@@ -1,7 +1,7 @@
 
 'use client';
 
-import {SidebarProvider, Sidebar, SidebarInset, SidebarTrigger, SidebarRail} from '@/components/ui/sidebar';
+import {SidebarProvider, Sidebar, SidebarInset} from '@/components/ui/sidebar';
 import {Header} from '@/components/dashboard/header';
 import {HealthDashboard} from '@/components/dashboard/health-dashboard';
 import {DashboardSidebar} from '@/components/dashboard/sidebar';
