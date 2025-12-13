@@ -172,7 +172,7 @@ export default function SkinPhotoLogPage() {
                     {photoHistory.map((record, index) => (
                          <Card key={index} className="overflow-hidden group relative">
                             <div className="aspect-square w-full">
-                                <Image src={record.image} alt={`Photo from ${record.date}`} layout="fill" objectFit="cover" />
+                                <Image src={record.image} alt={`Photo from ${record.date}`} fill={true} objectFit="cover" />
                             </div>
                             <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-2">
                                  <p className="text-white text-xs font-mono">{record.date}</p>

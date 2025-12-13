@@ -70,30 +70,11 @@ const Sidebar: React.FC<SidebarProps> = ({
   const { isOpen, setOpen } = useSidebar();
   const sidebarRef = React.useRef<HTMLDivElement>(null);
 
-  React.useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (
-        sidebarRef.current &&
-        !sidebarRef.current.contains(event.target as Node)
-      ) {
-        setOpen(false);
-      }
-    };
-
-    if (isOpen) {
-      document.addEventListener("mousedown", handleClickOutside);
-    }
-
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [isOpen, setOpen]);
-
   return (
     <>
       <div
         className={cn(
-          "fixed inset-0 z-40 bg-black/50 transition-opacity",
+          "fixed inset-0 z-40 bg-black/50 md:hidden",
           isOpen ? "opacity-100" : "opacity-0 pointer-events-none"
         )}
         onClick={() => setOpen(false)}
@@ -102,25 +83,27 @@ const Sidebar: React.FC<SidebarProps> = ({
         ref={sidebarRef}
         className={cn(
           sidebarVariants({ side }),
+          "transform-none md:translate-x-0 md:w-64 md:border-r md:shadow-none",
+          isOpen ? "translate-x-0" : "-translate-x-full",
           className,
-          "transform transition-transform",
-          isOpen ? "translate-x-0" : "-translate-x-full"
         )}
       >
-        <div className="flex items-center gap-2">
-            <Pill className="h-6 w-6 text-primary" />
-            <h1 className="text-xl font-bold font-headline text-foreground">
-              MediTrack Pro
-            </h1>
-          </div>
+        <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+                <Pill className="h-6 w-6 text-primary" />
+                <h1 className="text-xl font-bold font-headline text-foreground">
+                  MediTrack Pro
+                </h1>
+            </div>
+             <button
+                onClick={() => setOpen(false)}
+                className="rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none md:hidden"
+            >
+                <X className="h-4 w-4" />
+                <span className="sr-only">Close</span>
+            </button>
+        </div>
         {children}
-        <button
-          onClick={() => setOpen(false)}
-          className="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none"
-        >
-          <X className="h-4 w-4" />
-          <span className="sr-only">Close</span>
-        </button>
       </aside>
     </>
   );
@@ -129,7 +112,7 @@ const Sidebar: React.FC<SidebarProps> = ({
 const SidebarInset: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  return <div className="transition-all md:pl-0">{children}</div>;
+  return <div className="transition-all md:pl-64">{children}</div>;
 };
 
 export { Sidebar, SidebarInset };

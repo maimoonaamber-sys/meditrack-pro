@@ -29,6 +29,8 @@ const nextConfig: NextConfig = {
         pathname: '/**',
       },
     ],
+    dangerouslyAllowSVG: true,
+    unoptimized: true,
   },
 };
 
