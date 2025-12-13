@@ -16,8 +16,12 @@ interface SicknessEntry {
   medicines: string;
 }
 
+const MAX_ENTRIES = 100;
+const PREVIEW_COUNT = 5;
+
 export function SicknessHistory() {
   const [history, setHistory] = useState<SicknessEntry[]>([]);
+  const [showAll, setShowAll] = useState(false);
   const illnessRef = useRef<HTMLInputElement>(null);
   const dateRef = useRef<HTMLInputElement>(null);
   const durationRef = useRef<HTMLInputElement>(null);
@@ -49,10 +53,15 @@ export function SicknessHistory() {
         duration: `${duration} days`,
         medicines,
       };
-      setHistory(prevHistory => [...prevHistory, newEntry].sort((a,b) => new Date(b.date).getTime() - new Date(a.date).getTime()));
+      setHistory(prevHistory => [...prevHistory, newEntry]
+        .sort((a,b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+        .slice(0, MAX_ENTRIES)
+      );
       formRef.current?.reset();
     }
   };
+
+  const displayedHistory = showAll ? history : history.slice(0, PREVIEW_COUNT);
 
 
   return (
@@ -93,18 +102,27 @@ export function SicknessHistory() {
         </form>
 
         {history.length > 0 && (
-          <ul className="space-y-3">
-            {history.map((item, index) => (
-              <li key={index} className="flex justify-between items-start text-sm bg-muted/50 p-3 rounded-md">
-                <div>
-                  <p className="font-medium">{item.illness}</p>
-                  <p className="text-muted-foreground text-xs mt-1">Duration: {item.duration}</p>
-                  <p className="text-muted-foreground text-xs">Medicines: {item.medicines}</p>
+          <>
+            <ul className="space-y-3">
+                {displayedHistory.map((item, index) => (
+                <li key={index} className="flex justify-between items-start text-sm bg-muted/50 p-3 rounded-md">
+                    <div>
+                    <p className="font-medium">{item.illness}</p>
+                    <p className="text-muted-foreground text-xs mt-1">Duration: {item.duration}</p>
+                    <p className="text-muted-foreground text-xs">Medicines: {item.medicines}</p>
+                    </div>
+                    <span className="text-muted-foreground text-xs text-right shrink-0 ml-4">{format(new Date(item.date), 'MMM d, yyyy')}</span>
+                </li>
+                ))}
+            </ul>
+             {history.length > PREVIEW_COUNT && (
+                <div className="text-center mt-4">
+                    <Button variant="link" onClick={() => setShowAll(!showAll)}>
+                        {showAll ? "Show Less" : "Show All"}
+                    </Button>
                 </div>
-                <span className="text-muted-foreground text-xs text-right shrink-0 ml-4">{format(new Date(item.date), 'MMM d, yyyy')}</span>
-              </li>
-            ))}
-          </ul>
+            )}
+          </>
         )}
       </CardContent>
     </Card>

@@ -21,8 +21,12 @@ interface Reading {
   afterMeal: string;
 }
 
+const MAX_READINGS = 100;
+const PREVIEW_COUNT = 5;
+
 export function DiabetesTracker() {
   const [readings, setReadings] = useState<Reading[]>([]);
+  const [showAll, setShowAll] = useState(false);
   const beforeMealRef = useRef<HTMLInputElement>(null);
   const afterMealRef = useRef<HTMLInputElement>(null);
   const formRef = useRef<HTMLFormElement>(null);
@@ -46,14 +50,16 @@ export function DiabetesTracker() {
 
     if (beforeMeal || afterMeal) {
       const newReading: Reading = {
-        date: new Date().toLocaleDateString(),
+        date: new Date().toLocaleString(),
         beforeMeal: beforeMeal || "N/A",
         afterMeal: afterMeal || "N/A",
       };
-      setReadings([newReading, ...readings]);
+      setReadings(prevReadings => [newReading, ...prevReadings].slice(0, MAX_READINGS));
       formRef.current?.reset();
     }
   };
+
+  const displayedReadings = showAll ? readings : readings.slice(0, PREVIEW_COUNT);
 
   return (
     <Card>
@@ -97,7 +103,7 @@ export function DiabetesTracker() {
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {readings.map((reading, index) => (
+                {displayedReadings.map((reading, index) => (
                   <TableRow key={index}>
                     <TableCell>{reading.date}</TableCell>
                     <TableCell>{reading.beforeMeal}</TableCell>
@@ -106,6 +112,13 @@ export function DiabetesTracker() {
                 ))}
               </TableBody>
             </Table>
+             {readings.length > PREVIEW_COUNT && (
+                <div className="text-center mt-4">
+                    <Button variant="link" onClick={() => setShowAll(!showAll)}>
+                        {showAll ? "Show Less" : "Show All"}
+                    </Button>
+                </div>
+            )}
           </div>
         )}
       </CardContent>

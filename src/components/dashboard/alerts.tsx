@@ -1,7 +1,7 @@
 
 "use client";
 
-import { AlertTriangle, Phone, Video, Share2 } from "lucide-react";
+import { AlertTriangle, Phone, Video, Share2, Share } from "lucide-react";
 import {
   Card,
   CardContent,
@@ -97,11 +97,26 @@ export function Alerts() {
     }
   };
 
+  const handleShareApp = () => {
+    if (navigator.share) {
+      navigator.share({
+        title: 'MediTrack Pro',
+        text: 'Check out MediTrack Pro, a great app for managing your health!',
+        url: window.location.href,
+      }).catch(err => console.error("Could not share app:", err));
+    } else {
+       toast({
+        title: "Feature Not Supported",
+        description: "Your browser does not support the Web Share API.",
+      });
+    }
+  }
+
   return (
     <Card className="border-accent/50 bg-accent/10">
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
         <CardTitle className="text-lg font-medium font-headline text-accent-foreground/90">
-          Emergency Actions
+          Emergency & Quick Actions
         </CardTitle>
         <AlertTriangle className="h-5 w-5 text-accent" />
       </CardHeader>
@@ -109,14 +124,14 @@ export function Alerts() {
         <p className="text-sm text-accent-foreground/80 mb-4">
           In case of an emergency, use the options below to get help quickly. Your location can be sent to your emergency contacts.
         </p>
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
           <Button
             size="sm"
             className="w-full bg-accent text-accent-foreground hover:bg-accent/90"
             onClick={handleConsultDoctor}
           >
             <Video className="mr-2 h-4 w-4" />
-            Consult Doctor
+            Consult
           </Button>
            <Button
             size="sm"
@@ -127,6 +142,15 @@ export function Alerts() {
             <Share2 className="mr-2 h-4 w-4" />
             Send Location
           </Button>
+            <Button
+                size="sm"
+                variant="outline"
+                className="w-full border-accent text-accent-foreground/90 hover:bg-accent/20"
+                onClick={handleShareApp}
+            >
+                <Share className="mr-2 h-4 w-4" />
+                Share App
+            </Button>
           <Button
             size="sm"
             variant="destructive"
@@ -134,7 +158,7 @@ export function Alerts() {
             onClick={handleCallAmbulance}
           >
             <Phone className="mr-2 h-4 w-4" />
-            Call Ambulance
+            Call 112
           </Button>
         </div>
       </CardContent>

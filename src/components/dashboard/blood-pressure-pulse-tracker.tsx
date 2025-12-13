@@ -22,8 +22,12 @@ interface Reading {
   diastolic: string;
 }
 
+const MAX_READINGS = 100;
+const PREVIEW_COUNT = 5;
+
 export function BloodPressurePulseTracker() {
   const [readings, setReadings] = useState<Reading[]>([]);
+  const [showAll, setShowAll] = useState(false);
   const pulseRateRef = useRef<HTMLInputElement>(null);
   const systolicRef = useRef<HTMLInputElement>(null);
   const diastolicRef = useRef<HTMLInputElement>(null);
@@ -49,15 +53,17 @@ export function BloodPressurePulseTracker() {
 
     if (pulseRate || systolic || diastolic) {
       const newReading: Reading = {
-        date: new Date().toLocaleDateString(),
+        date: new Date().toLocaleString(),
         pulseRate: pulseRate || "N/A",
         systolic: systolic || "N/A",
         diastolic: diastolic || "N/A",
       };
-      setReadings([newReading, ...readings]);
+      setReadings(prevReadings => [newReading, ...prevReadings].slice(0, MAX_READINGS));
       formRef.current?.reset();
     }
   };
+
+  const displayedReadings = showAll ? readings : readings.slice(0, PREVIEW_COUNT);
 
   return (
     <Card>
@@ -106,7 +112,7 @@ export function BloodPressurePulseTracker() {
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {readings.map((reading, index) => (
+                {displayedReadings.map((reading, index) => (
                   <TableRow key={index}>
                     <TableCell>{reading.date}</TableCell>
                     <TableCell>{reading.pulseRate}</TableCell>
@@ -116,6 +122,13 @@ export function BloodPressurePulseTracker() {
                 ))}
               </TableBody>
             </Table>
+            {readings.length > PREVIEW_COUNT && (
+                <div className="text-center mt-4">
+                    <Button variant="link" onClick={() => setShowAll(!showAll)}>
+                        {showAll ? "Show Less" : "Show All"}
+                    </Button>
+                </div>
+            )}
           </div>
         )}
       </CardContent>
