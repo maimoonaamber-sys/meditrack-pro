@@ -68,13 +68,8 @@ const menuItems = [
     icon: FileText,
   },
   {
-    href: '/#medicine-info',
-    label: 'Medicine Assistant',
-    icon: Pill,
-  },
-  {
-    href: '/#symptom-checker',
-    label: 'Symptom Checker',
+    href: '/#medipop-assist',
+    label: 'Medipop (AI Assist)',
     icon: Stethoscope,
   },
 ];

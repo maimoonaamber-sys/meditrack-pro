@@ -2,15 +2,14 @@
 import { Alerts } from "./alerts";
 import { HealthTrends } from "./health-trends";
 import { LabReports } from "./lab-reports";
-import { MedicineInfo } from "./medicine-info";
 import { RiskScore } from "./risk-score";
 import { SicknessHistory } from "./sickness-history";
-import { SymptomChecker } from "./symptom-checker";
 import { CurrentMedications } from "./current-medications";
 import { DiabetesTracker } from "./diabetes-tracker";
 import { BloodPressurePulseTracker } from "./blood-pressure-pulse-tracker";
 import { DoctorVisits } from "./doctor-visits";
 import { DoctorContacts } from "./doctor-contacts";
+import { MedipopAssist } from "./medipop-assist";
 
 export function HealthDashboard() {
   return (
@@ -45,11 +44,8 @@ export function HealthDashboard() {
         <div id="doctor-contacts">
           <DoctorContacts />
         </div>
-        <div id="medicine-info">
-          <MedicineInfo />
-        </div>
-        <div id="symptom-checker">
-          <SymptomChecker />
+        <div id="medipop-assist">
+          <MedipopAssist />
         </div>
         <RiskScore />
       </div>
