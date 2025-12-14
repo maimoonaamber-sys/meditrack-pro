@@ -7,17 +7,12 @@ import { SicknessHistory } from "./sickness-history";
 import { CurrentMedications } from "./current-medications";
 import { DiabetesTracker } from "./diabetes-tracker";
 import { BloodPressurePulseTracker } from "./blood-pressure-pulse-tracker";
-import { SymptomChecker } from "./symptom-checker";
-import { MedicineInfo } from "./medicine-info";
-import { Card, CardDescription, CardHeader, CardTitle } from "../ui/card";
-import { MessageCircle } from "lucide-react";
-import { MentalHealthQuestionnaire } from "./mental-health-questionnaire";
 import { GreetingCard } from "./greeting-card";
 import { NotificationManager } from "./notification-manager";
 import { InfoCard } from "./info-card";
+import { MentalHealthQuestionnaire } from "./mental-health-questionnaire";
 
 export function HealthDashboard() {
-
   return (
     <>
       <NotificationManager />
@@ -32,14 +27,6 @@ export function HealthDashboard() {
           >
             <HealthTrends />
           </InfoCard>
-          <InfoCard
-            icon={MentalHealthQuestionnaire}
-            title="Mental Health Check-in 🧠"
-            description="Regularly assessing your mental health is an important part of your
-        overall well-being."
-          >
-            <MentalHealthQuestionnaire />
-          </InfoCard>
           <div id="blood-pressure-pulse-tracker">
             <InfoCard
               icon={BloodPressurePulseTracker}
@@ -50,7 +37,7 @@ export function HealthDashboard() {
             </InfoCard>
           </div>
           <div id="diabetes-tracker">
-             <InfoCard
+            <InfoCard
               icon={DiabetesTracker}
               title="Diabetes Monitor 🩸"
               description="Log your blood sugar readings before and after meals."
