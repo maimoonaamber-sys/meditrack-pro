@@ -26,6 +26,13 @@ export function HealthDashboard() {
           <GreetingCard />
           <Alerts />
           <InfoCard
+            icon={HealthTrends}
+            title="Health Trends 📈"
+            description="Visualize your blood pressure over time to spot trends."
+          >
+            <HealthTrends />
+          </InfoCard>
+          <InfoCard
             icon={MentalHealthQuestionnaire}
             title="Mental Health Check-in 🧠"
             description="Regularly assessing your mental health is an important part of your

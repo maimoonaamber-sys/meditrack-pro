@@ -96,7 +96,7 @@ export function SicknessHistory() {
         </div>
         <Button
           type="submit"
-          className="w-full bg-accent hover:bg-accent/90 text-accent-foreground"
+          className="w-full"
         >
           <PlusCircle />
           Add Sickness Entry

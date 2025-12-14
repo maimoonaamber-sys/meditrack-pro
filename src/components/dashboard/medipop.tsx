@@ -197,7 +197,7 @@ export function Medipop() {
   return (
     <>
       <Button
-        className="fixed bottom-6 right-6 h-16 w-16 rounded-full shadow-2xl z-50 animate-zoom-in bg-[hsl(var(--chart-4))] hover:bg-[hsl(var(--chart-4)/0.9)]"
+        className="fixed bottom-6 right-6 h-16 w-16 rounded-full shadow-2xl z-50 animate-zoom-in"
         onClick={() => handleOpenChange(true)}
       >
         <Sparkles className="h-6 w-6 mr-0" />

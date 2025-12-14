@@ -18,10 +18,14 @@ export function GreetingCard() {
       setName(''); // Set to empty string if no profile to avoid null
     }
 
-    const hour = new Date().getHours();
-    if (hour < 12) setGreeting('Good Morning');
-    else if (hour < 18) setGreeting('Good Afternoon');
-    else setGreeting('Good Evening');
+    const setGreetingBasedOnTime = () => {
+      const hour = new Date().getHours();
+      if (hour < 12) setGreeting('Good Morning');
+      else if (hour < 18) setGreeting('Good Afternoon');
+      else setGreeting('Good Evening');
+    };
+
+    setGreetingBasedOnTime();
   }, []);
 
   const getSummary = () => {
@@ -31,11 +35,11 @@ export function GreetingCard() {
 
   if (greeting === null || name === null) {
     return (
-       <Card className="bg-[hsl(var(--chart-4))] text-primary-foreground">
+       <Card>
         <CardHeader>
           <div className="space-y-2">
-             <div className="w-3/4 h-6 bg-primary-foreground/20 rounded-md animate-pulse"></div>
-             <div className="w-full h-4 bg-primary-foreground/20 rounded-md animate-pulse"></div>
+             <div className="w-3/4 h-6 bg-muted rounded-md animate-pulse"></div>
+             <div className="w-full h-4 bg-muted rounded-md animate-pulse"></div>
           </div>
         </CardHeader>
       </Card>
@@ -43,17 +47,17 @@ export function GreetingCard() {
   }
 
   return (
-    <Card className="bg-[hsl(var(--chart-4))] text-primary-foreground">
+    <Card>
       <CardHeader>
         <div className="flex items-center gap-4">
-          <div className="bg-primary-foreground/10 text-primary-foreground p-3 rounded-full">
+          <div className="bg-primary/10 text-primary p-3 rounded-full">
              <Hand className="h-6 w-6" />
           </div>
           <div className="flex-1">
             <CardTitle className="font-headline text-xl">
               {greeting}, {name || 'there'}!
             </CardTitle>
-            <CardDescription className="text-primary-foreground/80">
+            <CardDescription>
               {getSummary()}
             </CardDescription>
           </div>

@@ -17,39 +17,13 @@ const chartData = [{ name: "risk", value: 35 }];
 
 export function RiskScore() {
   const riskValue = chartData[0].value;
-
-  let riskLabel = "Low Risk";
-  let cardColorClass = "bg-[hsl(var(--chart-emerald))]";
-  let textColorClass = "text-primary-foreground";
-  let remainingColor = "hsl(var(--chart-emerald) / 0.5)";
-
-  if (riskValue >= 50 && riskValue <= 80) {
-    riskLabel = "Medium Risk";
-    cardColorClass = "bg-[hsl(var(--chart-orange))]";
-    textColorClass = "text-white";
-    remainingColor = "hsl(var(--chart-orange) / 0.5)";
-  } else if (riskValue > 85) {
-    riskLabel = "High Risk";
-    cardColorClass = "bg-[hsl(var(--chart-red))]";
-    textColorClass = "text-white";
-    remainingColor = "hsl(var(--chart-red) / 0.5)";
-  }
-  
-  const displayData = [
-    { name: "risk", value: riskValue, fill: "hsl(var(--primary-foreground))" },
-    { name: "remaining", value: 100 - riskValue, fill: remainingColor },
-  ];
-
+  const remainingValue = 100 - riskValue;
 
   return (
     <InfoCard
       icon={Target}
       title="Overall Risk Score 🎯"
       description="Based on your profile and inputs"
-      cardClassName={cardColorClass}
-      iconClassName={textColorClass}
-      titleClassName={textColorClass}
-      descriptionClassName={`${textColorClass}/80`}
     >
       <ChartContainer
         config={{}}
@@ -57,7 +31,7 @@ export function RiskScore() {
       >
         <PieChart>
           <Pie
-            data={displayData}
+            data={chartData}
             dataKey="value"
             nameKey="name"
             cx="50%"
@@ -66,19 +40,26 @@ export function RiskScore() {
             outerRadius={80}
             startAngle={90}
             endAngle={-270}
-            cornerRadius={5}
+            strokeWidth={0}
           >
-            {displayData.map((entry, index) => (
-              <Cell key={`cell-${index}`} fill={entry.fill} />
-            ))}
+            <Cell
+              key="risk"
+              fill="hsl(var(--primary))"
+              className="fill-primary"
+            />
+            <Cell
+              key="remaining"
+              fill="hsl(var(--primary) / 0.2)"
+              className="fill-primary/20"
+            />
           </Pie>
           <foreignObject width="100%" height="100%">
             <div className="flex h-full w-full items-center justify-center text-center">
               <div>
-                <p className={`text-4xl font-bold font-headline ${textColorClass}`}>
+                <p className="text-4xl font-bold font-headline text-primary">
                   {riskValue}%
                 </p>
-                <p className={`text-sm ${textColorClass}/80`}>{riskLabel}</p>
+                <p className="text-sm text-muted-foreground">Low Risk</p>
               </div>
             </div>
           </foreignObject>
