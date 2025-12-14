@@ -7,6 +7,7 @@ import { Hand } from "lucide-react";
 
 export function GreetingCard() {
   const [name, setName] = useState<string>('');
+  const [greeting, setGreeting] = useState<string>('');
 
   useEffect(() => {
     const savedProfile = localStorage.getItem('userProfile');
@@ -14,14 +15,12 @@ export function GreetingCard() {
       const profile = JSON.parse(savedProfile);
       setName(profile.name);
     }
-  }, []);
 
-  const getGreeting = () => {
     const hour = new Date().getHours();
-    if (hour < 12) return 'Good Morning';
-    if (hour < 18) return 'Good Afternoon';
-    return 'Good Evening';
-  };
+    if (hour < 12) setGreeting('Good Morning');
+    else if (hour < 18) setGreeting('Good Afternoon');
+    else setGreeting('Good Evening');
+  }, []);
 
   const getSummary = () => {
     // This could be dynamic later
@@ -37,7 +36,7 @@ export function GreetingCard() {
           </div>
           <div className="flex-1">
             <CardTitle className="font-headline text-xl">
-              {getGreeting()}, {name || 'there'}!
+              {greeting}, {name || 'there'}!
             </CardTitle>
             <CardDescription>
               {getSummary()}
