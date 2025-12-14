@@ -101,12 +101,12 @@ export function DashboardSidebar() {
              {sections.map((section) => (
                 <NavGroup title={section.title} key={section.title}>
                     {section.items.map((item) => (
-                         <Link key={item.label} href={item.href} onClick={() => setOpen(false)}>
-                            <Button variant="ghost" className="w-full justify-start gap-2">
+                         <Button asChild variant="ghost" className="w-full justify-start gap-2" key={item.label} onClick={() => setOpen(false)}>
+                            <Link href={item.href}>
                                 <item.icon />
                                 {item.label}
-                            </Button>
-                        </Link>
+                            </Link>
+                        </Button>
                     ))}
                 </NavGroup>
              ))}
@@ -114,12 +114,12 @@ export function DashboardSidebar() {
 
              <div className="mt-auto pt-4 border-t border-sidebar-border">
                 {bottomMenuItems.map((item) => (
-                     <Link key={item.label} href={item.href} onClick={() => setOpen(false)}>
-                        <Button variant="ghost" className="w-full justify-start gap-2">
+                     <Button asChild variant="ghost" className="w-full justify-start gap-2" key={item.label} onClick={() => setOpen(false)}>
+                        <Link href={item.href}>
                             <item.icon />
                             {item.label}
-                        </Button>
-                    </Link>
+                        </Link>
+                    </Button>
                 ))}
             </div>
         </nav>
