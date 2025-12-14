@@ -8,8 +8,12 @@ import { Hand } from "lucide-react";
 export function GreetingCard() {
   const [name, setName] = useState<string | null>(null);
   const [greeting, setGreeting] = useState<string | null>(null);
+  const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
+    // This effect will only run on the client
+    setIsClient(true);
+
     const savedProfile = localStorage.getItem('userProfile');
     if (savedProfile) {
       const profile = JSON.parse(savedProfile);
@@ -25,7 +29,6 @@ export function GreetingCard() {
       else setGreeting('Good Evening');
     };
 
-    // Defer the greeting generation to client-side only after mount
     setGreetingBasedOnTime();
   }, []);
 
@@ -34,8 +37,8 @@ export function GreetingCard() {
     return "You have 2 medications due soon and your daily hydration goal is 75% complete. Keep it up!";
   }
 
-  // Render a skeleton/placeholder while waiting for client-side state
-  if (greeting === null || name === null) {
+  // Render a skeleton/placeholder until the component has mounted on the client
+  if (!isClient) {
     return (
        <Card>
         <CardHeader>
