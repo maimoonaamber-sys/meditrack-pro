@@ -61,12 +61,17 @@ interface Medication {
 
 
 function Countdown({ nextDose }: { nextDose: number }) {
-  const [timeLeft, setTimeLeft] = useState(nextDose - Date.now());
+  const [timeLeft, setTimeLeft] = useState<number | null>(null);
 
   useEffect(() => {
-    if (timeLeft <= 0) return;
+    // This function will only run on the client
+    const calculateTimeLeft = () => nextDose - Date.now();
+
+    // Set initial value on mount
+    setTimeLeft(calculateTimeLeft());
+
     const interval = setInterval(() => {
-      const newTimeLeft = nextDose - Date.now();
+      const newTimeLeft = calculateTimeLeft();
       if (newTimeLeft <= 0) {
         clearInterval(interval);
         setTimeLeft(0);
@@ -76,7 +81,12 @@ function Countdown({ nextDose }: { nextDose: number }) {
     }, 1000);
 
     return () => clearInterval(interval);
-  }, [nextDose, timeLeft]);
+  }, [nextDose]);
+
+  // Don't render on the server or until timeLeft is calculated
+  if (timeLeft === null) {
+    return null;
+  }
 
   if (timeLeft <= 0) {
     return <Badge variant="destructive">Time for dose!</Badge>;
