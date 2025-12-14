@@ -122,12 +122,12 @@ export function Alerts() {
   };
 
   return (
-    <Card className="border-destructive/30 bg-destructive/10">
+    <Card className="bg-destructive text-destructive-foreground">
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-        <CardTitle className="text-lg font-medium font-headline text-destructive-foreground/90">
+        <CardTitle className="text-lg font-medium font-headline">
           Emergency & Quick Actions ⚡
         </CardTitle>
-        <AlertTriangle className="h-5 w-5 text-destructive" />
+        <AlertTriangle className="h-5 w-5" />
       </CardHeader>
       <CardContent>
         <p className="text-sm text-destructive-foreground/80 mb-4">
@@ -136,8 +136,8 @@ export function Alerts() {
         <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-2">
           <Button
             size="sm"
-            variant="outline"
-            className="w-full border-destructive/50 text-destructive-foreground/90 hover:bg-destructive/20"
+            variant="destructive"
+            className="w-full bg-destructive-foreground/20 hover:bg-destructive-foreground/30"
             onClick={handleConsultDoctor}
           >
             <Video className="mr-2 h-4 w-4" />
@@ -145,8 +145,8 @@ export function Alerts() {
           </Button>
           <Button
             size="sm"
-            variant="outline"
-            className="w-full border-destructive/50 text-destructive-foreground/90 hover:bg-destructive/20"
+            variant="destructive"
+            className="w-full bg-destructive-foreground/20 hover:bg-destructive-foreground/30"
             onClick={handleSendLocation}
           >
             <Share2 className="mr-2 h-4 w-4" />
@@ -154,8 +154,8 @@ export function Alerts() {
           </Button>
           <Button
             size="sm"
-            variant="outline"
-            className="w-full border-destructive/50 text-destructive-foreground/90 hover:bg-destructive/20"
+            variant="destructive"
+            className="w-full bg-destructive-foreground/20 hover:bg-destructive-foreground/30"
             onClick={handleShareApp}
           >
             <Share className="mr-2 h-4 w-4" />
@@ -163,8 +163,8 @@ export function Alerts() {
           </Button>
           <Button
             size="sm"
-            variant="destructive"
-            className="w-full"
+            variant="secondary"
+            className="w-full bg-destructive-foreground text-destructive hover:bg-destructive-foreground/90"
             onClick={handleCallAmbulance}
           >
             <Phone className="mr-2 h-4 w-4" />
