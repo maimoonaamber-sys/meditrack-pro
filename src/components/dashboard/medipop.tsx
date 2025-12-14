@@ -83,7 +83,7 @@ export function Medipop() {
           const { latitude, longitude } = position.coords;
           const url = `https://www.google.com/maps/search/hospitals+near+me/@${latitude},${longitude},14z`;
            toast({
-            title: "Finding Hospitals",
+            title: "Finding Hospitals 🏥",
             description: "Opening Google Maps to show nearby hospitals.",
           });
           window.open(url, '_blank');
@@ -92,7 +92,7 @@ export function Medipop() {
         () => {
            toast({
             variant: "destructive",
-            title: "Location Access Denied",
+            title: "Location Access Denied 📍",
             description: "Defaulting to a general search for nearby hospitals.",
           });
           window.open('https://www.google.com/maps/search/hospitals+near+me', '_blank');
@@ -102,7 +102,7 @@ export function Medipop() {
     } else {
         toast({
             variant: "destructive",
-            title: "Geolocation Not Supported",
+            title: "Geolocation Not Supported 📍",
             description: "Opening a general search for nearby hospitals.",
         });
        window.open('https://www.google.com/maps/search/hospitals+near+me', '_blank');
