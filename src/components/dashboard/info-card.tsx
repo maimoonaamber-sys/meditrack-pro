@@ -8,19 +8,31 @@ interface InfoCardProps {
   description: string;
   children: React.ReactNode;
   cardClassName?: string;
+  iconClassName?: string;
+  titleClassName?: string;
+  descriptionClassName?: string;
 }
 
-export function InfoCard({ icon: Icon, title, description, children, cardClassName }: InfoCardProps) {
+export function InfoCard({ 
+  icon: Icon, 
+  title, 
+  description, 
+  children, 
+  cardClassName,
+  iconClassName,
+  titleClassName,
+  descriptionClassName
+}: InfoCardProps) {
   return (
     <Card className={cn("h-full", cardClassName)}>
       <CardHeader>
         <div className="flex items-start gap-4">
-          <div className="bg-primary/10 text-primary p-2 rounded-lg">
-            <Icon className="h-6 w-6 text-primary" />
+          <div className={cn("bg-primary/10 text-primary p-2 rounded-lg", iconClassName)}>
+            <Icon className="h-6 w-6" />
           </div>
           <div className="flex-1">
-            <CardTitle className="font-headline text-lg">{title}</CardTitle>
-            <CardDescription>{description}</CardDescription>
+            <CardTitle className={cn("font-headline text-lg", titleClassName)}>{title}</CardTitle>
+            <CardDescription className={cn(descriptionClassName)}>{description}</CardDescription>
           </div>
         </div>
       </CardHeader>

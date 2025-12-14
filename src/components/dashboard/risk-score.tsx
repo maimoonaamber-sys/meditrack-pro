@@ -14,8 +14,8 @@ import { InfoCard } from "./info-card";
 import { Target } from "lucide-react";
 
 const chartData = [
-  { name: "risk", value: 35, fill: "hsl(var(--primary))" },
-  { name: "remaining", value: 65, fill: "hsl(var(--muted))" },
+  { name: "risk", value: 35, fill: "hsl(var(--primary-foreground))" },
+  { name: "remaining", value: 65, fill: "hsl(var(--chart-5) / 0.5)" },
 ];
 
 export function RiskScore() {
@@ -24,6 +24,10 @@ export function RiskScore() {
       icon={Target}
       title="Overall Risk Score 🎯"
       description="Based on your profile and inputs"
+      cardClassName="bg-[hsl(var(--chart-5))] text-primary-foreground"
+      iconClassName="text-primary-foreground"
+      titleClassName="text-primary-foreground"
+      descriptionClassName="text-primary-foreground/80"
     >
       <ChartContainer
         config={{}}
@@ -49,10 +53,10 @@ export function RiskScore() {
           <foreignObject width="100%" height="100%">
             <div className="flex h-full w-full items-center justify-center text-center">
               <div>
-                <p className="text-4xl font-bold font-headline text-primary">
+                <p className="text-4xl font-bold font-headline text-primary-foreground">
                   {chartData[0].value}%
                 </p>
-                <p className="text-sm text-muted-foreground">Low Risk</p>
+                <p className="text-sm text-primary-foreground/80">Low Risk</p>
               </div>
             </div>
           </foreignObject>
