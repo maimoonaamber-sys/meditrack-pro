@@ -6,14 +6,16 @@ import { Card, CardDescription, CardHeader, CardTitle } from "../ui/card";
 import { Hand } from "lucide-react";
 
 export function GreetingCard() {
-  const [name, setName] = useState<string>('');
-  const [greeting, setGreeting] = useState<string>('');
+  const [name, setName] = useState<string | null>(null);
+  const [greeting, setGreeting] = useState<string | null>(null);
 
   useEffect(() => {
     const savedProfile = localStorage.getItem('userProfile');
     if (savedProfile) {
       const profile = JSON.parse(savedProfile);
       setName(profile.name);
+    } else {
+      setName(''); // Set to empty string if no profile to avoid null
     }
 
     const hour = new Date().getHours();
@@ -27,18 +29,22 @@ export function GreetingCard() {
     return "You have 2 medications due soon and your daily hydration goal is 75% complete. Keep it up!";
   }
 
+  if (greeting === null || name === null) {
+    return null; // or a loading skeleton
+  }
+
   return (
-    <Card className="bg-primary/5 border-primary/20">
+    <Card className="bg-[hsl(var(--chart-4))] text-primary-foreground">
       <CardHeader>
         <div className="flex items-center gap-4">
-          <div className="bg-primary/10 text-primary p-3 rounded-full">
+          <div className="bg-primary-foreground/10 text-primary-foreground p-3 rounded-full">
              <Hand className="h-6 w-6" />
           </div>
           <div className="flex-1">
             <CardTitle className="font-headline text-xl">
               {greeting}, {name || 'there'}!
             </CardTitle>
-            <CardDescription>
+            <CardDescription className="text-primary-foreground/80">
               {getSummary()}
             </CardDescription>
           </div>
