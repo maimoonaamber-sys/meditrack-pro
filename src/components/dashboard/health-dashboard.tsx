@@ -1,18 +1,13 @@
 
-import { Droplets, HeartPulse } from "lucide-react";
+import { Droplets, HeartPulse, ClipboardPlus } from "lucide-react";
 import { Alerts } from "./alerts";
 import { BloodPressurePulseTracker } from "./blood-pressure-pulse-tracker";
 import { CurrentMedications } from "./current-medications";
 import { DiabetesTracker } from "./diabetes-tracker";
 import { GreetingCard } from "./greeting-card";
 import { InfoCard } from "./info-card";
-import { LabReports } from "./lab-reports";
 import { NotificationManager } from "./notification-manager";
 import { RiskScore } from "./risk-score";
-import { SicknessHistory } from "./sickness-history";
-import { HealthTrends } from "./health-trends";
-import { MentalHealthQuestionnaire } from "./mental-health-questionnaire";
-import { BrainCircuit, FileText, History, ClipboardPlus } from "lucide-react";
 
 export function HealthDashboard() {
   return (
@@ -40,6 +35,14 @@ export function HealthDashboard() {
               <BloodPressurePulseTracker />
             </InfoCard>
           </div>
+           <InfoCard
+              icon={ClipboardPlus}
+              title="Current Medications"
+              description="Add your prescriptions and get reminders."
+              cardClassName="bg-[hsl(var(--card-cream-bg))]"
+            >
+              <CurrentMedications />
+            </InfoCard>
         </div>
         <div className="lg:col-span-1 grid auto-rows-max items-start gap-4 md:gap-8">
           <RiskScore />

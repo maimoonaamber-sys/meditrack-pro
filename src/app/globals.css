@@ -43,6 +43,7 @@
     --sidebar-ring: 220 75% 65%;
     --card-pink-bg: 340 80% 95%;
     --card-skyblue-bg: 200 80% 95%;
+    --card-cream-bg: 40 50% 95%;
   }
   .dark {
     --background: 220 13% 10%;
@@ -82,6 +83,7 @@
     --sidebar-ring: 220 75% 65%;
     --card-pink-bg: 340 20% 25%;
     --card-skyblue-bg: 200 20% 25%;
+    --card-cream-bg: 40 20% 25%;
   }
 }
 
