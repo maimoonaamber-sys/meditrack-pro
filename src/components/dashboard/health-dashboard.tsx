@@ -21,19 +21,6 @@ export function HealthDashboard() {
       <div className="grid gap-4 md:gap-8 lg:grid-cols-3">
         <div className="lg:col-span-2 grid auto-rows-max items-start gap-4 md:gap-8">
           <Alerts />
-          <Card className="bg-primary/5 border-primary/20">
-            <CardHeader>
-              <div className="flex items-center gap-3">
-                <MessageCircle className="h-6 w-6 text-primary" />
-                <div className="flex-1">
-                  <CardTitle className="font-headline text-lg text-primary/90">Meet Medipop!</CardTitle>
-                  <CardDescription>
-                    Your friendly AI assistant is in the bottom-right corner, ready to help you find information quickly.
-                  </CardDescription>
-                </div>
-              </div>
-            </CardHeader>
-          </Card>
           <div className="grid gap-4 md:grid-cols-2">
             <SymptomChecker />
             <MedicineInfo />
