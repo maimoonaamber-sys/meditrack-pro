@@ -1,6 +1,7 @@
 import type {Metadata} from 'next';
 import './globals.css';
 import { Toaster } from "@/components/ui/toaster"
+import { Medipop } from '@/components/dashboard/medipop';
 
 export const metadata: Metadata = {
   title: 'MediTrack Pro',
@@ -22,6 +23,7 @@ export default function RootLayout({
       <body className="font-body bg-background antialiased">
         {children}
         <Toaster />
+        <Medipop />
       </body>
     </html>
   );
