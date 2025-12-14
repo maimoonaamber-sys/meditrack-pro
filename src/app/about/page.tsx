@@ -1,3 +1,4 @@
+
 'use client';
 
 import Link from 'next/link';
@@ -37,21 +38,21 @@ export default function AboutPage() {
                 <div className="flex items-center gap-3">
                   <Info className="h-6 w-6" />
                   <div className="flex-1">
-                    <CardTitle className="font-headline text-lg">About MediTrack Pro</CardTitle>
+                    <CardTitle className="font-headline text-lg">About MediTrack Pro ℹ️</CardTitle>
                     <CardDescription>Information about this application and its creators.</CardDescription>
                   </div>
                 </div>
               </CardHeader>
               <CardContent className="space-y-6">
                  <section>
-                    <h3 className="text-md font-semibold mb-2">About The App</h3>
+                    <h3 className="text-md font-semibold mb-2">About The App 📱</h3>
                     <p className="text-sm text-muted-foreground">{appInfo}</p>
                 </section>
 
                 <Separator />
                 
                 <section>
-                    <h3 className="text-md font-semibold">Created By:</h3>
+                    <h3 className="text-md font-semibold">Created By: 🧑‍💻</h3>
                     <ul className="list-disc list-inside space-y-2 pl-2 text-muted-foreground mt-2">
                     {contributors.map((name) => (
                         <li key={name}>{name}</li>

@@ -1,5 +1,4 @@
 
-
 import { Alerts } from "./alerts";
 import { HealthTrends } from "./health-trends";
 import { LabReports } from "./lab-reports";
@@ -27,7 +26,7 @@ export function HealthDashboard() {
                       {/* <CuteDoctor /> */}
                     </div>
                     <div className="flex-1">
-                        <CardTitle className="font-headline text-lg">Meet Medipop!</CardTitle>
+                        <CardTitle className="font-headline text-lg">Meet Medipop! 👋</CardTitle>
                         <CardDescription>
                             Your personal AI health assistant for quick information. Click the sparkle button in the corner!
                         </CardDescription>
@@ -68,4 +67,3 @@ export function HealthDashboard() {
     </>
   );
 }
-

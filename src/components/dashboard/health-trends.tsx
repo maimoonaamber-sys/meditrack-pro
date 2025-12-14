@@ -1,3 +1,4 @@
+
 "use client"
 
 import { Line, LineChart, CartesianGrid, XAxis, YAxis, Tooltip } from "recharts"
@@ -29,7 +30,7 @@ export function HealthTrends() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle className="font-headline">Health Trends</CardTitle>
+        <CardTitle className="font-headline">Health Trends 📈</CardTitle>
         <CardDescription>Monthly Blood Pressure Reading</CardDescription>
       </CardHeader>
       <CardContent>

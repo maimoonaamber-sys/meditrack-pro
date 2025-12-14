@@ -165,28 +165,28 @@ export function Medipop() {
         <Button variant="outline" className="justify-start h-14" onClick={() => setCurrentState('medicine')}>
           <Pill className="mr-3 text-primary" />
           <div>
-            <p className="font-semibold text-left">Know about Medicine</p>
+            <p className="font-semibold text-left">Know about Medicine 💊</p>
             <p className="text-xs text-muted-foreground text-left">Search for uses and side effects.</p>
           </div>
         </Button>
         <Button variant="outline" className="justify-start h-14" onClick={() => setCurrentState('symptoms')}>
           <Stethoscope className="mr-3 text-primary" />
            <div>
-            <p className="font-semibold text-left">Check Symptoms</p>
+            <p className="font-semibold text-left">Check Symptoms 🩺</p>
             <p className="text-xs text-muted-foreground text-left">Find potential causes and treatments.</p>
           </div>
         </Button>
         <Button variant="outline" className="justify-start h-14" onClick={() => setCurrentState('interactions')}>
           <Microscope className="mr-3 text-primary" />
            <div>
-            <p className="font-semibold text-left">Drug Interactions</p>
+            <p className="font-semibold text-left">Drug Interactions 🔬</p>
             <p className="text-xs text-muted-foreground text-left">Check multiple medications.</p>
           </div>
         </Button>
         <Button variant="outline" className="justify-start h-14" onClick={handleFindHospital}>
           <Hospital className="mr-3 text-primary" />
            <div>
-            <p className="font-semibold text-left">Find a Hospital Nearby</p>
+            <p className="font-semibold text-left">Find a Hospital Nearby 🏥</p>
             <p className="text-xs text-muted-foreground text-left">Get directions on Google Maps.</p>
           </div>
         </Button>
@@ -209,7 +209,7 @@ export function Medipop() {
           <SheetHeader className="text-left">
             <SheetTitle className="flex items-center gap-2 font-headline text-xl">
               <Bot className="text-primary"/>
-              Hello! I'm Medipop.
+              Hello! I'm Medipop. 👋
             </SheetTitle>
             <SheetDescription>
               How can I assist you today? I can help you find information quickly.

@@ -116,7 +116,7 @@ export function Alerts() {
     <Card className="border-accent/50 bg-accent/10">
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
         <CardTitle className="text-lg font-medium font-headline text-accent-foreground/90">
-          Emergency & Quick Actions
+          Emergency & Quick Actions ⚡
         </CardTitle>
         <AlertTriangle className="h-5 w-5 text-accent" />
       </CardHeader>

@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
@@ -124,7 +125,7 @@ export default function SkinPhotoLogPage() {
                     <div className="flex items-center gap-3">
                         <Camera className="h-6 w-6" />
                         <div className="flex-1">
-                            <CardTitle className="font-headline text-lg">Skin Photo Log</CardTitle>
+                            <CardTitle className="font-headline text-lg">Skin Photo Log 📸</CardTitle>
                             <CardDescription>
                                 Use your camera to take photos of skin issues to show your doctor.
                             </CardDescription>
@@ -138,7 +139,7 @@ export default function SkinPhotoLogPage() {
 
                     { !hasCameraPermission && (
                         <Alert variant="destructive">
-                            <AlertTitle>Camera Access Required</AlertTitle>
+                            <AlertTitle>Camera Access Required 📸</AlertTitle>
                             <AlertDescription>
                                 Please allow camera access in your browser to use this feature. You may need to refresh the page after granting permission.
                             </AlertDescription>
@@ -153,7 +154,7 @@ export default function SkinPhotoLogPage() {
                      <Alert variant="destructive" className="flex items-start">
                         <AlertTriangle className="h-5 w-5 mt-0.5" />
                         <div className="ml-4">
-                            <AlertTitle>Disclaimer</AlertTitle>
+                            <AlertTitle>Disclaimer ⚠️</AlertTitle>
                             <AlertDescription>
                                This tool is for logging images only and does not provide medical advice. Always consult a qualified healthcare provider for any health concerns.
                             </AlertDescription>
@@ -168,7 +169,7 @@ export default function SkinPhotoLogPage() {
                         <div className="flex items-center gap-3">
                              <History className="h-6 w-6" />
                              <div className="flex-1">
-                                <CardTitle className="font-headline text-lg">Photo History</CardTitle>
+                                <CardTitle className="font-headline text-lg">Photo History 🖼️</CardTitle>
                                 <CardDescription>Review your saved photos.</CardDescription>
                             </div>
                         </div>

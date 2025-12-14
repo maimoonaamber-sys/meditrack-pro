@@ -1,3 +1,4 @@
+
 import { FileText, Upload } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
@@ -17,7 +18,7 @@ export function LabReports() {
         <div className="flex items-center gap-3">
           <FileText className="h-6 w-6" />
           <div className="flex-1">
-            <CardTitle className="font-headline">Lab Reports</CardTitle>
+            <CardTitle className="font-headline">Lab Reports 📄</CardTitle>
             <CardDescription>Upload and review key test results</CardDescription>
           </div>
         </div>
@@ -28,7 +29,7 @@ export function LabReports() {
           <p className="mt-2 text-sm text-muted-foreground">Click or drag file to upload</p>
         </div>
         <div>
-          <h3 className="text-sm font-medium mb-2">Latest Report Highlights</h3>
+          <h3 className="text-sm font-medium mb-2">Latest Report Highlights ✨</h3>
           <Table>
             <TableHeader>
               <TableRow>

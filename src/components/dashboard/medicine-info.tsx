@@ -40,7 +40,7 @@ export function MedicineInfo() {
         <div className="flex items-center gap-3">
           <Pill className="h-6 w-6" />
           <div className="flex-1">
-            <CardTitle className="font-headline text-lg">Medicine Information</CardTitle>
+            <CardTitle className="font-headline text-lg">Medicine Information 💊</CardTitle>
             <CardDescription>
               Enter a medicine name to search for its uses and side effects.
             </CardDescription>

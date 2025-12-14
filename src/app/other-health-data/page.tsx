@@ -15,6 +15,7 @@ import { SidebarProvider, Sidebar, SidebarInset } from '@/components/ui/sidebar'
 import { Header } from '@/components/dashboard/header';
 import { DashboardSidebar } from '@/components/dashboard/sidebar';
 import { format } from 'date-fns';
+import CuteDoctor from '@/components/dashboard/cute-doctor';
 
 type MetricType = 'alcohol' | 'blood_alcohol' | 'blood_glucose' | 'inhaler' | 'insulin' | 'falls' | 'sexual_activity' | 'toothbrushing' | 'uv_index' | 'water_temp';
 
@@ -135,7 +136,7 @@ export default function OtherHealthDataPage() {
                 <div className="flex items-center gap-3">
                   <Layers className="h-6 w-6" />
                   <div className="flex-1">
-                    <CardTitle className="font-headline text-lg">Other Health Data</CardTitle>
+                    <CardTitle className="font-headline text-lg">Other Health Data 📊</CardTitle>
                     <CardDescription>Log additional health metrics to get a more complete picture of your well-being.</CardDescription>
                   </div>
                 </div>
@@ -175,7 +176,7 @@ export default function OtherHealthDataPage() {
                     <div className="space-y-6">
                         {Object.entries(groupedEntries).map(([date, dateEntries]) => (
                             <div key={date}>
-                                <h3 className="text-lg font-semibold font-headline mb-3 border-b pb-2">{format(new Date(date), 'MMMM d, yyyy')}</h3>
+                                <h3 className="text-lg font-semibold font-headline mb-3 border-b pb-2">{format(new Date(date), 'MMMM d, yyyy')} 📅</h3>
                                 <div className="space-y-3">
                                     {dateEntries.map((entry) => (
                                         <div key={entry.id} className="flex justify-between items-start bg-muted/50 p-3 rounded-md">
@@ -196,6 +197,7 @@ export default function OtherHealthDataPage() {
                     </div>
                 ): (
                     <div className="text-center text-sm text-muted-foreground mt-6">
+                        <CuteDoctor />
                         <p>No data logged yet.</p>
                         <p>Use the form above to add your first entry.</p>
                     </div>

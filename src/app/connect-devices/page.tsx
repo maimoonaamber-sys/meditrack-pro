@@ -54,7 +54,7 @@ export default function ConnectDevicesPage() {
                 <div className="flex items-center gap-3">
                   <LinkIcon className="h-6 w-6" />
                   <div className="flex-1">
-                    <CardTitle className="font-headline text-lg">Connect Devices & Apps</CardTitle>
+                    <CardTitle className="font-headline text-lg">Connect Devices & Apps 🔗</CardTitle>
                     <CardDescription>Sync your data from Bluetooth devices and health apps.</CardDescription>
                   </div>
                 </div>
@@ -65,7 +65,7 @@ export default function ConnectDevicesPage() {
                 <section className="space-y-4">
                     <div className="flex items-center gap-3">
                         <Bluetooth className="h-5 w-5 text-primary" />
-                        <h3 className="text-lg font-semibold">Bluetooth Devices</h3>
+                        <h3 className="text-lg font-semibold">Bluetooth Devices 📶</h3>
                     </div>
                     <Button className="w-full" onClick={() => handleActionClick("Scan for Devices")}>
                         Scan for Nearby Devices
@@ -84,7 +84,7 @@ export default function ConnectDevicesPage() {
                 <section className="space-y-4">
                     <div className="flex items-center gap-3">
                         <Smartphone className="h-5 w-5 text-primary" />
-                        <h3 className="text-lg font-semibold">Health Apps</h3>
+                        <h3 className="text-lg font-semibold">Health Apps 📱</h3>
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <Button variant="outline" className="h-16 text-lg" onClick={() => handleActionClick("Connect Apple Health")}>

@@ -14,6 +14,7 @@ import { SidebarProvider, Sidebar, SidebarInset } from '@/components/ui/sidebar'
 import { Header } from '@/components/dashboard/header';
 import { DashboardSidebar } from '@/components/dashboard/sidebar';
 import { format } from 'date-fns';
+import CuteDoctor from '@/components/dashboard/cute-doctor';
 
 interface ExerciseEntry {
   id: string;
@@ -109,7 +110,7 @@ export default function ExerciseLogPage() {
                 <div className="flex items-center gap-3">
                   <Dumbbell className="h-6 w-6" />
                   <div className="flex-1">
-                    <CardTitle className="font-headline text-lg">Exercise Log</CardTitle>
+                    <CardTitle className="font-headline text-lg">Exercise Log 🏋️</CardTitle>
                     <CardDescription>Log your daily workouts and physical activity.</CardDescription>
                   </div>
                 </div>
@@ -140,7 +141,7 @@ export default function ExerciseLogPage() {
                   <div className="space-y-6">
                     {Object.entries(groupedEntries).map(([date, dateEntries]) => (
                       <div key={date}>
-                        <h3 className="text-lg font-semibold font-headline mb-3 border-b pb-2">{format(new Date(date), 'MMMM d, yyyy')}</h3>
+                        <h3 className="text-lg font-semibold font-headline mb-3 border-b pb-2">{format(new Date(date), 'MMMM d, yyyy')} 📅</h3>
                         <div className="space-y-3">
                           {dateEntries.map((entry) => (
                             <div key={entry.id} className="flex justify-between items-start bg-muted/50 p-3 rounded-md">
@@ -161,6 +162,7 @@ export default function ExerciseLogPage() {
                   </div>
                 ) : (
                   <div className="text-center text-sm text-muted-foreground mt-6">
+                    <CuteDoctor />
                     <p>No workouts logged yet.</p>
                     <p>Use the form above to add your first one.</p>
                   </div>

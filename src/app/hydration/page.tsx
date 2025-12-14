@@ -115,7 +115,7 @@ export default function HydrationPage() {
                             <div className="flex items-center gap-3">
                             <GlassWater className="h-6 w-6" />
                             <div className="flex-1">
-                                <CardTitle className="font-headline text-lg">Hydration Tracker</CardTitle>
+                                <CardTitle className="font-headline text-lg">Hydration Tracker 💧</CardTitle>
                                 <CardDescription>Log your daily water intake to stay hydrated.</CardDescription>
                             </div>
                             </div>
@@ -145,7 +145,7 @@ export default function HydrationPage() {
                              <div className="flex items-center gap-3">
                                 <Trophy className="h-6 w-6" />
                                 <div className="flex-1">
-                                    <CardTitle className="font-headline text-lg">Streaks & Achievements</CardTitle>
+                                    <CardTitle className="font-headline text-lg">Streaks & Achievements 🏆</CardTitle>
                                     <CardDescription>Stay motivated with your progress.</CardDescription>
                                 </div>
                             </div>
@@ -174,7 +174,7 @@ export default function HydrationPage() {
                             <div className="flex items-center gap-3">
                                 <BrainCircuit className="h-6 w-6 text-primary" />
                                 <div className="flex-1">
-                                    <CardTitle className="font-headline text-lg">AI Hydration Insights</CardTitle>
+                                    <CardTitle className="font-headline text-lg">AI Hydration Insights 🧠</CardTitle>
                                     <CardDescription>Personalized analysis and recommendations.</CardDescription>
                                 </div>
                             </div>
@@ -182,7 +182,7 @@ export default function HydrationPage() {
                         <CardContent className="space-y-4">
                              <Alert variant="destructive">
                                 <AlertTriangle className="h-5 w-5"/>
-                                <AlertTitle>Disclaimer</AlertTitle>
+                                <AlertTitle>Disclaimer ⚠️</AlertTitle>
                                 <AlertDescription>
                                     This is not medical advice. Consult a healthcare professional for any health concerns. AI analysis feature coming soon.
                                 </AlertDescription>
@@ -200,7 +200,7 @@ export default function HydrationPage() {
                     </Card>
                      <Card>
                         <CardHeader>
-                            <CardTitle className="font-headline text-lg">Hydration Correlation</CardTitle>
+                            <CardTitle className="font-headline text-lg">Hydration Correlation 🧬</CardTitle>
                             <CardDescription>How hydration affects your well-being.</CardDescription>
                         </CardHeader>
                         <CardContent className="space-y-3">
@@ -226,4 +226,3 @@ export default function HydrationPage() {
     </SidebarProvider>
   );
 }
-

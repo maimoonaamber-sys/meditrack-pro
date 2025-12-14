@@ -65,7 +65,7 @@ export default function EmergencyCardPage() {
             <div className="flex min-h-screen w-full flex-col items-center justify-center bg-background p-4">
                  <Card className="w-full max-w-md">
                     <CardHeader>
-                        <CardTitle className="text-center font-headline text-destructive">No Profile Found</CardTitle>
+                        <CardTitle className="text-center font-headline text-destructive">No Profile Found  profilo</CardTitle>
                     </CardHeader>
                     <CardContent>
                         <p className="text-center text-muted-foreground">
@@ -87,7 +87,7 @@ export default function EmergencyCardPage() {
                 <CardHeader className="bg-destructive rounded-t-2xl text-destructive-foreground p-6">
                     <div className="flex items-center gap-4">
                          <LifeBuoy className="h-8 w-8" />
-                         <CardTitle className="font-headline text-2xl">Emergency Health Card</CardTitle>
+                         <CardTitle className="font-headline text-2xl">Emergency Health Card 🚑</CardTitle>
                     </div>
                 </CardHeader>
                 <CardContent className="p-6 space-y-6">
@@ -116,7 +116,7 @@ export default function EmergencyCardPage() {
                             <section className="space-y-3">
                                 <div className="flex items-center gap-4">
                                     <Pill className="h-5 w-5 text-primary" />
-                                    <p className="text-sm font-semibold text-muted-foreground">Current Medications</p>
+                                    <p className="text-sm font-semibold text-muted-foreground">Current Medications 💊</p>
                                 </div>
                                 <div className="space-y-2 pl-9">
                                     {medications.map(med => (
@@ -136,7 +136,7 @@ export default function EmergencyCardPage() {
                             <section className="space-y-3">
                                 <div className="flex items-center gap-4">
                                     <Shield className="h-5 w-5 text-primary" />
-                                    <p className="text-sm font-semibold text-muted-foreground">Emergency Contacts</p>
+                                    <p className="text-sm font-semibold text-muted-foreground">Emergency Contacts 🛡️</p>
                                 </div>
                                 <div className="space-y-3 pl-9">
                                      {profile.emergencyContacts.map((contact, index) => (
@@ -158,4 +158,3 @@ export default function EmergencyCardPage() {
         </main>
     );
 }
-

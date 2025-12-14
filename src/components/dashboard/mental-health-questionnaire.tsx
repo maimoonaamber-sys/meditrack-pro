@@ -28,7 +28,7 @@ export function MentalHealthQuestionnaire() {
         <div className="flex items-center gap-3">
           <BrainCircuit className="h-6 w-6" />
           <div className="flex-1">
-            <CardTitle className="font-headline text-lg">Mental Health Check-in</CardTitle>
+            <CardTitle className="font-headline text-lg">Mental Health Check-in 🧠</CardTitle>
             <CardDescription>
               Regularly assessing your mental health is an important part of your overall well-being.
             </CardDescription>

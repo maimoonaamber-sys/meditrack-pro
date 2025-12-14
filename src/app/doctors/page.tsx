@@ -132,7 +132,7 @@ export default function DoctorsPage() {
                     <div className="flex items-center gap-3">
                     <Contact className="h-6 w-6" />
                     <div className="flex-1">
-                        <CardTitle className="font-headline text-lg">Doctor Contacts</CardTitle>
+                        <CardTitle className="font-headline text-lg">Doctor Contacts 📞</CardTitle>
                         <CardDescription>Manage your doctors' contact information.</CardDescription>
                     </div>
                     </div>
@@ -155,7 +155,7 @@ export default function DoctorsPage() {
                     </form>
                     {doctors.length > 0 && (
                     <div className="space-y-2 pt-4">
-                        <h3 className="text-sm font-medium">Your Doctors</h3>
+                        <h3 className="text-sm font-medium">Your Doctors 👨‍⚕️</h3>
                         <ul className="space-y-2">
                         {doctors.map((doc, index) => (
                             <li key={index} className="flex justify-between items-center text-sm bg-muted/50 p-2 rounded-md pl-3">
@@ -183,7 +183,7 @@ export default function DoctorsPage() {
                     <div className="flex items-center gap-3">
                     <CalendarDays className="h-6 w-6" />
                     <div className="flex-1">
-                        <CardTitle className="font-headline text-lg">Doctor Visits</CardTitle>
+                        <CardTitle className="font-headline text-lg">Doctor Visits 🗓️</CardTitle>
                         <CardDescription>Log and get reminders for your doctor appointments.</CardDescription>
                     </div>
                     </div>
@@ -206,7 +206,7 @@ export default function DoctorsPage() {
                     </form>
                     {visits.length > 0 ? (
                     <div className="space-y-2 pt-4">
-                        <h3 className="text-sm font-medium">Recent & Upcoming Visits</h3>
+                        <h3 className="text-sm font-medium">Recent & Upcoming Visits ✨</h3>
                         <ul className="space-y-2">
                         {visits.map((visit, index) => (
                             <li key={index} className="flex justify-between items-center text-sm bg-muted/50 p-2 rounded-md">

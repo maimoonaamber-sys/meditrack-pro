@@ -1,3 +1,4 @@
+
 "use client"
 
 import { Pie, PieChart, Cell } from "recharts"
@@ -13,7 +14,7 @@ export function RiskScore() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle className="font-headline">Overall Risk Score</CardTitle>
+        <CardTitle className="font-headline">Overall Risk Score 🎯</CardTitle>
         <CardDescription>Based on your profile and inputs</CardDescription>
       </CardHeader>
       <CardContent>

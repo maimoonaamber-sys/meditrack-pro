@@ -1,5 +1,4 @@
 
-
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
@@ -136,7 +135,7 @@ export default function ProfilePage() {
                         <div className="flex items-center gap-3">
                             <User className="h-6 w-6" />
                             <div className="flex-1">
-                                <CardTitle className="font-headline text-lg">Your Profile</CardTitle>
+                                <CardTitle className="font-headline text-lg">Your Profile 👤</CardTitle>
                                 <CardDescription>Manage your personal and medical information. This will be used for your Emergency Health Card and personalized insights.</CardDescription>
                             </div>
                         </div>
@@ -201,7 +200,7 @@ export default function ProfilePage() {
                         <div className="flex items-center gap-3">
                             <QrCode className="h-6 w-6" />
                             <div className="flex-1">
-                                <CardTitle className="font-headline text-lg">Emergency QR Code</CardTitle>
+                                <CardTitle className="font-headline text-lg">Emergency QR Code 🚨</CardTitle>
                                 <CardDescription>Show this QR code to medical staff to give them access to your health card.</CardDescription>
                             </div>
                         </div>
@@ -219,7 +218,7 @@ export default function ProfilePage() {
                         <div className="flex items-center gap-3">
                             <Shield className="h-6 w-6" />
                             <div className="flex-1">
-                                <CardTitle className="font-headline text-lg">Emergency Contacts</CardTitle>
+                                <CardTitle className="font-headline text-lg">Emergency Contacts 🛡️</CardTitle>
                                 <CardDescription>Add contacts who can be reached in an emergency. This information will be used for the "Send Location" feature.</CardDescription>
                             </div>
                         </div>

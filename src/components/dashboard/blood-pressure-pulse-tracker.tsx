@@ -71,7 +71,7 @@ export function BloodPressurePulseTracker() {
         <div className="flex items-center gap-3">
           <HeartPulse className="h-6 w-6" />
           <div className="flex-1">
-            <CardTitle className="font-headline text-lg">Blood Pressure & Pulse Tracker</CardTitle>
+            <CardTitle className="font-headline text-lg">Blood Pressure & Pulse Tracker 🩺</CardTitle>
             <CardDescription>
               Log your daily pulse and blood pressure readings.
             </CardDescription>
@@ -101,7 +101,7 @@ export function BloodPressurePulseTracker() {
         </form>
         {readings.length > 0 && (
           <div className="pt-6">
-            <h3 className="text-sm font-medium mb-2">Your Readings</h3>
+            <h3 className="text-sm font-medium mb-2">Your Readings 📜</h3>
             <Table>
               <TableHeader>
                 <TableRow>

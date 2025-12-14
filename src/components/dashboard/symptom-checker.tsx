@@ -40,7 +40,7 @@ export function SymptomChecker() {
         <div className="flex items-center gap-3">
           <Stethoscope className="h-6 w-6" />
           <div className="flex-1">
-            <CardTitle className="font-headline text-lg">Symptom Checker</CardTitle>
+            <CardTitle className="font-headline text-lg">Symptom Checker 🩺</CardTitle>
             <CardDescription>
               Enter symptoms to search for causes and treatments on Google.
             </CardDescription>

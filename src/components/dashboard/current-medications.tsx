@@ -129,7 +129,7 @@ export function CurrentMedications() {
         <div className="flex items-center gap-3">
           <ClipboardPlus className="h-6 w-6" />
           <div className="flex-1">
-            <CardTitle className="font-headline text-lg">Current Medications</CardTitle>
+            <CardTitle className="font-headline text-lg">Current Medications 💊</CardTitle>
             <CardDescription>
               Add your daily medications to get AI-powered safety analysis.
             </CardDescription>
@@ -158,7 +158,7 @@ export function CurrentMedications() {
           </Button>
           {medications.length > 0 && (
             <div className="space-y-2 pt-4">
-              <h3 className="text-sm font-medium">Your Medications</h3>
+              <h3 className="text-sm font-medium">Your Medications 📝</h3>
               <ul className="space-y-2">
                 {medications.map((med, index) => (
                   <li key={index} className="flex justify-between items-center text-sm bg-muted/50 p-2 rounded-md">
@@ -177,13 +177,13 @@ export function CurrentMedications() {
             <div className="pt-4 space-y-4">
                 <div className="flex items-center gap-2 text-primary">
                     <Sparkles className="h-5 w-5" />
-                    <h3 className="text-md font-semibold font-headline">AI Analysis</h3>
+                    <h3 className="text-md font-semibold font-headline">AI Analysis ✨</h3>
                 </div>
 
                  <Alert variant="destructive" className="flex items-start">
                     <AlertTriangle className="h-5 w-5 mt-0.5" />
                     <div className="ml-4">
-                        <AlertTitle>Important Disclaimer</AlertTitle>
+                        <AlertTitle>Important Disclaimer ⚠️</AlertTitle>
                         <AlertDescription>
                            This AI-powered analysis is for informational purposes only and is not a substitute for professional medical advice. Always consult your doctor or pharmacist.
                         </AlertDescription>
@@ -202,7 +202,7 @@ export function CurrentMedications() {
                         {analysis.interactionWarning && (
                              <Alert variant="destructive">
                                 <AlertTriangle className="h-5 w-5" />
-                                <AlertTitle className="ml-2 font-headline">Potential Interaction Warning!</AlertTitle>
+                                <AlertTitle className="ml-2 font-headline">Potential Interaction Warning! 💥</AlertTitle>
                                 <AlertDescription className="ml-2 mt-2">{analysis.interactionWarning}</AlertDescription>
                             </Alert>
                         )}
@@ -215,14 +215,14 @@ export function CurrentMedications() {
                                         <div className="flex items-start gap-2">
                                             <Hand className="h-4 w-4 mt-1 text-primary shrink-0" />
                                             <div>
-                                                <h4 className="font-semibold">Side Effects</h4>
+                                                <h4 className="font-semibold">Side Effects 🥴</h4>
                                                 <p className="text-sm text-muted-foreground">{med.sideEffects}</p>
                                             </div>
                                         </div>
                                          <div className="flex items-start gap-2">
                                             <WheatOff className="h-4 w-4 mt-1 text-primary shrink-0" />
                                             <div>
-                                                <h4 className="font-semibold">Food Restrictions</h4>
+                                                <h4 className="font-semibold">Food Restrictions 🥑</h4>
                                                 <p className="text-sm text-muted-foreground">{med.foodRestrictions}</p>
                                             </div>
                                         </div>
@@ -240,5 +240,3 @@ export function CurrentMedications() {
     </Card>
   );
 }
-
-    

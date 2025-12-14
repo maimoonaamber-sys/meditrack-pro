@@ -49,7 +49,7 @@ export default function NotesPage() {
                 <div className="flex items-center gap-3">
                   <FilePenLine className="h-6 w-6" />
                   <div className="flex-1">
-                    <CardTitle className="font-headline text-lg">My Notes</CardTitle>
+                    <CardTitle className="font-headline text-lg">My Notes 📝</CardTitle>
                     <CardDescription>Jot down your thoughts, reminders, or questions for your doctor.</CardDescription>
                   </div>
                 </div>

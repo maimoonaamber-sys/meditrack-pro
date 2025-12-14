@@ -70,7 +70,7 @@ export function SicknessHistory() {
         <div className="flex items-center gap-3">
           <History className="h-6 w-6" />
           <div className="flex-1">
-            <CardTitle className="font-headline">Sickness History</CardTitle>
+            <CardTitle className="font-headline">Sickness History 📜</CardTitle>
             <CardDescription>Log your past illnesses and treatments.</CardDescription>
           </div>
         </div>
