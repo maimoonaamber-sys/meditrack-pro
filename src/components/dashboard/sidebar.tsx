@@ -24,6 +24,7 @@ import {
   Link as LinkIcon,
   Info,
   GlassWater,
+  Layers,
 } from 'lucide-react';
 import Link from 'next/link';
 import { useSidebar } from '../ui/sidebar';
@@ -69,6 +70,11 @@ const menuItems = [
     href: '/exercises',
     label: 'Exercise Log',
     icon: Dumbbell,
+  },
+  {
+    href: '/other-health-data',
+    label: 'Other Health Data',
+    icon: Layers,
   },
   {
     href: '/#sickness-history',
