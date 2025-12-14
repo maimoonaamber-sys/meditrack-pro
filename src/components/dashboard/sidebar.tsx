@@ -100,7 +100,7 @@ const bottomMenuItems = [
     },
     {
         href: '/about',
-        label: 'App Info',
+        label: 'About Us',
         icon: Info
     }
 ]
