@@ -22,6 +22,7 @@ import {
   Dumbbell,
   ShieldAlert,
   Link as LinkIcon,
+  Info,
 } from 'lucide-react';
 import Link from 'next/link';
 import { useSidebar } from '../ui/sidebar';
@@ -85,6 +86,11 @@ const bottomMenuItems = [
         href: '/notes',
         label: 'Notes',
         icon: FilePenLine
+    },
+    {
+        href: '/about',
+        label: 'About App',
+        icon: Info
     }
 ]
 
