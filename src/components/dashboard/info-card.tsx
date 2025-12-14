@@ -24,7 +24,7 @@ export function InfoCard({
   descriptionClassName
 }: InfoCardProps) {
   return (
-    <Card className={cn("", cardClassName)}>
+    <Card className={cn("h-full", cardClassName)}>
       <CardHeader>
         <div className="flex items-start gap-4">
           <div className={cn("bg-primary/10 text-primary p-2 rounded-lg", iconClassName)}>

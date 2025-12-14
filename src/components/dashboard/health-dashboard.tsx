@@ -77,6 +77,14 @@ export function HealthDashboard() {
             </InfoCard>
           </div>
           <RiskScore />
+          <InfoCard
+            icon={MentalHealthQuestionnaire}
+            title="Mental Health Check-in 🧠"
+            description="Quickly assess your emotional well-being."
+            cardClassName="h-full"
+          >
+            <MentalHealthQuestionnaire />
+          </InfoCard>
         </div>
       </div>
     </>
