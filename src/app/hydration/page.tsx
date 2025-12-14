@@ -1,67 +1,93 @@
 
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { ArrowLeft, Activity, Footprints, Heart, Bed, GlassWater, Flame, Save } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { ArrowLeft, Activity, Footprints, Heart, Bed, GlassWater, Flame, Zap, Moon, Droplet } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { useToast } from '@/hooks/use-toast';
 import { SidebarProvider, Sidebar, SidebarInset } from '@/components/ui/sidebar';
 import { Header } from '@/components/dashboard/header';
 import { DashboardSidebar } from '@/components/dashboard/sidebar';
 import { format } from 'date-fns';
+import { Skeleton } from '@/components/ui/skeleton';
 
-interface DailyActivity {
-  steps?: number;
-  heartRate?: number;
-  sleep?: number;
-  water?: number;
-  calories?: number;
+interface DailyActivityReport {
+  activityName: string;
+  steps: number;
+  avgHeartRate: number;
+  peakHeartRate: number;
+  sleepDuration: string;
+  sleepQuality: 'Good' | 'Fair' | 'Poor';
+  waterIntake: number; // in Liters
+  caloriesBurned: number;
+  insight: string;
 }
 
-const ActivityInput = ({ icon: Icon, label, unit, value, onChange }: { icon: React.ElementType, label: string, unit: string, value: number | undefined, onChange: (val: number) => void }) => (
-    <div className="space-y-1.5">
-        <Label className="flex items-center gap-2">
-            <Icon className="h-4 w-4 text-primary"/>
-            {label} <span className="text-xs text-muted-foreground">({unit})</span>
-        </Label>
-        <Input 
-            type="number" 
-            placeholder={`e.g., ${label === 'Steps Walked' ? '10000' : '75'}`}
-            value={value || ''}
-            onChange={(e) => onChange(parseInt(e.target.value, 10) || 0)}
-        />
+const StatCard = ({ icon: Icon, label, value, unit, iconBgColor }: { icon: React.ElementType, label: string, value: string | number, unit?: string, iconBgColor?: string }) => (
+    <div className="flex items-center gap-3 bg-muted/50 p-3 rounded-lg">
+        <div className={`p-2 rounded-full ${iconBgColor || 'bg-primary/10'}`}>
+            <Icon className="h-5 w-5 text-primary" />
+        </div>
+        <div>
+            <p className="font-bold text-lg">{value} <span className="text-sm font-normal text-muted-foreground">{unit}</span></p>
+            <p className="text-xs text-muted-foreground">{label}</p>
+        </div>
     </div>
 );
 
 
-export default function TodaysActivityPage() {
-  const [activity, setActivity] = useState<DailyActivity>({});
-  const { toast } = useToast();
-  const today = format(new Date(), 'yyyy-MM-dd');
-  const storageKey = `dailyActivity-${today}`;
+export default function AutomatedActivityReportPage() {
+  const [report, setReport] = useState<DailyActivityReport | null>(null);
 
   useEffect(() => {
-    const savedActivity = localStorage.getItem(storageKey);
-    if (savedActivity) {
-      setActivity(JSON.parse(savedActivity));
-    }
-  }, [storageKey]);
+    // Simulate fetching and processing sensor data on the client
+    const generateReport = () => {
+      const randomSeed = (new Date().getDate() % 5) + 1; // Changes daily
+      
+      const steps = 6000 + Math.floor(Math.random() * 8000 * (randomSeed/3));
+      const avgHeartRate = 65 + Math.floor(Math.random() * 15);
+      const peakHeartRate = avgHeartRate + 30 + Math.floor(Math.random() * 20);
+      const sleepHours = 6 + Math.random() * 2.5;
+      const sleepQuality = sleepHours > 7.5 ? 'Good' : sleepHours > 6 ? 'Fair' : 'Poor';
+      const waterIntake = 1.5 + Math.random() * 1.5;
+      const caloriesBurned = Math.floor(steps * 0.04 + (avgHeartRate - 60) * 10);
+      
+      let activityName = "Light Activity Day";
+      let insight = "Looks like a pretty standard day. Keep up the consistent effort!";
+      if (steps > 12000) {
+        activityName = "Very Active Day";
+        insight = "Fantastic step count! You've been very active today. Make sure to rehydrate and rest well.";
+      } else if (steps > 8000) {
+        activityName = "Active Day";
+        insight = "Great job staying active! Your heart rate was healthy and stable. Keep it up!";
+      } else if (steps < 4000) {
+         activityName = "Rest Day";
+         insight = "A good day for recovery. Remember to stretch and drink plenty of water even on rest days."
+      }
 
-  const handleSave = () => {
-    localStorage.setItem(storageKey, JSON.stringify(activity));
-    toast({
-        title: "Activity Saved! 🎉",
-        description: "Your activities for today have been saved."
-    });
-  }
+      if (sleepQuality === 'Poor') {
+          insight += " Your sleep seemed a bit short. Try to wind down earlier tonight for better recovery."
+      }
 
-  const handleActivityChange = (field: keyof DailyActivity, value: number) => {
-    setActivity(prev => ({...prev, [field]: value}));
-  }
+
+      setReport({
+        activityName,
+        steps,
+        avgHeartRate,
+        peakHeartRate,
+        sleepDuration: `${Math.floor(sleepHours)}h ${Math.floor((sleepHours % 1) * 60)}m`,
+        sleepQuality,
+        waterIntake: parseFloat(waterIntake.toFixed(1)),
+        caloriesBurned,
+        insight,
+      });
+    };
+    
+    // Use a timeout to simulate the async nature of sensor data processing
+    const timer = setTimeout(generateReport, 500);
+    return () => clearTimeout(timer);
+
+  }, []);
 
   return (
     <SidebarProvider>
@@ -80,24 +106,44 @@ export default function TodaysActivityPage() {
             <Card>
                 <CardHeader>
                     <div className="flex items-center gap-3">
-                    <Activity className="h-6 w-6" />
-                    <div className="flex-1">
-                        <CardTitle className="font-headline text-lg">Today's Activity 💪</CardTitle>
-                        <CardDescription>Log your key health and fitness metrics for today, {format(new Date(), 'MMMM d')}.</CardDescription>
-                    </div>
+                        <Activity className="h-6 w-6" />
+                        <div className="flex-1">
+                            <CardTitle className="font-headline text-lg">Today's Activity Report 📈</CardTitle>
+                            <CardDescription>An automated summary of your health signals for {format(new Date(), 'MMMM d')}.</CardDescription>
+                        </div>
                     </div>
                 </CardHeader>
                 <CardContent className="space-y-6">
-                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <ActivityInput icon={Footprints} label="Steps Walked" unit="steps" value={activity.steps} onChange={(val) => handleActivityChange('steps', val)} />
-                        <ActivityInput icon={Heart} label="Heart Rate" unit="avg bpm" value={activity.heartRate} onChange={(val) => handleActivityChange('heartRate', val)} />
-                        <ActivityInput icon={Bed} label="Time Slept" unit="hours" value={activity.sleep} onChange={(val) => handleActivityChange('sleep', val)} />
-                        <ActivityInput icon={GlassWater} label="Water Intake" unit="ml" value={activity.water} onChange={(val) => handleActivityChange('water', val)} />
-                        <ActivityInput icon={Flame} label="Calories Burned" unit="kcal" value={activity.calories} onChange={(val) => handleActivityChange('calories', val)} />
-                   </div>
-                   <Button onClick={handleSave} className="w-full">
-                       <Save className="mr-2" /> Save Today's Activity
-                   </Button>
+                    {report ? (
+                        <>
+                            <div className="bg-primary/5 border border-primary/20 rounded-lg p-4 text-center">
+                                <h3 className="font-headline text-xl text-primary">{report.activityName}</h3>
+                                <p className="text-sm text-muted-foreground mt-1">{report.insight}</p>
+                            </div>
+                            <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
+                                <StatCard icon={Footprints} label="Steps Walked" value={report.steps.toLocaleString()} unit="steps" iconBgColor="bg-blue-500/10" />
+                                <StatCard icon={Heart} label="Avg. Heart Rate" value={report.avgHeartRate} unit="bpm" iconBgColor="bg-red-500/10" />
+                                <StatCard icon={Zap} label="Peak Heart Rate" value={report.peakHeartRate} unit="bpm" iconBgColor="bg-yellow-500/10" />
+                                <StatCard icon={Moon} label="Time Slept" value={report.sleepDuration} unit={report.sleepQuality} iconBgColor="bg-indigo-500/10" />
+                                <StatCard icon={Droplet} label="Water Intake" value={report.waterIntake} unit="liters" iconBgColor="bg-sky-500/10" />
+                                <StatCard icon={Flame} label="Calories Burned" value={report.caloriesBurned} unit="kcal" iconBgColor="bg-orange-500/10" />
+                            </div>
+                        </>
+                    ) : (
+                        <>
+                           <div className="bg-muted/50 rounded-lg p-4 text-center h-24 flex items-center justify-center">
+                               <Skeleton className="h-4 w-3/4" />
+                           </div>
+                           <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
+                                <Skeleton className="h-20 w-full" />
+                                <Skeleton className="h-20 w-full" />
+                                <Skeleton className="h-20 w-full" />
+                                <Skeleton className="h-20 w-full" />
+                                <Skeleton className="h-20 w-full" />
+                                <Skeleton className="h-20 w-full" />
+                           </div>
+                        </>
+                    )}
                 </CardContent>
             </Card>
           </main>
