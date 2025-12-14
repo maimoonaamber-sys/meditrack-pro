@@ -66,13 +66,8 @@ const menuItems = [
     icon: Dumbbell,
   },
   {
-    href: '/#doctor-visits',
-    label: 'Doctor Visits',
-    icon: CalendarDays,
-  },
-  {
-    href: '/#doctor-contacts',
-    label: 'Doctor Contacts',
+    href: '/doctors',
+    label: 'Doctors',
     icon: Contact,
   },
   {
