@@ -19,6 +19,7 @@ import { Header } from '@/components/dashboard/header';
 import { DashboardSidebar } from '@/components/dashboard/sidebar';
 import Link from 'next/link';
 import { useToast } from "@/hooks/use-toast";
+import CuteDoctor from "@/components/dashboard/cute-doctor";
 
 // Interfaces
 interface Doctor {
@@ -203,7 +204,7 @@ export default function DoctorsPage() {
                         <PlusCircle /> Add Visit
                     </Button>
                     </form>
-                    {visits.length > 0 && (
+                    {visits.length > 0 ? (
                     <div className="space-y-2 pt-4">
                         <h3 className="text-sm font-medium">Recent & Upcoming Visits</h3>
                         <ul className="space-y-2">
@@ -218,6 +219,12 @@ export default function DoctorsPage() {
                         ))}
                         </ul>
                     </div>
+                    ) : (
+                      <div className="text-center text-sm text-muted-foreground mt-6">
+                        <CuteDoctor />
+                        <p>No visits logged yet.</p>
+                        <p>Use the form above to add your first one.</p>
+                      </div>
                     )}
                 </CardContent>
                 </Card>
