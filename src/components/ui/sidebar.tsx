@@ -6,6 +6,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Pill } from "lucide-react";
+import Link from "next/link";
 
 // Sidebar context
 interface SidebarContextType {
@@ -89,12 +90,12 @@ const Sidebar: React.FC<SidebarProps> = ({
         )}
       >
         <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2">
+            <Link href="/" className="flex items-center gap-2">
                 <Pill className="h-6 w-6 text-primary" />
                 <h1 className="text-xl font-bold font-headline text-foreground">
                   MediTrack Pro
                 </h1>
-            </div>
+            </Link>
              <button
                 onClick={() => setOpen(false)}
                 className="rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none md:hidden"
