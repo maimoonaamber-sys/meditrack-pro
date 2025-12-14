@@ -111,7 +111,10 @@ export function BloodPressurePulseTracker() {
             />
           </div>
         </div>
-        <Button type="submit" className="w-full">
+        <Button
+          type="submit"
+          className="w-full bg-[hsl(var(--chart-4))] hover:bg-[hsl(var(--chart-4)/0.9)] text-white"
+        >
           <Save />
           Save Reading
         </Button>

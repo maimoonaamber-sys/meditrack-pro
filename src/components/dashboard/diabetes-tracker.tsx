@@ -98,7 +98,10 @@ export function DiabetesTracker() {
             />
           </div>
         </div>
-        <Button type="submit" className="w-full">
+        <Button
+          type="submit"
+          className="w-full bg-[hsl(var(--chart-3))] hover:bg-[hsl(var(--chart-3)/0.9)] text-white"
+        >
           <Save />
           Save Reading
         </Button>

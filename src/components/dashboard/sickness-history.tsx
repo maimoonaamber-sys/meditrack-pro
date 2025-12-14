@@ -99,7 +99,10 @@ export function SicknessHistory() {
             <Input id="medicines" placeholder="e.g., Paracetamol" ref={medicinesRef} />
           </div>
         </div>
-        <Button type="submit" className="w-full">
+        <Button
+          type="submit"
+          className="w-full bg-accent hover:bg-accent/90 text-accent-foreground"
+        >
           <PlusCircle />
           Add Sickness Entry
         </Button>
