@@ -35,17 +35,6 @@ interface ProfileData {
     activityLevel: 'Sedentary' | 'Light' | 'Moderate' | 'Active' | 'Very Active' | '';
 }
 
-const contributors = [
-  "Mohammed Anas Ahmed",
-  "Maimoona Amber",
-  "Summaya Abdul Qadeer",
-  "Mohammed Roofi Azam",
-  "Mohammed Safdar Hussain"
-];
-
-const appInfo = "MediTrack Pro is a comprehensive personal health management web application designed to solve this problem by providing a centralized digital health record system. By combining health tracking, medical record management, and AI assistance, MediTrack Pro empowers users to take control of their health proactively, reduces dependency on manual records, and improves health awareness and safety.";
-
-
 export default function ProfilePage() {
     const [profile, setProfile] = useState<ProfileData>({
         name: '',
@@ -205,35 +194,6 @@ export default function ProfilePage() {
                             <Textarea id="medicalConditions" placeholder="e.g., Asthma, Type 2 Diabetes" value={profile.medicalConditions} onChange={(e) => handleProfileChange('medicalConditions', e.target.value)} />
                         </div>
                         <Button onClick={handleSaveProfile}>Save Profile</Button>
-                    </CardContent>
-                </Card>
-
-                <Card>
-                    <CardHeader>
-                        <div className="flex items-center gap-3">
-                        <Info className="h-6 w-6" />
-                        <div className="flex-1">
-                            <CardTitle className="font-headline text-lg">About MediTrack Pro</CardTitle>
-                            <CardDescription>Information about this application and its creators.</CardDescription>
-                        </div>
-                        </div>
-                    </CardHeader>
-                    <CardContent className="space-y-6">
-                        <section>
-                            <h3 className="text-md font-semibold mb-2">About The App</h3>
-                            <p className="text-sm text-muted-foreground">{appInfo}</p>
-                        </section>
-
-                        <Separator />
-                        
-                        <section>
-                            <h3 className="text-md font-semibold">Created By:</h3>
-                            <ul className="list-disc list-inside space-y-2 pl-2 text-muted-foreground mt-2">
-                            {contributors.map((name) => (
-                                <li key={name}>{name}</li>
-                            ))}
-                            </ul>
-                        </section>
                     </CardContent>
                 </Card>
                 
