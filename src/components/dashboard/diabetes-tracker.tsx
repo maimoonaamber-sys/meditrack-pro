@@ -79,7 +79,7 @@ export function DiabetesTracker() {
             <Input
               id="beforeMeal"
               type="number"
-              placeholder="Normal"
+              placeholder="Normal, 90"
               ref={beforeMealRef}
             />
           </div>
@@ -88,7 +88,7 @@ export function DiabetesTracker() {
             <Input
               id="afterMeal"
               type="number"
-              placeholder="Normal"
+              placeholder="Normal, 140"
               ref={afterMealRef}
             />
           </div>
