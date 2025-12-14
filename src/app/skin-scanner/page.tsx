@@ -2,7 +2,7 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
-import { Sidebar, SidebarInset } from '@/components/ui/sidebar';
+import { Sidebar, SidebarInset, SidebarProvider } from '@/components/ui/sidebar';
 import { Header } from '@/components/dashboard/header';
 import { DashboardSidebar } from '@/components/dashboard/sidebar';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
@@ -108,14 +108,14 @@ export default function SkinPhotoLogPage() {
   }
 
   return (
-    <>
+    <SidebarProvider>
       <Sidebar>
         <DashboardSidebar />
       </Sidebar>
       <SidebarInset>
         <div className="flex min-h-screen w-full flex-col">
           <Header />
-          <main className="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-8">
+          <main className="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-8 animate-fade-in-up">
             <Link href="/" className="flex items-center gap-2 text-sm font-medium text-muted-foreground hover:text-foreground">
                 <ArrowLeft className="h-4 w-4" />
                 Back to Dashboard
@@ -191,6 +191,6 @@ export default function SkinPhotoLogPage() {
           </main>
         </div>
       </SidebarInset>
-    </>
+    </SidebarProvider>
   );
 }
