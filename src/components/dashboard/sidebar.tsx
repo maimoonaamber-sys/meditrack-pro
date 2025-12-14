@@ -23,6 +23,7 @@ import {
   ShieldAlert,
   Link as LinkIcon,
   Info,
+  GlassWater,
 } from 'lucide-react';
 import Link from 'next/link';
 import { useSidebar } from '../ui/sidebar';
@@ -33,6 +34,11 @@ const menuItems = [
     href: '/#health-trends',
     label: 'Health Trends',
     icon: LineChart,
+  },
+   {
+    href: '/hydration',
+    label: 'Hydration Tracker',
+    icon: GlassWater,
   },
   {
     href: '/#blood-pressure-pulse-tracker',

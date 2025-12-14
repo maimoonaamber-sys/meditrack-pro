@@ -9,6 +9,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { User, Shield, Phone, PlusCircle, Trash2, ArrowLeft, QrCode } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import Link from 'next/link';
@@ -29,6 +30,8 @@ interface ProfileData {
     allergies: string;
     emergencyContacts: EmergencyContact[];
     medicalConditions: string;
+    gender: 'Male' | 'Female' | 'Other' | '';
+    activityLevel: 'Sedentary' | 'Light' | 'Moderate' | 'Active' | 'Very Active' | '';
 }
 
 export default function ProfilePage() {
@@ -38,7 +41,9 @@ export default function ProfilePage() {
         bloodGroup: '',
         allergies: '',
         emergencyContacts: [],
-        medicalConditions: ''
+        medicalConditions: '',
+        gender: '',
+        activityLevel: '',
     });
     const [qrCodeUrl, setQrCodeUrl] = useState('');
     const [emergencyCardUrl, setEmergencyCardUrl] = useState('');
@@ -132,7 +137,7 @@ export default function ProfilePage() {
                             <User className="h-6 w-6" />
                             <div className="flex-1">
                                 <CardTitle className="font-headline text-lg">Your Profile</CardTitle>
-                                <CardDescription>Manage your personal and medical information. This will be used for your Emergency Health Card.</CardDescription>
+                                <CardDescription>Manage your personal and medical information. This will be used for your Emergency Health Card and personalized insights.</CardDescription>
                             </div>
                         </div>
                     </CardHeader>
@@ -153,6 +158,34 @@ export default function ProfilePage() {
                              <div className="space-y-1.5">
                                 <Label htmlFor="allergies">Allergies</Label>
                                 <Input id="allergies" placeholder="e.g., Peanuts, Pollen" value={profile.allergies} onChange={(e) => handleProfileChange('allergies', e.target.value)} />
+                            </div>
+                             <div className="space-y-1.5">
+                                <Label>Gender</Label>
+                                <Select value={profile.gender} onValueChange={(value) => handleProfileChange('gender', value)}>
+                                    <SelectTrigger>
+                                        <SelectValue placeholder="Select gender" />
+                                    </SelectTrigger>
+                                    <SelectContent>
+                                        <SelectItem value="Male">Male</SelectItem>
+                                        <SelectItem value="Female">Female</SelectItem>
+                                        <SelectItem value="Other">Other</SelectItem>
+                                    </SelectContent>
+                                </Select>
+                            </div>
+                             <div className="space-y-1.5">
+                                <Label>Activity Level</Label>
+                                <Select value={profile.activityLevel} onValueChange={(value) => handleProfileChange('activityLevel', value)}>
+                                    <SelectTrigger>
+                                        <SelectValue placeholder="Select activity level" />
+                                    </SelectTrigger>
+                                    <SelectContent>
+                                        <SelectItem value="Sedentary">Sedentary (little or no exercise)</SelectItem>
+                                        <SelectItem value="Light">Light (light exercise/sports 1-3 days/week)</SelectItem>
+                                        <SelectItem value="Moderate">Moderate (moderate exercise/sports 3-5 days/week)</SelectItem>
+                                        <SelectItem value="Active">Active (hard exercise/sports 6-7 days a week)</SelectItem>
+                                        <SelectItem value="Very Active">Very Active (very hard exercise & physical job)</SelectItem>
+                                    </SelectContent>
+                                </Select>
                             </div>
                         </div>
                         <div className="space-y-1.5">
