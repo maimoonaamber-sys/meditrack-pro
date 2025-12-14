@@ -92,8 +92,7 @@ export default function TodaysActivityPage() {
                         <ActivityInput icon={Footprints} label="Steps Walked" unit="steps" value={activity.steps} onChange={(val) => handleActivityChange('steps', val)} />
                         <ActivityInput icon={Heart} label="Heart Rate" unit="avg bpm" value={activity.heartRate} onChange={(val) => handleActivityChange('heartRate', val)} />
                         <ActivityInput icon={Bed} label="Time Slept" unit="hours" value={activity.sleep} onChange={(val) => handleActivityChange('sleep', val)} />
-                        <ActivityInput icon={GlassWater} label="Water Intake" unit="ml" value={activity.water} onChange={(val) => handleActivityG/File[src/components/dashboard/sidebar.tsx] is being modified
-Change('water', val)} />
+                        <ActivityInput icon={GlassWater} label="Water Intake" unit="ml" value={activity.water} onChange={(val) => handleActivityChange('water', val)} />
                         <ActivityInput icon={Flame} label="Calories Burned" unit="kcal" value={activity.calories} onChange={(val) => handleActivityChange('calories', val)} />
                    </div>
                    <Button onClick={handleSave} className="w-full">
