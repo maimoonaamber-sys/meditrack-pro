@@ -1,5 +1,5 @@
 
-import { Droplets, HeartPulse, ClipboardPlus } from "lucide-react";
+import { Droplets, HeartPulse, ClipboardPlus, Contact } from "lucide-react";
 import { Alerts } from "./alerts";
 import { BloodPressurePulseTracker } from "./blood-pressure-pulse-tracker";
 import { CurrentMedications } from "./current-medications";
@@ -8,6 +8,8 @@ import { GreetingCard } from "./greeting-card";
 import { InfoCard } from "./info-card";
 import { NotificationManager } from "./notification-manager";
 import { RiskScore } from "./risk-score";
+import { Button } from "../ui/button";
+import Link from "next/link";
 
 export function HealthDashboard() {
   return (
@@ -43,6 +45,22 @@ export function HealthDashboard() {
             >
               <CurrentMedications />
             </InfoCard>
+             <InfoCard
+                icon={Contact}
+                title="My Doctor"
+                description="Manage your doctor's details and appointments."
+                cardClassName="bg-[hsl(var(--card-darkgrey-bg))] text-white"
+                titleClassName="text-white"
+                descriptionClassName="text-white/80"
+                iconClassName="bg-white/20 text-white"
+             >
+                <div className="text-center">
+                    <p className="mb-4">View and manage your doctor's contact information and visit history.</p>
+                    <Button asChild variant="secondary">
+                        <Link href="/doctors">Manage Doctors</Link>
+                    </Button>
+                </div>
+             </InfoCard>
         </div>
         <div className="lg:col-span-1 grid auto-rows-max items-start gap-4 md:gap-8">
           <RiskScore />

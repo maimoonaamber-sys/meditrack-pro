@@ -20,11 +20,13 @@ import { DashboardSidebar } from '@/components/dashboard/sidebar';
 import Link from 'next/link';
 import { useToast } from "@/hooks/use-toast";
 import CuteDoctor from "@/components/dashboard/cute-doctor";
+import { Textarea } from "@/components/ui/textarea";
 
 // Interfaces
 interface Doctor {
   name: string;
   number: string;
+  address: string;
 }
 
 interface Visit {
@@ -37,6 +39,7 @@ export default function DoctorsPage() {
   const [doctors, setDoctors] = useState<Doctor[]>([]);
   const contactNameRef = useRef<HTMLInputElement>(null);
   const contactNumberRef = useRef<HTMLInputElement>(null);
+  const contactAddressRef = useRef<HTMLTextAreaElement>(null);
   const contactFormRef = useRef<HTMLFormElement>(null);
   
   // State for Doctor Visits
@@ -84,9 +87,10 @@ export default function DoctorsPage() {
     event.preventDefault();
     const name = contactNameRef.current?.value;
     const number = contactNumberRef.current?.value;
+    const address = contactAddressRef.current?.value;
 
-    if (name && number) {
-      setDoctors([...doctors, { name, number }]);
+    if (name && number && address) {
+      setDoctors([...doctors, { name, number, address }]);
       contactFormRef.current?.reset();
       toast({ title: "Doctor Added", description: `${name} has been added to your contacts.` });
     }
@@ -148,6 +152,10 @@ export default function DoctorsPage() {
                         <Label htmlFor="doctorNumber">Phone Number</Label>
                         <Input id="doctorNumber" type="tel" placeholder="e.g., 555-123-4567" ref={contactNumberRef} />
                         </div>
+                        <div className="space-y-1.5 col-span-1 md:col-span-2">
+                        <Label htmlFor="doctorAddress">Address</Label>
+                        <Textarea id="doctorAddress" placeholder="e.g., 123 Health St, Medtown" ref={contactAddressRef} />
+                        </div>
                     </div>
                     <Button type="submit" className="w-full">
                         <PlusCircle /> Add Doctor
@@ -158,14 +166,15 @@ export default function DoctorsPage() {
                         <h3 className="text-sm font-medium">Your Doctors 👨‍⚕️</h3>
                         <ul className="space-y-2">
                         {doctors.map((doc, index) => (
-                            <li key={index} className="flex justify-between items-center text-sm bg-muted/50 p-2 rounded-md pl-3">
+                            <li key={index} className="flex justify-between items-start text-sm bg-muted/50 p-3 rounded-md pl-3">
                             <div>
-                                <span className="font-medium">{doc.name}</span>
+                                <p className="font-medium">{doc.name}</p>
                                 <a href={`tel:${doc.number}`} className="text-sm text-primary hover:underline block">
                                 {doc.number}
                                 </a>
+                                <p className="text-sm text-muted-foreground whitespace-pre-wrap">{doc.address}</p>
                             </div>
-                            <Button variant="ghost" size="icon" className="h-8 w-8 text-destructive" onClick={() => handleDeleteDoctor(index)}>
+                            <Button variant="ghost" size="icon" className="h-8 w-8 text-destructive shrink-0" onClick={() => handleDeleteDoctor(index)}>
                                 <X className="h-4 w-4" />
                                 <span className="sr-only">Delete contact</span>
                             </Button>

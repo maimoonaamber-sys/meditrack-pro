@@ -44,6 +44,7 @@
     --card-pink-bg: 340 80% 95%;
     --card-skyblue-bg: 200 80% 95%;
     --card-cream-bg: 40 50% 95%;
+    --card-darkgrey-bg: 220 13% 88%;
   }
   .dark {
     --background: 220 13% 10%;
@@ -84,6 +85,7 @@
     --card-pink-bg: 340 20% 25%;
     --card-skyblue-bg: 200 20% 25%;
     --card-cream-bg: 40 20% 25%;
+    --card-darkgrey-bg: 220 13% 30%;
   }
 }
 

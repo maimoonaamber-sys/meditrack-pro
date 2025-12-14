@@ -46,8 +46,8 @@ const sections: NavSection[] = [
   {
     title: 'Health Tracking',
     items: [
-      { href: '/#blood-pressure-pulse-tracker', label: 'Vitals', icon: HeartPulse },
-      { href: '/#diabetes-tracker', label: 'Diabetes Monitor', icon: Droplets },
+      { href: '/#vitals', label: 'Vitals', icon: HeartPulse },
+      { href: '/#diabetes-monitor', label: 'Diabetes Monitor', icon: Droplets },
       { href: '/hydration', label: 'Hydration', icon: GlassWater },
       { href: '/exercises', label: 'Exercise Activity', icon: Dumbbell },
       { href: '/diet-chart', label: 'Diet & Nutrition', icon: UtensilsCrossed },
