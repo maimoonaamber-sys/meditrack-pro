@@ -13,7 +13,6 @@ import {
 } from "@/components/ui/card";
 import { Pill, Search } from "lucide-react";
 import { Textarea } from "../ui/textarea";
-import { InfoCard } from "./info-card";
 
 export function MedicineInfo() {
   const inputRef = useRef<HTMLTextAreaElement>(null);
@@ -36,12 +35,6 @@ export function MedicineInfo() {
   };
 
   return (
-    <InfoCard
-      icon={Pill}
-      title="Medicine Information 💊"
-      description="Enter a medicine name to search for its uses and side effects."
-      cardClassName="flex flex-col"
-    >
       <form onSubmit={handleSearch} className="flex flex-col flex-1">
         <div className="flex-1">
           <Textarea
@@ -63,6 +56,5 @@ export function MedicineInfo() {
           </Button>
         </div>
       </form>
-    </InfoCard>
   );
 }

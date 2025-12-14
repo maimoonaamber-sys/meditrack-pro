@@ -11,7 +11,6 @@ import {
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
-import { InfoCard } from "./info-card";
 
 export function MentalHealthQuestionnaire() {
   const { toast } = useToast();
@@ -24,12 +23,7 @@ export function MentalHealthQuestionnaire() {
   };
 
   return (
-    <InfoCard
-      icon={BrainCircuit}
-      title="Mental Health Check-in 🧠"
-      description="Regularly assessing your mental health is an important part of your
-        overall well-being."
-    >
+    <>
       <p className="text-sm text-muted-foreground mb-4">
         Take a few moments for a confidential questionnaire to reflect on your
         current emotional state.
@@ -40,6 +34,6 @@ export function MentalHealthQuestionnaire() {
       >
         Take Questionnaire
       </Button>
-    </InfoCard>
+    </>
   );
 }

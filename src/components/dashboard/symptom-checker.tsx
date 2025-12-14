@@ -13,7 +13,6 @@ import {
 } from "@/components/ui/card";
 import { Stethoscope, Search } from "lucide-react";
 import { Textarea } from "../ui/textarea";
-import { InfoCard } from "./info-card";
 
 export function SymptomChecker() {
   const inputRef = useRef<HTMLTextAreaElement>(null);
@@ -36,12 +35,6 @@ export function SymptomChecker() {
   };
 
   return (
-    <InfoCard
-      icon={Stethoscope}
-      title="Symptom Checker 🩺"
-      description="Enter symptoms to search for causes and treatments on Google."
-      cardClassName="flex flex-col"
-    >
       <form onSubmit={handleSearch} className="flex flex-col flex-1">
         <div className="flex-1">
           <Textarea
@@ -63,6 +56,5 @@ export function SymptomChecker() {
           </Button>
         </div>
       </form>
-    </InfoCard>
   );
 }

@@ -21,7 +21,6 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { HeartPulse, Save } from "lucide-react";
-import { InfoCard } from "./info-card";
 
 interface Reading {
   date: string;
@@ -76,11 +75,7 @@ export function BloodPressurePulseTracker() {
   const displayedReadings = showAll ? readings : readings.slice(0, PREVIEW_COUNT);
 
   return (
-    <InfoCard
-      icon={HeartPulse}
-      title="Vitals 🩺"
-      description="Log your daily pulse and blood pressure readings."
-    >
+    <>
       <form onSubmit={handleAddReading} ref={formRef} className="space-y-4">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div className="space-y-1.5">
@@ -151,6 +146,6 @@ export function BloodPressurePulseTracker() {
           )}
         </div>
       )}
-    </InfoCard>
+    </>
   );
 }

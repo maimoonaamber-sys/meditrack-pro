@@ -21,7 +21,6 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Droplets, Save } from "lucide-react";
-import { InfoCard } from "./info-card";
 
 interface Reading {
   date: string;
@@ -72,11 +71,7 @@ export function DiabetesTracker() {
   const displayedReadings = showAll ? readings : readings.slice(0, PREVIEW_COUNT);
 
   return (
-    <InfoCard
-      icon={Droplets}
-      title="Diabetes Monitor 🩸"
-      description="Log your blood sugar readings before and after meals."
-    >
+    <>
       <form onSubmit={handleAddReading} ref={formRef} className="space-y-4">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="space-y-1.5">
@@ -100,7 +95,7 @@ export function DiabetesTracker() {
         </div>
         <Button
           type="submit"
-          className="w-full bg-[hsl(var(--chart-3))] hover:bg-[hsl(var(--chart-3)/0.9)] text-white"
+          className="w-full bg-[hsl(var(--chart-orange))] hover:bg-[hsl(var(--chart-orange)/0.9)] text-white"
         >
           <Save />
           Save Reading
@@ -136,6 +131,6 @@ export function DiabetesTracker() {
           )}
         </div>
       )}
-    </InfoCard>
+    </>
   );
 }

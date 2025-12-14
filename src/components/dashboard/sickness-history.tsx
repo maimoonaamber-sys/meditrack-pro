@@ -14,7 +14,6 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { format } from "date-fns";
-import { InfoCard } from "./info-card";
 
 interface SicknessEntry {
   illness: string;
@@ -75,11 +74,7 @@ export function SicknessHistory() {
   const displayedHistory = showAll ? history : history.slice(0, PREVIEW_COUNT);
 
   return (
-    <InfoCard
-      icon={History}
-      title="Sickness History 📜"
-      description="Log your past illnesses and treatments."
-    >
+    <>
       <form onSubmit={handleAddEntry} ref={formRef} className="space-y-4 mb-6">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="space-y-1.5">
@@ -140,6 +135,6 @@ export function SicknessHistory() {
           )}
         </>
       )}
-    </InfoCard>
+    </>
   );
 }

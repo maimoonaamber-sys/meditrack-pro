@@ -14,8 +14,11 @@ import { MessageCircle } from "lucide-react";
 import { MentalHealthQuestionnaire } from "./mental-health-questionnaire";
 import { GreetingCard } from "./greeting-card";
 import { NotificationManager } from "./notification-manager";
+import { InfoCard } from "./info-card";
 
 export function HealthDashboard() {
+  const creamyOrangeBg = "bg-[var(--card-creamy-orange-bg)]";
+
   return (
     <>
       <NotificationManager />
@@ -24,31 +27,95 @@ export function HealthDashboard() {
           <GreetingCard />
           <Alerts />
           <div className="grid gap-4 md:grid-cols-2">
-            <SymptomChecker />
-            <MedicineInfo />
+             <InfoCard
+              icon={SymptomChecker}
+              title="Symptom Checker 🩺"
+              description="Enter symptoms to search for causes and treatments on Google."
+              cardClassName={`flex flex-col ${creamyOrangeBg}`}
+            >
+              <SymptomChecker />
+            </InfoCard>
+             <InfoCard
+              icon={MedicineInfo}
+              title="Medicine Information 💊"
+              description="Enter a medicine name to search for its uses and side effects."
+              cardClassName={`flex flex-col ${creamyOrangeBg}`}
+            >
+              <MedicineInfo />
+            </InfoCard>
           </div>
           <div id="health-trends">
-            <HealthTrends />
+             <InfoCard
+              icon={HealthTrends}
+              title="Health Trends 📈"
+              description="Monthly Blood Pressure Reading"
+              cardClassName={creamyOrangeBg}
+            >
+              <HealthTrends />
+            </InfoCard>
           </div>
-          <MentalHealthQuestionnaire />
+          <InfoCard
+            icon={MentalHealthQuestionnaire}
+            title="Mental Health Check-in 🧠"
+            description="Regularly assessing your mental health is an important part of your
+        overall well-being."
+            cardClassName={creamyOrangeBg}
+          >
+            <MentalHealthQuestionnaire />
+          </InfoCard>
           <div id="blood-pressure-pulse-tracker">
-            <BloodPressurePulseTracker />
+            <InfoCard
+              icon={BloodPressurePulseTracker}
+              title="Vitals 🩺"
+              description="Log your daily pulse and blood pressure readings."
+              cardClassName={creamyOrangeBg}
+            >
+              <BloodPressurePulseTracker />
+            </InfoCard>
           </div>
           <div id="diabetes-tracker">
-            <DiabetesTracker />
+             <InfoCard
+              icon={DiabetesTracker}
+              title="Diabetes Monitor 🩸"
+              description="Log your blood sugar readings before and after meals."
+              cardClassName={creamyOrangeBg}
+            >
+              <DiabetesTracker />
+            </InfoCard>
           </div>
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-2">
             <div id="sickness-history">
-              <SicknessHistory />
+              <InfoCard
+                icon={SicknessHistory}
+                title="Sickness History 📜"
+                description="Log your past illnesses and treatments."
+                cardClassName={creamyOrangeBg}
+              >
+                <SicknessHistory />
+              </InfoCard>
             </div>
             <div id="lab-reports">
-              <LabReports />
+              <InfoCard
+                icon={LabReports}
+                title="Lab Reports 📄"
+                description="Upload and review key test results"
+                cardClassName={creamyOrangeBg}
+              >
+                <LabReports />
+              </InfoCard>
             </div>
           </div>
         </div>
         <div className="lg:col-span-1 grid auto-rows-max items-start gap-4 md:gap-8">
           <div id="current-medications">
-            <CurrentMedications />
+            <InfoCard
+              icon={CurrentMedications}
+              title="Current Medications 💊"
+              description="Add your daily medications to get AI-powered safety analysis."
+              cardClassName={creamyOrangeBg}
+            >
+              <CurrentMedications />
+            </InfoCard>
           </div>
           <RiskScore />
         </div>

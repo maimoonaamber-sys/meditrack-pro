@@ -16,7 +16,6 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
-import { InfoCard } from "./info-card";
 
 const reportData = [
   { test: "Cholesterol", value: "190 mg/dL", status: "Normal" },
@@ -27,11 +26,6 @@ const reportData = [
 
 export function LabReports() {
   return (
-    <InfoCard
-      icon={FileText}
-      title="Lab Reports 📄"
-      description="Upload and review key test results"
-    >
       <div className="space-y-4">
         <div className="border-2 border-dashed border-muted-foreground/30 rounded-lg p-8 flex flex-col items-center justify-center text-center cursor-pointer hover:bg-muted/50 transition-colors">
           <Upload className="h-8 w-8 text-muted-foreground" />
@@ -67,6 +61,5 @@ export function LabReports() {
           </Table>
         </div>
       </div>
-    </InfoCard>
   );
 }

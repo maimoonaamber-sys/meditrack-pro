@@ -35,7 +35,6 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "../ui/accordion";
-import { InfoCard } from "./info-card";
 
 interface Medication {
   name: string;
@@ -152,11 +151,6 @@ export function CurrentMedications() {
   };
 
   return (
-    <InfoCard
-      icon={ClipboardPlus}
-      title="Current Medications 💊"
-      description="Add your daily medications to get AI-powered safety analysis."
-    >
       <form onSubmit={handleAddMedication} ref={formRef}>
         <div className="space-y-4">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -284,6 +278,5 @@ export function CurrentMedications() {
           )}
         </div>
       </form>
-    </InfoCard>
   );
 }
