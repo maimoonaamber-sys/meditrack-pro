@@ -13,21 +13,43 @@ import { ChartContainer } from "@/components/ui/chart";
 import { InfoCard } from "./info-card";
 import { Target } from "lucide-react";
 
-const chartData = [
-  { name: "risk", value: 35, fill: "hsl(var(--primary-foreground))" },
-  { name: "remaining", value: 65, fill: "hsl(var(--chart-5) / 0.5)" },
-];
+const chartData = [{ name: "risk", value: 35 }];
 
 export function RiskScore() {
+  const riskValue = chartData[0].value;
+
+  let riskLabel = "Low Risk";
+  let cardColorClass = "bg-[hsl(var(--chart-emerald))]";
+  let textColorClass = "text-primary-foreground";
+  let remainingColor = "hsl(var(--chart-emerald) / 0.5)";
+
+  if (riskValue >= 50 && riskValue <= 80) {
+    riskLabel = "Medium Risk";
+    cardColorClass = "bg-[hsl(var(--chart-orange))]";
+    textColorClass = "text-white";
+    remainingColor = "hsl(var(--chart-orange) / 0.5)";
+  } else if (riskValue > 85) {
+    riskLabel = "High Risk";
+    cardColorClass = "bg-[hsl(var(--chart-red))]";
+    textColorClass = "text-white";
+    remainingColor = "hsl(var(--chart-red) / 0.5)";
+  }
+  
+  const displayData = [
+    { name: "risk", value: riskValue, fill: "hsl(var(--primary-foreground))" },
+    { name: "remaining", value: 100 - riskValue, fill: remainingColor },
+  ];
+
+
   return (
     <InfoCard
       icon={Target}
       title="Overall Risk Score 🎯"
       description="Based on your profile and inputs"
-      cardClassName="bg-[hsl(var(--chart-5))] text-primary-foreground"
-      iconClassName="text-primary-foreground"
-      titleClassName="text-primary-foreground"
-      descriptionClassName="text-primary-foreground/80"
+      cardClassName={cardColorClass}
+      iconClassName={textColorClass}
+      titleClassName={textColorClass}
+      descriptionClassName={`${textColorClass}/80`}
     >
       <ChartContainer
         config={{}}
@@ -35,7 +57,7 @@ export function RiskScore() {
       >
         <PieChart>
           <Pie
-            data={chartData}
+            data={displayData}
             dataKey="value"
             nameKey="name"
             cx="50%"
@@ -46,17 +68,17 @@ export function RiskScore() {
             endAngle={-270}
             cornerRadius={5}
           >
-            {chartData.map((entry, index) => (
+            {displayData.map((entry, index) => (
               <Cell key={`cell-${index}`} fill={entry.fill} />
             ))}
           </Pie>
           <foreignObject width="100%" height="100%">
             <div className="flex h-full w-full items-center justify-center text-center">
               <div>
-                <p className="text-4xl font-bold font-headline text-primary-foreground">
-                  {chartData[0].value}%
+                <p className={`text-4xl font-bold font-headline ${textColorClass}`}>
+                  {riskValue}%
                 </p>
-                <p className="text-sm text-primary-foreground/80">Low Risk</p>
+                <p className={`text-sm ${textColorClass}/80`}>{riskLabel}</p>
               </div>
             </div>
           </foreignObject>
