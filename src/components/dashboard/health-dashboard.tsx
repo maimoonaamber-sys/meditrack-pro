@@ -1,6 +1,5 @@
 
 import { Alerts } from "./alerts";
-import { HealthTrends } from "./health-trends";
 import { LabReports } from "./lab-reports";
 import { RiskScore } from "./risk-score";
 import { SicknessHistory } from "./sickness-history";
@@ -11,6 +10,7 @@ import { GreetingCard } from "./greeting-card";
 import { NotificationManager } from "./notification-manager";
 import { InfoCard } from "./info-card";
 import { MentalHealthQuestionnaire } from "./mental-health-questionnaire";
+import { HealthTrends } from "./health-trends";
 
 export function HealthDashboard() {
   return (
@@ -20,13 +20,6 @@ export function HealthDashboard() {
         <div className="lg:col-span-2 grid auto-rows-max items-start gap-4 md:gap-8">
           <GreetingCard />
           <Alerts />
-          <InfoCard
-            icon={HealthTrends}
-            title="Health Trends 📈"
-            description="Visualize your blood pressure over time to spot trends."
-          >
-            <HealthTrends />
-          </InfoCard>
           <div id="blood-pressure-pulse-tracker">
             <InfoCard
               icon={BloodPressurePulseTracker}
