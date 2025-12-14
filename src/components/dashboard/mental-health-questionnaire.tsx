@@ -1,5 +1,5 @@
 
-'use client';
+"use client";
 
 import { BrainCircuit } from "lucide-react";
 import {
@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
+import { InfoCard } from "./info-card";
 
 export function MentalHealthQuestionnaire() {
   const { toast } = useToast();
@@ -23,26 +24,19 @@ export function MentalHealthQuestionnaire() {
   };
 
   return (
-    <Card>
-      <CardHeader>
-        <div className="flex items-center gap-3">
-          <BrainCircuit className="h-6 w-6" />
-          <div className="flex-1">
-            <CardTitle className="font-headline text-lg">Mental Health Check-in 🧠</CardTitle>
-            <CardDescription>
-              Regularly assessing your mental health is an important part of your overall well-being.
-            </CardDescription>
-          </div>
-        </div>
-      </CardHeader>
-      <CardContent>
-        <p className="text-sm text-muted-foreground mb-4">
-            Take a few moments for a confidential questionnaire to reflect on your current emotional state.
-        </p>
-        <Button className="w-full" onClick={handleTakeQuestionnaire}>
-          Take Questionnaire
-        </Button>
-      </CardContent>
-    </Card>
+    <InfoCard
+      icon={BrainCircuit}
+      title="Mental Health Check-in 🧠"
+      description="Regularly assessing your mental health is an important part of your
+        overall well-being."
+    >
+      <p className="text-sm text-muted-foreground mb-4">
+        Take a few moments for a confidential questionnaire to reflect on your
+        current emotional state.
+      </p>
+      <Button className="w-full" onClick={handleTakeQuestionnaire}>
+        Take Questionnaire
+      </Button>
+    </InfoCard>
   );
 }

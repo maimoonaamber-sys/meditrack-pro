@@ -1,8 +1,8 @@
 
-'use client';
+"use client";
 
-import { useRef, useState } from 'react';
-import { Button } from '@/components/ui/button';
+import { useRef, useState } from "react";
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -10,9 +10,10 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from '@/components/ui/card';
-import { Pill, Search } from 'lucide-react';
-import { Textarea } from '../ui/textarea';
+} from "@/components/ui/card";
+import { Pill, Search } from "lucide-react";
+import { Textarea } from "../ui/textarea";
+import { InfoCard } from "./info-card";
 
 export function MedicineInfo() {
   const inputRef = useRef<HTMLTextAreaElement>(null);
@@ -26,43 +27,38 @@ export function MedicineInfo() {
       const url = `https://www.google.com/search?q=Medication ${encodeURIComponent(
         query
       )}: uses, why it is prescribed, side effects, and overdose information`;
-      window.open(url, '_blank');
+      window.open(url, "_blank");
       setIsLoading(false);
-      if(inputRef.current) {
-        inputRef.current.value = '';
+      if (inputRef.current) {
+        inputRef.current.value = "";
       }
     }
   };
 
   return (
-    <Card>
-      <CardHeader>
-        <div className="flex items-center gap-3">
-          <Pill className="h-6 w-6" />
-          <div className="flex-1">
-            <CardTitle className="font-headline text-lg">Medicine Information 💊</CardTitle>
-            <CardDescription>
-              Enter a medicine name to search for its uses and side effects.
-            </CardDescription>
-          </div>
-        </div>
-      </CardHeader>
-      <form onSubmit={handleSearch}>
-        <CardContent className="space-y-4">
+    <InfoCard
+      icon={Pill}
+      title="Medicine Information 💊"
+      description="Enter a medicine name to search for its uses and side effects."
+      cardClassName="flex flex-col"
+    >
+      <form onSubmit={handleSearch} className="flex flex-col flex-1">
+        <div className="flex-1">
           <Textarea
             placeholder="e.g., 'Aspirin'"
             rows={3}
             ref={inputRef}
             disabled={isLoading}
+            className="h-full"
           />
-        </CardContent>
-        <CardFooter className="flex">
+        </div>
+        <div className="mt-4">
           <Button type="submit" className="w-full" disabled={isLoading}>
             <Search />
-            {isLoading ? 'Searching...' : 'Search'}
+            {isLoading ? "Searching..." : "Search"}
           </Button>
-        </CardFooter>
+        </div>
       </form>
-    </Card>
+    </InfoCard>
   );
 }

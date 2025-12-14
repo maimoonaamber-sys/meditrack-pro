@@ -12,28 +12,15 @@ import { MedicineInfo } from "./medicine-info";
 import { Card, CardDescription, CardHeader, CardTitle } from "../ui/card";
 import { MessageCircle } from "lucide-react";
 import { MentalHealthQuestionnaire } from "./mental-health-questionnaire";
+import { GreetingCard } from "./greeting-card";
 
 export function HealthDashboard() {
   return (
     <>
       <div className="grid gap-4 md:gap-8 lg:grid-cols-3">
         <div className="lg:col-span-2 grid auto-rows-max items-start gap-4 md:gap-8">
+          <GreetingCard />
           <Alerts />
-          <Card>
-            <CardHeader>
-                <div className="flex items-center gap-3">
-                    <div className="w-24">
-                      {/* <CuteDoctor /> */}
-                    </div>
-                    <div className="flex-1">
-                        <CardTitle className="font-headline text-lg">Meet Medipop! 👋</CardTitle>
-                        <CardDescription>
-                            Your personal AI health assistant for quick information. Click the sparkle button in the corner!
-                        </CardDescription>
-                    </div>
-                </div>
-            </CardHeader>
-        </Card>
           <div className="grid gap-4 md:grid-cols-2">
             <SymptomChecker />
             <MedicineInfo />
@@ -41,9 +28,9 @@ export function HealthDashboard() {
           <div id="health-trends">
             <HealthTrends />
           </div>
-           <MentalHealthQuestionnaire />
+          <MentalHealthQuestionnaire />
           <div id="blood-pressure-pulse-tracker">
-              <BloodPressurePulseTracker />
+            <BloodPressurePulseTracker />
           </div>
           <div id="diabetes-tracker">
             <DiabetesTracker />
