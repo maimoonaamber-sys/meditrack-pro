@@ -20,34 +20,7 @@ export function HealthDashboard() {
         <div className="lg:col-span-2 grid auto-rows-max items-start gap-4 md:gap-8">
           <GreetingCard />
           <Alerts />
-          <div id="blood-pressure-pulse-tracker">
-            <InfoCard
-              icon={BloodPressurePulseTracker}
-              title="Vitals 🩺"
-              description="Log your daily pulse and blood pressure readings."
-            >
-              <BloodPressurePulseTracker />
-            </InfoCard>
-          </div>
-          <div id="diabetes-tracker">
-            <InfoCard
-              icon={DiabetesTracker}
-              title="Diabetes Monitor 🩸"
-              description="Log your blood sugar readings before and after meals."
-            >
-              <DiabetesTracker />
-            </InfoCard>
-          </div>
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-2">
-            <div id="sickness-history">
-              <InfoCard
-                icon={SicknessHistory}
-                title="Sickness History 📜"
-                description="Log your past illnesses and treatments."
-              >
-                <SicknessHistory />
-              </InfoCard>
-            </div>
             <div id="lab-reports">
               <InfoCard
                 icon={LabReports}
@@ -70,14 +43,6 @@ export function HealthDashboard() {
             </InfoCard>
           </div>
           <RiskScore />
-          <InfoCard
-            icon={MentalHealthQuestionnaire}
-            title="Mental Health Check-in 🧠"
-            description="Quickly assess your emotional well-being."
-            cardClassName="h-full"
-          >
-            <MentalHealthQuestionnaire />
-          </InfoCard>
         </div>
       </div>
     </>
