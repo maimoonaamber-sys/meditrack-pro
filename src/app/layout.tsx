@@ -2,7 +2,7 @@ import type {Metadata} from 'next';
 import './globals.css';
 import { Toaster } from "@/components/ui/toaster"
 import { Medipop } from '@/components/dashboard/medipop';
-import ClientOnly from '@/components/ui/client-only';
+import { ClientOnly } from '@/components/ui/client-only';
 
 export const metadata: Metadata = {
   title: 'MediTrack Pro',
