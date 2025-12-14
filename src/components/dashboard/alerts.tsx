@@ -122,22 +122,21 @@ export function Alerts() {
   };
 
   return (
-    <Card className="bg-destructive text-destructive-foreground">
+    <Card className="bg-muted">
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
         <CardTitle className="text-lg font-medium font-headline">
           Emergency & Quick Actions ⚡
         </CardTitle>
-        <AlertTriangle className="h-5 w-5" />
+        <AlertTriangle className="h-5 w-5 text-destructive" />
       </CardHeader>
       <CardContent>
-        <p className="text-sm text-destructive-foreground/80 mb-4">
+        <p className="text-sm text-muted-foreground mb-4">
           In case of an emergency, use the options below to get help quickly.
         </p>
         <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-2">
           <Button
             size="sm"
-            variant="destructive"
-            className="w-full bg-destructive-foreground/20 hover:bg-destructive-foreground/30"
+            className="w-full bg-pink-500 hover:bg-pink-600 text-white"
             onClick={handleConsultDoctor}
           >
             <Video className="mr-2 h-4 w-4" />
@@ -146,7 +145,7 @@ export function Alerts() {
           <Button
             size="sm"
             variant="destructive"
-            className="w-full bg-destructive-foreground/20 hover:bg-destructive-foreground/30"
+            className="w-full"
             onClick={handleSendLocation}
           >
             <Share2 className="mr-2 h-4 w-4" />
@@ -154,8 +153,7 @@ export function Alerts() {
           </Button>
           <Button
             size="sm"
-            variant="destructive"
-            className="w-full bg-destructive-foreground/20 hover:bg-destructive-foreground/30"
+            className="w-full bg-blue-500 hover:bg-blue-600 text-white"
             onClick={handleShareApp}
           >
             <Share className="mr-2 h-4 w-4" />
@@ -163,8 +161,8 @@ export function Alerts() {
           </Button>
           <Button
             size="sm"
-            variant="secondary"
-            className="w-full bg-destructive-foreground text-destructive hover:bg-destructive-foreground/90"
+            variant="destructive"
+            className="w-full"
             onClick={handleCallAmbulance}
           >
             <Phone className="mr-2 h-4 w-4" />
