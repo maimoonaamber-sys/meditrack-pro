@@ -43,14 +43,14 @@ export const useSidebar = () => {
 // --- Sidebar components ---
 
 const sidebarVariants = cva(
-  "fixed z-50 gap-4 bg-sidebar p-6 shadow-lg transition ease-in-out data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:duration-300 data-[state=open]:duration-500",
+  "fixed z-50 gap-4 bg-sidebar p-6 shadow-lg transition-transform ease-in-out duration-300 md:translate-x-0",
   {
     variants: {
       side: {
-        top: "inset-x-0 top-0 border-b data-[state=closed]:slide-out-to-top data-[state=open]:slide-in-from-top",
-        bottom: "inset-x-0 bottom-0 border-t data-[state=closed]:slide-out-to-bottom data-[state=open]:slide-in-from-bottom",
-        left: "inset-y-0 left-0 h-full w-3/4 border-r data-[state=closed]:slide-out-to-left data-[state=open]:slide-in-from-left sm:max-w-sm",
-        right: "inset-y-0 right-0 h-full w-3/4 border-l data-[state=closed]:slide-out-to-right data-[state=open]:slide-in-from-right sm:max-w-sm",
+        top: "inset-x-0 top-0 border-b",
+        bottom: "inset-x-0 bottom-0 border-t",
+        left: "inset-y-0 left-0 h-full w-64 border-r",
+        right: "inset-y-0 right-0 h-full w-64 border-l",
       },
     },
     defaultVariants: {
@@ -85,8 +85,8 @@ const Sidebar: React.FC<SidebarProps> = ({
         ref={sidebarRef}
         className={cn(
           sidebarVariants({ side }),
-          "transform-none md:translate-x-0 md:w-64 md:border-r md:shadow-none",
-          isOpen ? "translate-x-0" : "-translate-x-full",
+          "md:w-64",
+          isOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0",
           "text-sidebar-foreground",
           className
         )}
