@@ -25,15 +25,6 @@ export function HealthDashboard() {
         <div className="lg:col-span-2 grid auto-rows-max items-start gap-4 md:gap-8">
           <GreetingCard />
           <Alerts />
-          <div id="health-trends">
-             <InfoCard
-              icon={HealthTrends}
-              title="Health Trends 📈"
-              description="Monthly Blood Pressure Reading"
-            >
-              <HealthTrends />
-            </InfoCard>
-          </div>
           <InfoCard
             icon={MentalHealthQuestionnaire}
             title="Mental Health Check-in 🧠"
