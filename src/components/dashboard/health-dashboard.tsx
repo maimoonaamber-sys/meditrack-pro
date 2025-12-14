@@ -25,24 +25,6 @@ export function HealthDashboard() {
         <div className="lg:col-span-2 grid auto-rows-max items-start gap-4 md:gap-8">
           <GreetingCard />
           <Alerts />
-          <div className="grid gap-4 md:grid-cols-2">
-             <InfoCard
-              icon={SymptomChecker}
-              title="Symptom Checker 🩺"
-              description="Enter symptoms to search for causes and treatments on Google."
-              cardClassName="flex flex-col"
-            >
-              <SymptomChecker />
-            </InfoCard>
-             <InfoCard
-              icon={MedicineInfo}
-              title="Medicine Information 💊"
-              description="Enter a medicine name to search for its uses and side effects."
-              cardClassName="flex flex-col"
-            >
-              <MedicineInfo />
-            </InfoCard>
-          </div>
           <div id="health-trends">
              <InfoCard
               icon={HealthTrends}
