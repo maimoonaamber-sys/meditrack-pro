@@ -9,12 +9,13 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { User, Shield, Phone, PlusCircle, Trash2, ArrowLeft, QrCode } from 'lucide-react';
+import { User, Shield, Phone, PlusCircle, Trash2, ArrowLeft, QrCode, Info } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import Link from 'next/link';
 import { Sidebar, SidebarInset, SidebarProvider } from '@/components/ui/sidebar';
 import { DashboardSidebar } from '@/components/dashboard/sidebar';
 import Image from 'next/image';
+import { Separator } from '@/components/ui/separator';
 
 interface EmergencyContact {
     name: string;
@@ -32,6 +33,17 @@ interface ProfileData {
     gender: 'Male' | 'Female' | 'Other' | '';
     activityLevel: 'Sedentary' | 'Light' | 'Moderate' | 'Active' | 'Very Active' | '';
 }
+
+const contributors = [
+  "Mohammed Anas Ahmed",
+  "Maimoona Amber",
+  "Summaya Abdul Qadeer",
+  "Mohammed Roofi Azam",
+  "Mohammed Safdar Hussain"
+];
+
+const appInfo = "MediTrack Pro is a comprehensive personal health management web application designed to solve this problem by providing a centralized digital health record system. By combining health tracking, medical record management, and AI assistance, MediTrack Pro empowers users to take control of their health proactively, reduces dependency on manual records, and improves health awareness and safety.";
+
 
 export default function ProfilePage() {
     const [profile, setProfile] = useState<ProfileData>({
@@ -265,6 +277,35 @@ export default function ProfilePage() {
                         ) : (
                             <p className="text-center text-sm text-muted-foreground">No emergency contacts added yet.</p>
                         )}
+                    </CardContent>
+                </Card>
+
+                 <Card>
+                    <CardHeader>
+                        <div className="flex items-center gap-3">
+                        <Info className="h-6 w-6" />
+                        <div className="flex-1">
+                            <CardTitle className="font-headline text-lg">About MediTrack Pro ℹ️</CardTitle>
+                            <CardDescription>Information about this application and its creators.</CardDescription>
+                        </div>
+                        </div>
+                    </CardHeader>
+                    <CardContent className="space-y-6">
+                        <section>
+                            <h3 className="text-md font-semibold mb-2">About The App 📱</h3>
+                            <p className="text-sm text-muted-foreground">{appInfo}</p>
+                        </section>
+
+                        <Separator />
+                        
+                        <section>
+                            <h3 className="text-md font-semibold">Created By: 🧑‍💻</h3>
+                            <ul className="list-disc list-inside space-y-2 pl-2 text-muted-foreground mt-2">
+                            {contributors.map((name) => (
+                                <li key={name}>{name}</li>
+                            ))}
+                            </ul>
+                        </section>
                     </CardContent>
                 </Card>
             </div>
