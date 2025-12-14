@@ -1,5 +1,5 @@
 
-import { Droplets, HeartPulse, ClipboardPlus, Contact } from "lucide-react";
+import { Droplets, HeartPulse, ClipboardPlus, Contact, LineChart, BrainCircuit } from "lucide-react";
 import { Alerts } from "./alerts";
 import { BloodPressurePulseTracker } from "./blood-pressure-pulse-tracker";
 import { CurrentMedications } from "./current-medications";
@@ -10,6 +10,8 @@ import { NotificationManager } from "./notification-manager";
 import { RiskScore } from "./risk-score";
 import { Button } from "../ui/button";
 import Link from "next/link";
+import { HealthTrends } from "./health-trends";
+import { MentalHealthQuestionnaire } from "./mental-health-questionnaire";
 
 export function HealthDashboard() {
   return (
@@ -49,21 +51,36 @@ export function HealthDashboard() {
                 icon={Contact}
                 title="My Doctor"
                 description="Manage your doctor's details and appointments."
-                cardClassName="bg-[hsl(var(--card-darkgrey-bg))] text-white"
-                titleClassName="text-white"
-                descriptionClassName="text-white/80"
-                iconClassName="bg-white/20 text-white"
+                cardClassName="bg-blue-100 dark:bg-blue-900/50"
+                titleClassName="text-blue-900 dark:text-blue-200"
+                descriptionClassName="text-blue-800/90 dark:text-blue-300/90"
+                iconClassName="bg-blue-500/20 text-blue-700 dark:text-blue-300"
              >
                 <div className="text-center">
-                    <p className="mb-4">View and manage your doctor's contact information and visit history.</p>
-                    <Button asChild variant="secondary">
+                    <p className="mb-4 text-blue-900/90 dark:text-blue-300/90">View and manage your doctor's contact information and visit history.</p>
+                    <Button asChild className="bg-blue-600 hover:bg-blue-700 text-white">
                         <Link href="/doctors">Manage Doctors</Link>
                     </Button>
                 </div>
              </InfoCard>
+             <InfoCard
+              icon={LineChart}
+              title="Health Trends 📈"
+              description="Visualize your blood pressure over time to spot trends."
+            >
+              <HealthTrends />
+            </InfoCard>
         </div>
         <div className="lg:col-span-1 grid auto-rows-max items-start gap-4 md:gap-8">
           <RiskScore />
+          <InfoCard
+            icon={BrainCircuit}
+            title="Mental Health Check-in 🧠"
+            description="Take a moment to reflect on your emotional well-being."
+            cardClassName="bg-purple-100 dark:bg-purple-900/50"
+          >
+            <MentalHealthQuestionnaire />
+          </InfoCard>
         </div>
       </div>
     </>

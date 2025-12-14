@@ -35,11 +35,11 @@ const chartData = [
 const chartConfig = {
   systolic: {
     label: "Systolic",
-    color: "hsl(var(--primary))",
+    color: "hsl(var(--foreground))",
   },
   diastolic: {
     label: "Diastolic",
-    color: "hsl(var(--accent))",
+    color: "hsl(var(--chart-2))",
   },
 } satisfies ChartConfig;
 
