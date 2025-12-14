@@ -4,133 +4,114 @@
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import {
-  Pill,
-  LineChart,
-  History,
-  FileText,
-  Stethoscope,
-  ClipboardPlus,
-  Droplets,
-  HeartPulse,
-  Camera,
-  CalendarDays,
-  Contact,
-  X,
-  User,
-  FilePenLine,
-  UtensilsCrossed,
-  Dumbbell,
   ShieldAlert,
-  Link as LinkIcon,
-  Info,
+  Contact,
+  ClipboardPlus,
+  HeartPulse,
+  Droplets,
   GlassWater,
+  Dumbbell,
+  UtensilsCrossed,
+  LineChart,
+  FileText,
+  History,
+  Camera,
   Layers,
+  Link as LinkIcon,
+  FilePenLine,
+  Info,
 } from 'lucide-react';
 import Link from 'next/link';
 import { useSidebar } from '../ui/sidebar';
 
+interface NavItem {
+  href: string;
+  label: string;
+  icon: React.ElementType;
+}
 
-const menuItems = [
+interface NavSection {
+  title: string;
+  items: NavItem[];
+}
+
+const sections: NavSection[] = [
   {
-    href: '/doctors',
-    label: 'Doctors',
-    icon: Contact,
-  },
-  {
-    href: '/#health-trends',
-    label: 'Health Trends',
-    icon: LineChart,
-  },
-   {
-    href: '/hydration',
-    label: 'Hydration Tracker',
-    icon: GlassWater,
+    title: 'Essentials',
+    items: [
+      { href: '/doctors', label: 'Doctors', icon: Contact },
+      { href: '/#current-medications', label: 'Current Medications', icon: ClipboardPlus },
+    ],
   },
   {
-    href: '/#current-medications',
-    label: 'Current Medications',
-    icon: ClipboardPlus,
+    title: 'Health Tracking',
+    items: [
+      { href: '/#blood-pressure-pulse-tracker', label: 'Vitals', icon: HeartPulse },
+      { href: '/#diabetes-tracker', label: 'Diabetes Monitor', icon: Droplets },
+      { href: '/hydration', label: 'Hydration', icon: GlassWater },
+      { href: '/exercises', label: 'Exercise Activity', icon: Dumbbell },
+      { href: '/diet-chart', label: 'Diet & Nutrition', icon: UtensilsCrossed },
+    ],
   },
   {
-    href: '/#diabetes-tracker',
-    label: 'Diabetes Tracker',
-    icon: Droplets,
+    title: 'Insights & Records',
+    items: [
+      { href: '/#health-trends', label: 'Health Trends', icon: LineChart },
+      { href: '/#lab-reports', label: 'Lab Reports', icon: FileText },
+      { href: '/#sickness-history', label: 'Sickness History', icon: History },
+      { href: '/skin-scanner', label: 'Skin Health Log', icon: Camera },
+    ],
   },
   {
-    href: '/#blood-pressure-pulse-tracker',
-    label: 'BP & Pulse',
-    icon: HeartPulse,
-  },
-  {
-    href: '/diet-chart',
-    label: 'Diet Chart',
-    icon: UtensilsCrossed,
-  },
-  {
-    href: '/exercises',
-    label: 'Exercise Log',
-    icon: Dumbbell,
-  },
-  {
-    href: '/other-health-data',
-    label: 'Other Health Data',
-    icon: Layers,
-  },
-  {
-    href: '/#sickness-history',
-    label: 'Sickness History',
-    icon: History,
-  },
-  {
-    href: '/#lab-reports',
-    label: 'Lab Reports',
-    icon: FileText,
-  },
-  {
-    href: '/skin-scanner',
-    label: 'Skin Photo Log',
-    icon: Camera,
-  },
-  {
-    href: '/connect-devices',
-    label: 'Connect Devices',
-    icon: LinkIcon,
-  },
+    title: 'Tools & Integrations',
+    items: [
+        { href: '/other-health-data', label: 'Other Health Metrics', icon: Layers },
+        { href: '/connect-devices', label: 'Connected Devices', icon: LinkIcon },
+    ]
+  }
 ];
 
-const bottomMenuItems = [
-    {
-        href: '/notes',
-        label: 'Notes',
-        icon: FilePenLine
-    },
-    {
-        href: '/about',
-        label: 'About Us',
-        icon: Info
-    }
-]
+const bottomMenuItems: NavItem[] = [
+    { href: '/notes', label: 'Notes', icon: FilePenLine },
+    { href: '/about', label: 'About Us', icon: Info },
+];
+
+const NavGroup: React.FC<{ title: string; children: React.ReactNode }> = ({ title, children }) => (
+    <div>
+        <h3 className="text-xs font-semibold text-muted-foreground uppercase tracking-wider px-4 mt-4 mb-2">{title}</h3>
+        <div className="flex flex-col gap-1">
+            {children}
+        </div>
+    </div>
+);
+
 
 export function DashboardSidebar() {
   const { setOpen } = useSidebar();
   return (
-        <nav className="mt-8 flex flex-col gap-1 h-full">
-            <div className="flex-grow">
-              <Link href="/emergency-card" onClick={() => setOpen(false)}>
-                <Button variant="default" className="w-full justify-start gap-2 mb-2 bg-accent text-accent-foreground hover:bg-accent/90">
+        <nav className="mt-8 flex flex-col h-full">
+            <div className="flex-grow space-y-2">
+              <Link href="/emergency-card" onClick={() => setOpen(false)} className="px-2">
+                <Button variant="destructive" className="w-full justify-start gap-2 mb-2">
                   <ShieldAlert />
                   Emergency Card
                 </Button>
               </Link>
-              {menuItems.map((item) => (
-                <Link key={item.label} href={item.href} onClick={() => setOpen(false)}>
-                  <Button variant="ghost" className="w-full justify-start gap-2">
-                    <item.icon />
-                    {item.label}
-                  </Button>
-                </Link>
-              ))}
+
+             {sections.map((section) => (
+                <NavGroup title={section.title} key={section.title}>
+                    {section.items.map((item) => (
+                         <Link key={item.label} href={item.href} onClick={() => setOpen(false)}>
+                            <Button variant="ghost" className="w-full justify-start gap-2">
+                                <item.icon />
+                                {item.label}
+                            </Button>
+                        </Link>
+                    ))}
+                </NavGroup>
+             ))}
             </div>
+
              <div className="mt-auto pt-4 border-t border-sidebar-border">
                 {bottomMenuItems.map((item) => (
                      <Link key={item.label} href={item.href} onClick={() => setOpen(false)}>
