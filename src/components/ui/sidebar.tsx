@@ -86,13 +86,14 @@ const Sidebar: React.FC<SidebarProps> = ({
           sidebarVariants({ side }),
           "transform-none md:translate-x-0 md:w-64 md:border-r md:shadow-none",
           isOpen ? "translate-x-0" : "-translate-x-full",
-          className,
+          "bg-background md:bg-sidebar text-foreground md:text-sidebar-foreground",
+          className
         )}
       >
         <div className="flex items-center justify-between">
             <Link href="/" className="flex items-center gap-2">
                 <Pill className="h-6 w-6 text-primary" />
-                <h1 className="text-xl font-bold font-headline text-foreground">
+                <h1 className="text-xl font-bold font-headline">
                   MediTrack Pro
                 </h1>
             </Link>
