@@ -16,7 +16,7 @@ export function InfoCard({ icon: Icon, title, description, children, cardClassNa
       <CardHeader>
         <div className="flex items-start gap-4">
           <div className="bg-primary/10 text-primary p-2 rounded-lg">
-            <Icon className="h-6 w-6" />
+            <Icon className="h-6 w-6 text-primary" />
           </div>
           <div className="flex-1">
             <CardTitle className="font-headline text-lg">{title}</CardTitle>
