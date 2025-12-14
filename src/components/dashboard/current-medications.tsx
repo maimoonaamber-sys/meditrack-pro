@@ -22,6 +22,8 @@ import {
   Info,
   WheatOff,
   Hand,
+  Check,
+  ChevronsUpDown,
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -35,6 +37,21 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "../ui/accordion";
+import {
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+} from "@/components/ui/command";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import { medications as medicationList } from "@/lib/medication-list";
+import { cn } from "@/lib/utils";
 
 interface Medication {
   name: string;
@@ -76,9 +93,65 @@ function Countdown({ nextDose }: { nextDose: number }) {
   );
 }
 
+function MedicationCombobox({ value, setValue }: { value: string, setValue: (value: string) => void }) {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <Popover open={open} onOpenChange={setOpen}>
+      <PopoverTrigger asChild>
+        <Button
+          variant="outline"
+          role="combobox"
+          aria-expanded={open}
+          className="w-full justify-between"
+        >
+          {value
+            ? medicationList.find((med) => med.toLowerCase() === value.toLowerCase()) || value
+            : "Select medicine..."}
+          <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+        </Button>
+      </PopoverTrigger>
+      <PopoverContent className="w-[--radix-popover-trigger-width] p-0">
+        <Command>
+          <CommandInput 
+            placeholder="Search for a medicine..."
+            onValueChange={(search) => setValue(search)}
+           />
+          <CommandEmpty>No medicine found.</CommandEmpty>
+          <CommandList>
+            <CommandGroup>
+              {medicationList
+                .filter(med => med.toLowerCase().startsWith(value.toLowerCase()))
+                .slice(0, 10)
+                .map((med) => (
+                <CommandItem
+                  key={med}
+                  value={med}
+                  onSelect={(currentValue) => {
+                    setValue(currentValue === value ? "" : currentValue);
+                    setOpen(false);
+                  }}
+                >
+                  <Check
+                    className={cn(
+                      "mr-2 h-4 w-4",
+                      value.toLowerCase() === med.toLowerCase() ? "opacity-100" : "opacity-0"
+                    )}
+                  />
+                  {med}
+                </CommandItem>
+              ))}
+            </CommandGroup>
+          </CommandList>
+        </Command>
+      </PopoverContent>
+    </Popover>
+  );
+}
+
 export function CurrentMedications() {
   const [medications, setMedications] = useState<Medication[]>([]);
-  const nameInputRef = useRef<HTMLInputElement>(null);
+  const [medicationName, setMedicationName] = useState("");
   const frequencyInputRef = useRef<HTMLInputElement>(null);
   const nextDoseTimeRef = useRef<HTMLInputElement>(null);
   const formRef = useRef<HTMLFormElement>(null);
@@ -118,7 +191,7 @@ export function CurrentMedications() {
 
   const handleAddMedication = (event: React.FormEvent) => {
     event.preventDefault();
-    const name = nameInputRef.current?.value;
+    const name = medicationName;
     const frequency = frequencyInputRef.current?.value;
     const nextDoseTime = nextDoseTimeRef.current?.value; // e.g., "14:30"
 
@@ -147,6 +220,7 @@ export function CurrentMedications() {
         ];
       });
       formRef.current?.reset();
+      setMedicationName("");
     }
   };
 
@@ -156,11 +230,7 @@ export function CurrentMedications() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div className="space-y-1.5">
               <Label htmlFor="medicationName">Medicine Name</Label>
-              <Input
-                id="medicationName"
-                placeholder="e.g., Aspirin"
-                ref={nameInputRef}
-              />
+              <MedicationCombobox value={medicationName} setValue={setMedicationName} />
             </div>
             <div className="space-y-1.5">
               <Label htmlFor="frequency">Times per Day</Label>
