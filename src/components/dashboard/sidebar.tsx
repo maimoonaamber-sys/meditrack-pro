@@ -21,6 +21,7 @@ import {
   UtensilsCrossed,
   Dumbbell,
   ShieldAlert,
+  Link as LinkIcon,
 } from 'lucide-react';
 import Link from 'next/link';
 import { useSidebar } from '../ui/sidebar';
@@ -102,6 +103,12 @@ export function DashboardSidebar() {
                 <Button variant="ghost" className="w-full justify-start gap-2">
                   <Camera />
                   Skin Photo Log
+                </Button>
+              </Link>
+              <Link href="/connect-devices" onClick={() => setOpen(false)}>
+                <Button variant="ghost" className="w-full justify-start gap-2">
+                  <LinkIcon />
+                  Connect Devices
                 </Button>
               </Link>
               {menuItems.map((item) => (
