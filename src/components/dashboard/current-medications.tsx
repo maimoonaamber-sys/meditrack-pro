@@ -13,7 +13,7 @@ import {
 } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { ClipboardPlus, PlusCircle, AlertTriangle, Sparkles, LoaderCircle, Info, WheatOff, HandPalm } from 'lucide-react';
+import { ClipboardPlus, PlusCircle, AlertTriangle, Sparkles, LoaderCircle, Info, WheatOff, Hand } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { analyzeMedications, type MedicationAnalysis } from '@/ai/flows/medication-analysis-flow';
 import { Alert, AlertDescription, AlertTitle } from '../ui/alert';
@@ -213,7 +213,7 @@ export function CurrentMedications() {
                                     <AccordionTrigger className="font-medium text-base">{med.name}</AccordionTrigger>
                                     <AccordionContent className="space-y-3 pl-2">
                                         <div className="flex items-start gap-2">
-                                            <HandPalm className="h-4 w-4 mt-1 text-primary shrink-0" />
+                                            <Hand className="h-4 w-4 mt-1 text-primary shrink-0" />
                                             <div>
                                                 <h4 className="font-semibold">Side Effects</h4>
                                                 <p className="text-sm text-muted-foreground">{med.sideEffects}</p>
