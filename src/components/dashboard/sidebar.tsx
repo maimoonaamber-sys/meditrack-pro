@@ -20,6 +20,7 @@ import {
   FilePenLine,
   UtensilsCrossed,
   Dumbbell,
+  ShieldAlert,
 } from 'lucide-react';
 import Link from 'next/link';
 import { useSidebar } from '../ui/sidebar';
@@ -91,6 +92,12 @@ export function DashboardSidebar() {
   return (
         <nav className="mt-8 flex flex-col gap-1 h-full">
             <div className="flex-grow">
+              <Link href="/emergency-card" onClick={() => setOpen(false)}>
+                <Button variant="default" className="w-full justify-start gap-2 mb-2 bg-accent text-accent-foreground hover:bg-accent/90">
+                  <ShieldAlert />
+                  Emergency Card
+                </Button>
+              </Link>
               <Link href="/skin-scanner" onClick={() => setOpen(false)}>
                 <Button variant="ghost" className="w-full justify-start gap-2">
                   <Camera />

@@ -9,11 +9,12 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
-import { User, Shield, Phone, PlusCircle, Trash2, ArrowLeft } from 'lucide-react';
+import { User, Shield, Phone, PlusCircle, Trash2, ArrowLeft, QrCode } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import Link from 'next/link';
 import { Sidebar, SidebarInset, SidebarProvider } from '@/components/ui/sidebar';
 import { DashboardSidebar } from '@/components/dashboard/sidebar';
+import Image from 'next/image';
 
 interface EmergencyContact {
     name: string;
@@ -24,6 +25,8 @@ interface EmergencyContact {
 interface ProfileData {
     name: string;
     contact: string;
+    bloodGroup: string;
+    allergies: string;
     emergencyContacts: EmergencyContact[];
     medicalConditions: string;
 }
@@ -32,9 +35,13 @@ export default function ProfilePage() {
     const [profile, setProfile] = useState<ProfileData>({
         name: '',
         contact: '',
+        bloodGroup: '',
+        allergies: '',
         emergencyContacts: [],
         medicalConditions: ''
     });
+    const [qrCodeUrl, setQrCodeUrl] = useState('');
+    const [emergencyCardUrl, setEmergencyCardUrl] = useState('');
     const { toast } = useToast();
 
     const emergencyNameRef = useRef<HTMLInputElement>(null);
@@ -48,6 +55,11 @@ export default function ProfilePage() {
         if (savedProfile) {
             setProfile(JSON.parse(savedProfile));
         }
+        // Set QR code URL based on current host
+        const cardUrl = `${window.location.origin}/emergency-card`;
+        setEmergencyCardUrl(cardUrl);
+        setQrCodeUrl(`https://api.qrserver.com/v1/create-qr-code/?size=192x192&data=${encodeURIComponent(cardUrl)}&bgcolor=f0f2f5`);
+
     }, []);
 
     const handleProfileChange = (field: keyof ProfileData, value: any) => {
@@ -120,7 +132,7 @@ export default function ProfilePage() {
                             <User className="h-6 w-6" />
                             <div className="flex-1">
                                 <CardTitle className="font-headline text-lg">Your Profile</CardTitle>
-                                <CardDescription>Manage your personal and medical information.</CardDescription>
+                                <CardDescription>Manage your personal and medical information. This will be used for your Emergency Health Card.</CardDescription>
                             </div>
                         </div>
                     </CardHeader>
@@ -134,12 +146,38 @@ export default function ProfilePage() {
                                 <Label htmlFor="patientContact">Contact Number</Label>
                                 <Input id="patientContact" type="tel" placeholder="e.g., 555-0101" value={profile.contact} onChange={(e) => handleProfileChange('contact', e.target.value)} />
                             </div>
+                            <div className="space-y-1.5">
+                                <Label htmlFor="bloodGroup">Blood Group</Label>
+                                <Input id="bloodGroup" placeholder="e.g., O+" value={profile.bloodGroup} onChange={(e) => handleProfileChange('bloodGroup', e.target.value)} />
+                            </div>
+                             <div className="space-y-1.5">
+                                <Label htmlFor="allergies">Allergies</Label>
+                                <Input id="allergies" placeholder="e.g., Peanuts, Pollen" value={profile.allergies} onChange={(e) => handleProfileChange('allergies', e.target.value)} />
+                            </div>
                         </div>
                         <div className="space-y-1.5">
-                            <Label htmlFor="medicalConditions">Pre-existing Medical Conditions</Label>
-                            <Textarea id="medicalConditions" placeholder="e.g., Asthma, Panic Attacks, Diabetes Type 2" value={profile.medicalConditions} onChange={(e) => handleProfileChange('medicalConditions', e.target.value)} />
+                            <Label htmlFor="medicalConditions">Pre-existing Medical Conditions / Chronic Diseases</Label>
+                            <Textarea id="medicalConditions" placeholder="e.g., Asthma, Type 2 Diabetes" value={profile.medicalConditions} onChange={(e) => handleProfileChange('medicalConditions', e.target.value)} />
                         </div>
                         <Button onClick={handleSaveProfile}>Save Profile</Button>
+                    </CardContent>
+                </Card>
+                
+                <Card>
+                    <CardHeader>
+                        <div className="flex items-center gap-3">
+                            <QrCode className="h-6 w-6" />
+                            <div className="flex-1">
+                                <CardTitle className="font-headline text-lg">Emergency QR Code</CardTitle>
+                                <CardDescription>Show this QR code to medical staff to give them access to your health card.</CardDescription>
+                            </div>
+                        </div>
+                    </CardHeader>
+                    <CardContent className="flex flex-col items-center justify-center gap-4">
+                         {qrCodeUrl && <Image src={qrCodeUrl} alt="Emergency Health Card QR Code" width={192} height={192} />}
+                         <Button variant="outline" asChild>
+                            <Link href="/emergency-card" target="_blank">View Your Health Card</Link>
+                         </Button>
                     </CardContent>
                 </Card>
 
