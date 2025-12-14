@@ -17,7 +17,6 @@ import { NotificationManager } from "./notification-manager";
 import { InfoCard } from "./info-card";
 
 export function HealthDashboard() {
-  const creamyOrangeBg = "bg-[var(--card-creamy-orange-bg)]";
 
   return (
     <>
@@ -31,7 +30,7 @@ export function HealthDashboard() {
               icon={SymptomChecker}
               title="Symptom Checker 🩺"
               description="Enter symptoms to search for causes and treatments on Google."
-              cardClassName={`flex flex-col ${creamyOrangeBg}`}
+              cardClassName="flex flex-col"
             >
               <SymptomChecker />
             </InfoCard>
@@ -39,7 +38,7 @@ export function HealthDashboard() {
               icon={MedicineInfo}
               title="Medicine Information 💊"
               description="Enter a medicine name to search for its uses and side effects."
-              cardClassName={`flex flex-col ${creamyOrangeBg}`}
+              cardClassName="flex flex-col"
             >
               <MedicineInfo />
             </InfoCard>
@@ -49,7 +48,6 @@ export function HealthDashboard() {
               icon={HealthTrends}
               title="Health Trends 📈"
               description="Monthly Blood Pressure Reading"
-              cardClassName={creamyOrangeBg}
             >
               <HealthTrends />
             </InfoCard>
@@ -59,7 +57,6 @@ export function HealthDashboard() {
             title="Mental Health Check-in 🧠"
             description="Regularly assessing your mental health is an important part of your
         overall well-being."
-            cardClassName={creamyOrangeBg}
           >
             <MentalHealthQuestionnaire />
           </InfoCard>
@@ -68,7 +65,6 @@ export function HealthDashboard() {
               icon={BloodPressurePulseTracker}
               title="Vitals 🩺"
               description="Log your daily pulse and blood pressure readings."
-              cardClassName={creamyOrangeBg}
             >
               <BloodPressurePulseTracker />
             </InfoCard>
@@ -78,7 +74,6 @@ export function HealthDashboard() {
               icon={DiabetesTracker}
               title="Diabetes Monitor 🩸"
               description="Log your blood sugar readings before and after meals."
-              cardClassName={creamyOrangeBg}
             >
               <DiabetesTracker />
             </InfoCard>
@@ -89,7 +84,6 @@ export function HealthDashboard() {
                 icon={SicknessHistory}
                 title="Sickness History 📜"
                 description="Log your past illnesses and treatments."
-                cardClassName={creamyOrangeBg}
               >
                 <SicknessHistory />
               </InfoCard>
@@ -99,7 +93,6 @@ export function HealthDashboard() {
                 icon={LabReports}
                 title="Lab Reports 📄"
                 description="Upload and review key test results"
-                cardClassName={creamyOrangeBg}
               >
                 <LabReports />
               </InfoCard>
@@ -112,7 +105,6 @@ export function HealthDashboard() {
               icon={CurrentMedications}
               title="Current Medications 💊"
               description="Add your daily medications to get AI-powered safety analysis."
-              cardClassName={creamyOrangeBg}
             >
               <CurrentMedications />
             </InfoCard>

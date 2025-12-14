@@ -30,7 +30,16 @@ export function GreetingCard() {
   }
 
   if (greeting === null || name === null) {
-    return null; // or a loading skeleton
+    return (
+       <Card className="bg-[hsl(var(--chart-4))] text-primary-foreground">
+        <CardHeader>
+          <div className="space-y-2">
+             <div className="w-3/4 h-6 bg-primary-foreground/20 rounded-md animate-pulse"></div>
+             <div className="w-full h-4 bg-primary-foreground/20 rounded-md animate-pulse"></div>
+          </div>
+        </CardHeader>
+      </Card>
+    )
   }
 
   return (
