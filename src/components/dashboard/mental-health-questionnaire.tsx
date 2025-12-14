@@ -34,7 +34,10 @@ export function MentalHealthQuestionnaire() {
         Take a few moments for a confidential questionnaire to reflect on your
         current emotional state.
       </p>
-      <Button className="w-full" onClick={handleTakeQuestionnaire}>
+      <Button
+        className="w-full bg-[hsl(var(--chart-4))] hover:bg-[hsl(var(--chart-4)/0.9)] text-white"
+        onClick={handleTakeQuestionnaire}
+      >
         Take Questionnaire
       </Button>
     </InfoCard>

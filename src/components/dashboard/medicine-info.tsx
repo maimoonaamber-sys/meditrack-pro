@@ -53,7 +53,11 @@ export function MedicineInfo() {
           />
         </div>
         <div className="mt-4">
-          <Button type="submit" className="w-full" disabled={isLoading}>
+          <Button
+            type="submit"
+            className="w-full bg-accent hover:bg-accent/90 text-accent-foreground"
+            disabled={isLoading}
+          >
             <Search />
             {isLoading ? "Searching..." : "Search"}
           </Button>

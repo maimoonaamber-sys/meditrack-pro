@@ -53,7 +53,11 @@ export function SymptomChecker() {
           />
         </div>
         <div className="mt-4">
-          <Button type="submit" className="w-full" disabled={isLoading}>
+          <Button
+            type="submit"
+            className="w-full bg-[hsl(var(--chart-3))] hover:bg-[hsl(var(--chart-3)/0.9)] text-white"
+            disabled={isLoading}
+          >
             <Search />
             {isLoading ? "Analyzing..." : "Analyze"}
           </Button>
