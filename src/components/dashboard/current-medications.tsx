@@ -55,9 +55,10 @@ import { cn } from "@/lib/utils";
 
 interface Medication {
   name: string;
-  frequency: string;
-  nextDose: number;
+  frequency: string; // e.g., "2 time(s) a day"
+  nextDose: number; // timestamp
 }
+
 
 function Countdown({ nextDose }: { nextDose: number }) {
   const [timeLeft, setTimeLeft] = useState(nextDose - Date.now());
@@ -224,6 +225,22 @@ export function CurrentMedications() {
     }
   };
 
+  const handleMarkAsTaken = (medName: string) => {
+    setMedications(prevMeds => {
+      return prevMeds.map(med => {
+        if (med.name === medName) {
+          const timesPerDay = parseInt(med.frequency, 10) || 1;
+          if (timesPerDay > 0) {
+            const intervalMs = (24 / timesPerDay) * 60 * 60 * 1000;
+            const newNextDose = Date.now() + intervalMs;
+            return { ...med, nextDose: newNextDose };
+          }
+        }
+        return med;
+      });
+    });
+  };
+
   return (
       <form onSubmit={handleAddMedication} ref={formRef}>
         <div className="space-y-4">
@@ -266,7 +283,12 @@ export function CurrentMedications() {
                         {med.frequency}
                       </span>
                     </div>
-                    <Countdown nextDose={med.nextDose} />
+                    <div className="flex items-center gap-2">
+                      <Countdown nextDose={med.nextDose} />
+                      <Button variant="ghost" size="icon" className="h-8 w-8 text-green-500" onClick={() => handleMarkAsTaken(med.name)}>
+                        <Check className="h-4 w-4" />
+                      </Button>
+                    </div>
                   </li>
                 ))}
               </ul>
