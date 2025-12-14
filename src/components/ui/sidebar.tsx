@@ -86,7 +86,7 @@ const Sidebar: React.FC<SidebarProps> = ({
           sidebarVariants({ side }),
           "transform-none md:translate-x-0 md:w-64 md:border-r md:shadow-none",
           isOpen ? "translate-x-0" : "-translate-x-full",
-          "bg-background md:bg-sidebar text-foreground md:text-sidebar-foreground",
+          "text-sidebar-foreground",
           className
         )}
       >
