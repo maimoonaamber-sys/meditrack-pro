@@ -57,8 +57,8 @@ const sections: NavSection[] = [
     title: 'Insights & Records',
     items: [
       { href: '/#health-trends', label: 'Health Trends', icon: LineChart },
-      { href: '/#lab-reports', label: 'Lab Reports', icon: FileText },
-      { href: '/#sickness-history', label: 'Sickness History', icon: History },
+      { href: '/lab-reports', label: 'Lab Reports', icon: FileText },
+      { href: '/sickness-history', label: 'Sickness History', icon: History },
       { href: '/skin-scanner', label: 'Skin Health Log', icon: Camera },
     ],
   },

@@ -1,5 +1,5 @@
 
-import { Droplets, HeartPulse, ClipboardPlus, Contact, LineChart, BrainCircuit } from "lucide-react";
+import { Droplets, HeartPulse, ClipboardPlus, Contact, LineChart, BrainCircuit, History, FileText } from "lucide-react";
 import { Alerts } from "./alerts";
 import { BloodPressurePulseTracker } from "./blood-pressure-pulse-tracker";
 import { CurrentMedications } from "./current-medications";
@@ -63,6 +63,40 @@ export function HealthDashboard() {
                     </Button>
                 </div>
              </InfoCard>
+             <div className="grid gap-4 md:grid-cols-2">
+                 <InfoCard
+                    icon={History}
+                    title="Sickness History"
+                    description="Log and view your past illnesses."
+                    cardClassName="bg-orange-100 dark:bg-orange-900/50"
+                    titleClassName="text-orange-900 dark:text-orange-200"
+                    descriptionClassName="text-orange-800/90 dark:text-orange-300/90"
+                    iconClassName="bg-orange-500/20 text-orange-700 dark:text-orange-300"
+                >
+                    <div className="text-center">
+                        <p className="mb-4 text-orange-900/90 dark:text-orange-300/90">Keep a record of past sicknesses to share with your doctor.</p>
+                        <Button asChild className="bg-orange-600 hover:bg-orange-700 text-white">
+                            <Link href="/sickness-history">Log Sickness</Link>
+                        </Button>
+                    </div>
+                </InfoCard>
+                <InfoCard
+                    icon={FileText}
+                    title="Lab Reports"
+                    description="Upload and manage your lab results."
+                    cardClassName="bg-red-100 dark:bg-red-900/50"
+                    titleClassName="text-red-900 dark:text-red-200"
+                    descriptionClassName="text-red-800/90 dark:text-red-300/90"
+                    iconClassName="bg-red-500/20 text-red-700 dark:text-red-300"
+                >
+                     <div className="text-center">
+                        <p className="mb-4 text-red-900/90 dark:text-red-300/90">Keep all your lab reports organized and accessible in one place.</p>
+                        <Button asChild className="bg-red-600 hover:bg-red-700 text-white">
+                            <Link href="/lab-reports">Manage Reports</Link>
+                        </Button>
+                    </div>
+                </InfoCard>
+             </div>
              <InfoCard
               icon={LineChart}
               title="Health Trends 📈"
@@ -73,14 +107,6 @@ export function HealthDashboard() {
         </div>
         <div className="lg:col-span-1 grid auto-rows-max items-start gap-4 md:gap-8">
           <RiskScore />
-          <InfoCard
-            icon={BrainCircuit}
-            title="Mental Health Check-in 🧠"
-            description="Take a moment to reflect on your emotional well-being."
-            cardClassName="bg-purple-100 dark:bg-purple-900/50"
-          >
-            <MentalHealthQuestionnaire />
-          </InfoCard>
         </div>
       </div>
     </>
