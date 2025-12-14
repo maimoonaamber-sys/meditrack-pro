@@ -49,16 +49,6 @@ export default function ConnectDevicesPage() {
               Back to Dashboard
             </Link>
             
-            <Alert variant="destructive">
-                <AlertTriangle className="h-5 w-5 mt-0.5" />
-                <div className="ml-4">
-                    <AlertTitle>Demonstration Only</AlertTitle>
-                    <AlertDescription>
-                        This page is a UI mock-up. Device and app connection functionality is not implemented.
-                    </AlertDescription>
-                </div>
-            </Alert>
-
             <Card>
               <CardHeader>
                 <div className="flex items-center gap-3">
