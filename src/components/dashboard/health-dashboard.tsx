@@ -13,6 +13,7 @@ import { SymptomChecker } from "./symptom-checker";
 import { MedicineInfo } from "./medicine-info";
 import { Card, CardDescription, CardHeader, CardTitle } from "../ui/card";
 import { MessageCircle } from "lucide-react";
+import { MentalHealthQuestionnaire } from "./mental-health-questionnaire";
 
 export function HealthDashboard() {
   return (
@@ -40,6 +41,7 @@ export function HealthDashboard() {
           <div id="health-trends">
             <HealthTrends />
           </div>
+           <MentalHealthQuestionnaire />
           <div id="blood-pressure-pulse-tracker">
               <BloodPressurePulseTracker />
           </div>
