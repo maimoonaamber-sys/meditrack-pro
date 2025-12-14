@@ -1,4 +1,5 @@
 
+
 import { Alerts } from "./alerts";
 import { HealthTrends } from "./health-trends";
 import { LabReports } from "./lab-reports";
@@ -12,6 +13,7 @@ import { MedicineInfo } from "./medicine-info";
 import { Card, CardDescription, CardHeader, CardTitle } from "../ui/card";
 import { MessageCircle } from "lucide-react";
 import { MentalHealthQuestionnaire } from "./mental-health-questionnaire";
+import CuteDoctor from "./cute-doctor";
 
 export function HealthDashboard() {
   return (
@@ -22,7 +24,9 @@ export function HealthDashboard() {
           <Card>
             <CardHeader>
                 <div className="flex items-center gap-3">
-                    <MessageCircle className="h-6 w-6" />
+                    <div className="w-24">
+                      <CuteDoctor />
+                    </div>
                     <div className="flex-1">
                         <CardTitle className="font-headline text-lg">Meet Medipop!</CardTitle>
                         <CardDescription>
@@ -65,3 +69,4 @@ export function HealthDashboard() {
     </>
   );
 }
+
