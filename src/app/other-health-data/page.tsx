@@ -28,16 +28,16 @@ interface HealthMetric {
 }
 
 const metricOptions: { value: MetricType; label: string; unit: string, inputType?: string }[] = [
-  { value: 'alcohol', label: 'Alcohol Consumption', unit: 'std drinks', inputType: 'number' },
-  { value: 'blood_alcohol', label: 'Blood Alcohol Content', unit: '%', inputType: 'number' },
-  { value: 'blood_glucose', label: 'Blood Glucose', unit: 'mg/dL', inputType: 'number' },
-  { value: 'inhaler', label: 'Inhaler Usage', unit: 'puffs', inputType: 'number' },
-  { value: 'insulin', label: 'Insulin Delivery', unit: 'units', inputType: 'number' },
-  { value: 'falls', label: 'Number of Times Fallen', unit: 'falls', inputType: 'number' },
-  { value: 'sexual_activity', label: 'Sexual Activity', unit: 'count', inputType: 'number' },
-  { value: 'toothbrushing', label: 'Toothbrushing', unit: 'times', inputType: 'number' },
-  { value: 'uv_index', label: 'UV Index', unit: 'index', inputType: 'number' },
-  { value: 'water_temp', label: 'Water Temperature', unit: '°C', inputType: 'number' },
+    { value: 'alcohol', label: 'Alcohol Consumption', unit: 'std drinks', inputType: 'number' },
+    { value: 'blood_alcohol', label: 'Blood Alcohol Content', unit: '%', inputType: 'number' },
+    { value: 'blood_glucose', label: 'Blood Glucose', unit: 'mg/dL', inputType: 'number' },
+    { value: 'inhaler', label: 'Inhaler Usage', unit: 'puffs', inputType: 'number' },
+    { value: 'insulin', label: 'Insulin Delivery', unit: 'units', inputType: 'number' },
+    { value: 'falls', label: 'Number of Times Fallen', unit: 'falls', inputType: 'number' },
+    { value: 'sexual_activity', label: 'Sexual Activity', unit: 'count', inputType: 'number' },
+    { value: 'toothbrushing', label: 'Toothbrushing', unit: 'times', inputType: 'number' },
+    { value: 'uv_index', label: 'UV Index', unit: 'index', inputType: 'number' },
+    { value: 'water_temp', label: 'Water Temperature', unit: '°C', inputType: 'number' },
 ];
 
 export default function OtherHealthDataPage() {
