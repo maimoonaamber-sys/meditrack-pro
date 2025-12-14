@@ -83,7 +83,7 @@ export function BloodPressurePulseTracker() {
             <Input
               id="pulseRate"
               type="number"
-              placeholder="e.g., 72"
+              placeholder="Normal, 70"
               ref={pulseRateRef}
             />
           </div>
@@ -92,7 +92,7 @@ export function BloodPressurePulseTracker() {
             <Input
               id="systolic"
               type="number"
-              placeholder="e.g., 120"
+              placeholder="Normal, 120"
               ref={systolicRef}
             />
           </div>
@@ -101,7 +101,7 @@ export function BloodPressurePulseTracker() {
             <Input
               id="diastolic"
               type="number"
-              placeholder="e.g., 80"
+              placeholder="Normal, 80"
               ref={diastolicRef}
             />
           </div>
