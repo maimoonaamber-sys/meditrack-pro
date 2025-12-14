@@ -16,7 +16,7 @@ import { Header } from '@/components/dashboard/header';
 import { DashboardSidebar } from '@/components/dashboard/sidebar';
 import { format } from 'date-fns';
 
-type MetricType = 'alcohol' | 'blood_alcohol' | 'inhaler' | 'insulin' | 'falls' | 'sexual_activity' | 'toothbrushing' | 'uv_index' | 'water_temp';
+type MetricType = 'alcohol' | 'blood_alcohol' | 'blood_glucose' | 'inhaler' | 'insulin' | 'falls' | 'sexual_activity' | 'toothbrushing' | 'uv_index' | 'water_temp';
 
 interface HealthMetric {
   id: string;
@@ -30,6 +30,7 @@ interface HealthMetric {
 const metricOptions: { value: MetricType; label: string; unit: string, inputType?: string }[] = [
   { value: 'alcohol', label: 'Alcohol Consumption', unit: 'std drinks', inputType: 'number' },
   { value: 'blood_alcohol', label: 'Blood Alcohol Content', unit: '%', inputType: 'number' },
+  { value: 'blood_glucose', label: 'Blood Glucose', unit: 'mg/dL', inputType: 'number' },
   { value: 'inhaler', label: 'Inhaler Usage', unit: 'puffs', inputType: 'number' },
   { value: 'insulin', label: 'Insulin Delivery', unit: 'units', inputType: 'number' },
   { value: 'falls', label: 'Number of Times Fallen', unit: 'falls', inputType: 'number' },
@@ -204,4 +205,3 @@ export default function OtherHealthDataPage() {
     </SidebarProvider>
   );
 }
-
