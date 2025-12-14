@@ -56,8 +56,12 @@ export default function DietChartPage() {
 
       setEntries(prevEntries => [...prevEntries, newEntry].sort((a,b) => new Date(b.date).getTime() - new Date(a.date).getTime()));
       
+      if(mealType === 'Lunch' || mealType === 'Dinner' || mealType === 'Breakfast') {
+        localStorage.setItem('lastMealTime', Date.now().toString());
+      }
+      
       toast({
-        title: 'Meal Added',
+        title: 'Meal Added 🍽️',
         description: `${mealType} has been added to your diet chart.`,
       });
 
@@ -67,7 +71,7 @@ export default function DietChartPage() {
     } else {
        toast({
         variant: 'destructive',
-        title: 'Missing Information',
+        title: 'Missing Information 😥',
         description: 'Please select a meal type and list food items.',
       });
     }
@@ -76,7 +80,7 @@ export default function DietChartPage() {
   const handleDeleteEntry = (id: string) => {
     setEntries(prevEntries => prevEntries.filter(entry => entry.id !== id));
     toast({
-      title: 'Entry Removed',
+      title: 'Entry Removed 🗑️',
       description: 'The meal entry has been removed from your chart.',
     });
   };
