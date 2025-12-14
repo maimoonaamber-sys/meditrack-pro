@@ -8,7 +8,6 @@
  */
 
 import { ai } from '@/ai/genkit';
-import { googleAI } from '@genkit-ai/google-genai';
 import { z } from 'zod';
 
 const MedicationAnalysisSchema = z.object({
@@ -29,7 +28,7 @@ const prompt = ai.definePrompt({
   name: 'medicationAnalysisPrompt',
   input: { schema: z.array(z.string()) },
   output: { schema: MedicationAnalysisSchema },
-  model: googleAI('gemini-1.5-flash'),
+  model: "googleai/gemini-1.5-flash",
   prompt: `You are an AI medical information assistant.
 You are NOT a doctor and should not provide medical advice.
 Your role is to analyze a list of medications and provide factual information based on publicly available data.
