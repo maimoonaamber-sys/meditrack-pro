@@ -76,7 +76,8 @@ const Sidebar: React.FC<SidebarProps> = ({
       <div
         className={cn(
           "fixed inset-0 z-40 bg-black/50 md:hidden",
-          isOpen ? "opacity-100" : "opacity-0 pointer-events-none"
+          isOpen ? "opacity-100" : "opacity-0 pointer-events-none",
+          "transition-opacity duration-300"
         )}
         onClick={() => setOpen(false)}
       />
@@ -90,8 +91,8 @@ const Sidebar: React.FC<SidebarProps> = ({
           className
         )}
       >
-        <div className="flex items-center justify-between">
-            <Link href="/" className="flex items-center gap-2">
+        <div className="flex items-center justify-between mb-4">
+            <Link href="/" className="flex items-center gap-2" onClick={() => setOpen(false)}>
                 <Pill className="h-6 w-6 text-primary" />
                 <h1 className="text-xl font-bold font-headline">
                   MediTrack Pro
@@ -101,7 +102,7 @@ const Sidebar: React.FC<SidebarProps> = ({
                 onClick={() => setOpen(false)}
                 className="rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none md:hidden"
             >
-                <X className="h-4 w-4" />
+                <X className="h-5 w-5" />
                 <span className="sr-only">Close</span>
             </button>
         </div>

@@ -40,14 +40,11 @@ const sections: NavSection[] = [
     title: 'Essentials',
     items: [
       { href: '/doctors', label: 'Doctors', icon: Contact },
-      { href: '/#current-medications', label: 'Current Medications', icon: ClipboardPlus },
     ],
   },
   {
     title: 'Health Tracking',
     items: [
-      { href: '/#vitals', label: 'Vitals', icon: HeartPulse },
-      { href: '/#diabetes-monitor', label: 'Diabetes Monitor', icon: Droplets },
       { href: '/hydration', label: 'Hydration', icon: GlassWater },
       { href: '/exercises', label: 'Exercise Activity', icon: Dumbbell },
       { href: '/diet-chart', label: 'Diet & Nutrition', icon: UtensilsCrossed },
@@ -56,9 +53,6 @@ const sections: NavSection[] = [
   {
     title: 'Insights & Records',
     items: [
-      { href: '/#health-trends', label: 'Health Trends', icon: LineChart },
-      { href: '/lab-reports', label: 'Lab Reports', icon: FileText },
-      { href: '/sickness-history', label: 'Sickness History', icon: History },
       { href: '/skin-scanner', label: 'Skin Health Log', icon: Camera },
     ],
   },
@@ -89,14 +83,20 @@ const NavGroup: React.FC<{ title: string; children: React.ReactNode }> = ({ titl
 export function DashboardSidebar() {
   const { setOpen } = useSidebar();
   return (
-        <nav className="mt-8 flex flex-col h-full">
-            <div className="flex-grow space-y-2">
+        <nav className="flex flex-col h-full">
+           <div className="flex-grow space-y-2 overflow-y-auto -mr-4 pr-4">
               <Link href="/emergency-card" onClick={() => setOpen(false)} className="px-2">
                 <Button variant="destructive" className="w-full justify-start gap-2 mb-2">
                   <ShieldAlert />
                   Emergency Card
                 </Button>
               </Link>
+             <Link href="/" onClick={() => setOpen(false)} className="px-2">
+                <Button variant="ghost" className="w-full justify-start gap-2">
+                    <ClipboardPlus />
+                    Dashboard
+                </Button>
+            </Link>
 
              {sections.map((section) => (
                 <NavGroup title={section.title} key={section.title}>

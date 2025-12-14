@@ -16,22 +16,22 @@ import { useSidebar } from "../ui/sidebar";
 export function Header() {
   const { toggleSidebar } = useSidebar();
   return (
-    <header className="sticky top-0 flex h-16 items-center gap-4 border-b bg-card px-4 md:px-6 z-10">
+    <header className="sticky top-0 flex h-16 items-center gap-4 border-b bg-card px-4 md:px-6 z-30">
        <Button
         variant="ghost"
         size="icon"
         className="md:hidden"
         onClick={toggleSidebar}
       >
-        <Menu />
+        <Menu className="h-6 w-6" />
         <span className="sr-only">Toggle Menu</span>
       </Button>
-      <Link href="/" className="flex items-center gap-2">
+      <div className="hidden md:flex items-center gap-2">
         <Pill className="h-6 w-6 text-primary" />
         <h1 className="text-xl font-bold font-headline text-foreground">
           MediTrack Pro
         </h1>
-      </Link>
+      </div>
       <div className="ml-auto">
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
