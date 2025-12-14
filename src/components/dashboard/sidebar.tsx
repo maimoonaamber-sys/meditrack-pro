@@ -31,6 +31,11 @@ import { useSidebar } from '../ui/sidebar';
 
 const menuItems = [
   {
+    href: '/doctors',
+    label: 'Doctors',
+    icon: Contact,
+  },
+  {
     href: '/#health-trends',
     label: 'Health Trends',
     icon: LineChart,
@@ -41,9 +46,9 @@ const menuItems = [
     icon: GlassWater,
   },
   {
-    href: '/#blood-pressure-pulse-tracker',
-    label: 'BP & Pulse',
-    icon: HeartPulse,
+    href: '/#current-medications',
+    label: 'Current Medications',
+    icon: ClipboardPlus,
   },
   {
     href: '/#diabetes-tracker',
@@ -51,9 +56,9 @@ const menuItems = [
     icon: Droplets,
   },
   {
-    href: '/#current-medications',
-    label: 'Current Medications',
-    icon: ClipboardPlus,
+    href: '/#blood-pressure-pulse-tracker',
+    label: 'BP & Pulse',
+    icon: HeartPulse,
   },
   {
     href: '/diet-chart',
@@ -66,11 +71,6 @@ const menuItems = [
     icon: Dumbbell,
   },
   {
-    href: '/doctors',
-    label: 'Doctors',
-    icon: Contact,
-  },
-  {
     href: '/#sickness-history',
     label: 'Sickness History',
     icon: History,
@@ -79,6 +79,16 @@ const menuItems = [
     href: '/#lab-reports',
     label: 'Lab Reports',
     icon: FileText,
+  },
+  {
+    href: '/skin-scanner',
+    label: 'Skin Photo Log',
+    icon: Camera,
+  },
+  {
+    href: '/connect-devices',
+    label: 'Connect Devices',
+    icon: LinkIcon,
   },
 ];
 
@@ -104,18 +114,6 @@ export function DashboardSidebar() {
                 <Button variant="default" className="w-full justify-start gap-2 mb-2 bg-accent text-accent-foreground hover:bg-accent/90">
                   <ShieldAlert />
                   Emergency Card
-                </Button>
-              </Link>
-              <Link href="/skin-scanner" onClick={() => setOpen(false)}>
-                <Button variant="ghost" className="w-full justify-start gap-2">
-                  <Camera />
-                  Skin Photo Log
-                </Button>
-              </Link>
-              <Link href="/connect-devices" onClick={() => setOpen(false)}>
-                <Button variant="ghost" className="w-full justify-start gap-2">
-                  <LinkIcon />
-                  Connect Devices
                 </Button>
               </Link>
               {menuItems.map((item) => (
