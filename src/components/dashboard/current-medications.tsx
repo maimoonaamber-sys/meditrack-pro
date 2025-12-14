@@ -1,8 +1,8 @@
 
-"use client";
+'use client';
 
-import { useState, useRef, useEffect } from "react";
-import { Button } from "@/components/ui/button";
+import { useState, useRef, useEffect, useMemo } from 'react';
+import { Button } from '@/components/ui/button';
 import {
   Card,
   CardContent,
@@ -10,11 +10,14 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { ClipboardPlus, PlusCircle } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
+} from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { ClipboardPlus, PlusCircle, AlertTriangle, Sparkles, LoaderCircle, Info, WheatOff, HandPalm } from 'lucide-react';
+import { Badge } from '@/components/ui/badge';
+import { analyzeMedications, type MedicationAnalysis } from '@/ai/flows/medication-analysis-flow';
+import { Alert, AlertDescription, AlertTitle } from '../ui/alert';
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '../ui/accordion';
 
 interface Medication {
   name: string;
@@ -62,6 +65,9 @@ export function CurrentMedications() {
   const nextDoseTimeRef = useRef<HTMLInputElement>(null);
   const formRef = useRef<HTMLFormElement>(null);
 
+  const [analysis, setAnalysis] = useState<MedicationAnalysis | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
+
   useEffect(() => {
     const savedMedications = localStorage.getItem('medications');
     if (savedMedications) {
@@ -71,8 +77,26 @@ export function CurrentMedications() {
 
   useEffect(() => {
     localStorage.setItem('medications', JSON.stringify(medications));
+    if (medications.length > 0) {
+      handleAnalyzeMedications();
+    } else {
+      setAnalysis(null);
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [medications]);
 
+  const handleAnalyzeMedications = async () => {
+    setIsLoading(true);
+    const medNames = medications.map(m => m.name);
+    try {
+        const result = await analyzeMedications(medNames);
+        setAnalysis(result);
+    } catch (error) {
+        console.error("Failed to analyze medications:", error);
+        setAnalysis(null);
+    }
+    setIsLoading(false);
+  };
 
   const handleAddMedication = (event: React.FormEvent) => {
     event.preventDefault();
@@ -90,10 +114,11 @@ export function CurrentMedications() {
         nextDoseDate.setDate(nextDoseDate.getDate() + 1);
       }
 
-      setMedications([
-        ...medications,
-        { name, frequency: `${frequency} time(s) a day`, nextDose: nextDoseDate.getTime() },
-      ]);
+      setMedications(prevMeds => {
+        const existingMed = prevMeds.find(m => m.name.toLowerCase() === name.toLowerCase());
+        if (existingMed) return prevMeds; // Avoid duplicates
+        return [...prevMeds, { name, frequency: `${frequency} time(s) a day`, nextDose: nextDoseDate.getTime() }];
+      });
       formRef.current?.reset();
     }
   };
@@ -106,7 +131,7 @@ export function CurrentMedications() {
           <div className="flex-1">
             <CardTitle className="font-headline text-lg">Current Medications</CardTitle>
             <CardDescription>
-              Add and manage your daily medications.
+              Add your daily medications to get AI-powered safety analysis.
             </CardDescription>
           </div>
         </div>
@@ -147,8 +172,73 @@ export function CurrentMedications() {
               </ul>
             </div>
           )}
+
+          {(isLoading || analysis) && (
+            <div className="pt-4 space-y-4">
+                <div className="flex items-center gap-2 text-primary">
+                    <Sparkles className="h-5 w-5" />
+                    <h3 className="text-md font-semibold font-headline">AI Analysis</h3>
+                </div>
+
+                 <Alert variant="destructive" className="flex items-start">
+                    <AlertTriangle className="h-5 w-5 mt-0.5" />
+                    <div className="ml-4">
+                        <AlertTitle>Important Disclaimer</AlertTitle>
+                        <AlertDescription>
+                           This AI-powered analysis is for informational purposes only and is not a substitute for professional medical advice. Always consult your doctor or pharmacist.
+                        </AlertDescription>
+                    </div>
+                </Alert>
+
+                {isLoading && (
+                     <div className="flex items-center justify-center gap-2 text-muted-foreground py-4">
+                        <LoaderCircle className="animate-spin h-5 w-5" />
+                        <span>Analyzing your medications...</span>
+                     </div>
+                )}
+                
+                {analysis && !isLoading && (
+                    <div className="space-y-4 animate-fade-in-up">
+                        {analysis.interactionWarning && (
+                             <Alert variant="destructive">
+                                <AlertTriangle className="h-5 w-5" />
+                                <AlertTitle className="ml-2 font-headline">Potential Interaction Warning!</AlertTitle>
+                                <AlertDescription className="ml-2 mt-2">{analysis.interactionWarning}</AlertDescription>
+                            </Alert>
+                        )}
+                        
+                        <Accordion type="single" collapsible className="w-full">
+                            {analysis.medications.map((med, index) => (
+                                <AccordionItem value={`item-${index}`} key={index}>
+                                    <AccordionTrigger className="font-medium text-base">{med.name}</AccordionTrigger>
+                                    <AccordionContent className="space-y-3 pl-2">
+                                        <div className="flex items-start gap-2">
+                                            <HandPalm className="h-4 w-4 mt-1 text-primary shrink-0" />
+                                            <div>
+                                                <h4 className="font-semibold">Side Effects</h4>
+                                                <p className="text-sm text-muted-foreground">{med.sideEffects}</p>
+                                            </div>
+                                        </div>
+                                         <div className="flex items-start gap-2">
+                                            <WheatOff className="h-4 w-4 mt-1 text-primary shrink-0" />
+                                            <div>
+                                                <h4 className="font-semibold">Food Restrictions</h4>
+                                                <p className="text-sm text-muted-foreground">{med.foodRestrictions}</p>
+                                            </div>
+                                        </div>
+                                    </AccordionContent>
+                                </AccordionItem>
+                            ))}
+                        </Accordion>
+                    </div>
+                )}
+            </div>
+          )}
+
         </CardContent>
       </form>
     </Card>
   );
 }
+
+    
