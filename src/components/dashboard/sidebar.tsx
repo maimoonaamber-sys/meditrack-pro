@@ -9,7 +9,7 @@ import {
   ClipboardPlus,
   HeartPulse,
   Droplets,
-  GlassWater,
+  Activity,
   Dumbbell,
   UtensilsCrossed,
   LineChart,
@@ -45,8 +45,8 @@ const sections: NavSection[] = [
   {
     title: 'Health Tracking',
     items: [
-      { href: '/hydration', label: 'Hydration', icon: GlassWater },
-      { href: '/exercises', label: 'Exercise Activity', icon: Dumbbell },
+      { href: '/hydration', label: 'Today\'s Activity', icon: Activity },
+      { href: '/exercises', label: 'Exercise Log', icon: Dumbbell },
       { href: '/diet-chart', label: 'Diet & Nutrition', icon: UtensilsCrossed },
     ],
   },
