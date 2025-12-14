@@ -25,6 +25,7 @@ export function GreetingCard() {
       else setGreeting('Good Evening');
     };
 
+    // Defer the greeting generation to client-side only after mount
     setGreetingBasedOnTime();
   }, []);
 
@@ -33,6 +34,7 @@ export function GreetingCard() {
     return "You have 2 medications due soon and your daily hydration goal is 75% complete. Keep it up!";
   }
 
+  // Render a skeleton/placeholder while waiting for client-side state
   if (greeting === null || name === null) {
     return (
        <Card>
