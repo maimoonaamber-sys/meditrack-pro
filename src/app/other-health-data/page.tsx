@@ -195,7 +195,10 @@ export default function OtherHealthDataPage() {
                         ))}
                     </div>
                 ): (
-                     <p className="text-center text-sm text-muted-foreground mt-6">No data logged yet. Use the form above to add your first entry.</p>
+                    <div className="text-center text-sm text-muted-foreground mt-6">
+                        <p>No data logged yet.</p>
+                        <p>Use the form above to add your first entry.</p>
+                    </div>
                 )}
               </CardContent>
             </Card>

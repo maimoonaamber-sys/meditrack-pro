@@ -13,7 +13,6 @@ import { MedicineInfo } from "./medicine-info";
 import { Card, CardDescription, CardHeader, CardTitle } from "../ui/card";
 import { MessageCircle } from "lucide-react";
 import { MentalHealthQuestionnaire } from "./mental-health-questionnaire";
-import CuteDoctor from "./cute-doctor";
 
 export function HealthDashboard() {
   return (
@@ -25,7 +24,7 @@ export function HealthDashboard() {
             <CardHeader>
                 <div className="flex items-center gap-3">
                     <div className="w-24">
-                      <CuteDoctor />
+                      {/* <CuteDoctor /> */}
                     </div>
                     <div className="flex-1">
                         <CardTitle className="font-headline text-lg">Meet Medipop!</CardTitle>

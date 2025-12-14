@@ -164,7 +164,10 @@ export default function DietChartPage() {
                         ))}
                     </div>
                 ): (
-                     <p className="text-center text-sm text-muted-foreground mt-6">No meals logged yet. Use the form above to add your first meal.</p>
+                     <div className="text-center text-sm text-muted-foreground mt-6">
+                        <p>No meals logged yet.</p>
+                        <p>Use the form above to add your first meal.</p>
+                     </div>
                 )}
               </CardContent>
             </Card>

@@ -160,7 +160,10 @@ export default function ExerciseLogPage() {
                     ))}
                   </div>
                 ) : (
-                  <p className="text-center text-sm text-muted-foreground mt-6">No workouts logged yet. Use the form above to add your first one.</p>
+                  <div className="text-center text-sm text-muted-foreground mt-6">
+                    <p>No workouts logged yet.</p>
+                    <p>Use the form above to add your first one.</p>
+                  </div>
                 )}
               </CardContent>
             </Card>
